@@ -13,6 +13,9 @@ logs/
 .idea/*
 *.iml
 
+# Cursor IDE
+.cursor
+
 # Ignore all .vscode files
 .vscode/*
 

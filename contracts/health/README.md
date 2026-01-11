@@ -4,7 +4,8 @@ Reusable health check base classes for MicroProfile Health, providing production
 
 ## Overview
 
-This module provides abstract base classes for implementing health checks in Quarkus/MicroProfile applications. The health checks verify connectivity and accessibility of:
+This module provides abstract base classes for implementing health checks in Quarkus/MicroProfile applications.  
+The health checks verify connectivity and accessibility of:
 
 - **PostgreSQL** - Database connectivity and table accessibility
 - **DynamoDB** - Table accessibility

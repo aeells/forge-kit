@@ -1,0 +1,53 @@
+# Cursor IDE configuration
+.cursor/
+
+# Build artifacts
+target/
+.mvn/
+
+# GitHub Actions
+.github/
+
+# IDE configurations
+.idea/
+.vscode/
+
+# Documentation tooling
+.adr-dir/
+.config/
+.grafana/
+.prometheus/
+
+# Application code (not needed for docs site)
+applications/
+libs/
+services/
+ui/
+perf/
+scripts/
+config/
+
+# Build and dependency files
+*.jar
+*.war
+*.class
+pom.xml
+mvnw
+compose.yml
+renovate.json
+taskfile*.yml
+
+# Logs and temporary files
+logs/
+*.log
+.env
+.envrc
+
+# Local data
+.localstack/
+.postgres/
+.prometheus/data/
+.grafana/data/
+.dependency-check-cache/
+.quarkus/
+.clover/
