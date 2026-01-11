@@ -1,3 +1,9 @@
+## v1.1.1 (2026-01-11)
+
+### Fix
+
+- **pages**: jekyll config to ignore cursor
+
 ## v1.1.0 (2026-01-11)
 
 ### Feat
