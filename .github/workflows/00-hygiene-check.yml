@@ -30,7 +30,7 @@ jobs:
       # ---------------------------
       # Commit message convention
       # ---------------------------
-      - run: cz check --rev-range HEAD~5..HEAD
+      - run: cz check --rev-range HEAD~1..HEAD
 
       # ---------------------------
       # Branch naming convention
