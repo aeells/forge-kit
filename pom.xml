@@ -33,7 +33,7 @@
         <!-- Plugin versions (centralized for clarity) -->
         <checkstyle.version>3.6.0</checkstyle.version>
         <lombok.version>1.18.42</lombok.version>
-        <owasp.version>12.1.9</owasp.version>
+        <owasp.version>12.2.0</owasp.version>
         <pmd.version>3.28.0</pmd.version>
         <spotbugs.version>4.9.8.2</spotbugs.version>
         <takari.lifecycle.version>2.3.2</takari.lifecycle.version>
