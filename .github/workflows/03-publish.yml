@@ -1,0 +1,29 @@
+---
+name: 03 📦 Publish package
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_run:
+    workflows: [ '02 👊🏽 Auto version bump' ]
+    types:
+      - completed
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Needed for commit range checks
+          ref: main  # check out the branch, not detached HEAD
+      - uses: ./.github/actions/tools
+      - run: mvn clean deploy -DskipTests
