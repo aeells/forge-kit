@@ -1,0 +1,35 @@
+---
+extends: default
+
+rules:
+  # Lines
+  line-length: disable
+  new-lines:
+    type: unix
+  new-line-at-end-of-file:
+    level: warning
+  trailing-spaces:
+    level: warning
+  empty-lines:
+    level: warning
+
+  # Indentation
+  indentation:
+    level: warning
+    indent-sequences: true
+
+  # Bracket spacing
+  brackets: disable
+
+  # Document formatting
+  document-start:
+    level: warning
+  truthy:
+    level: warning
+    allowed-values: ['on', 'off', 'yes', 'no', 'true', 'false']
+  comments-indentation:
+    level: warning
+
+  # Misc
+  hyphens:
+    level: warning

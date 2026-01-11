@@ -1,0 +1,68 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "schedule:nonOfficeHours",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeMinor",
+    ":automergeBranch",
+    ":prHourlyLimitNone",
+    ":disableRateLimiting"
+  ],
+  "enabled": true,
+  "prConcurrentLimit": 5,
+  "timezone": "America/Los_Angeles",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "automerge": true,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "automergeComment": "🤖 Auto-merged by Renovate after CI checks passed",
+  "dependencyDashboardAutoclose": true,
+  "packageRules": [
+    {
+      "enabled": false,
+      "matchPackageNames": [
+        "/^io\\.forge:.*$/"
+      ]
+    },
+    {
+      "matchManagers": [
+        "maven"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "automerge": true
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": true
+    },
+    {
+      "groupName": "AWS SDK v2 monorepo",
+      "matchPackageNames": [
+        "/^software\\.amazon\\.awssdk/"
+      ]
+    },
+    {
+      "groupName": "Quarkus platform updates",
+      "matchPackageNames": [
+        "/^io\\.quarkus/"
+      ]
+    }
+  ]
+}

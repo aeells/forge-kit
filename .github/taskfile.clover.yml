@@ -1,0 +1,23 @@
+---
+version: '3'
+
+# use mvnd if available, otherwise (in CI) fallback to ./mvnw
+vars:
+  MAVEN_CMD: '$(command -v mvnd >/dev/null 2>&1 && echo mvnd || echo "./mvnw")'
+  ROOT_DIR: "{{.TASKFILE_DIR}}/.."
+
+tasks:
+  clover-unit:
+    desc: Unit test all modules with clover coverage
+    aliases: [ cut ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} clover:setup test -Dtest.parallel=none -T 1'
+
+  clover-report:
+    desc: Generate merged clover coverage report
+    aliases: [ cr ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      # singleCloverDatabase=true, all coverage is already in one DB, so just generate report on root
+      - '{{.MAVEN_CMD}} clover:clover -pl :forge-platform-core -Dtest.parallel=none -T 1'

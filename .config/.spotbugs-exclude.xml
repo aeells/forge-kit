@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Class name="io.forge.security.infrastructure.http.ContainerRequestContextProducer"/>
+        <Method name="getRequestContext"/>
+        <Bug pattern="EI_EXPOSE_REP"/>
+    </Match>
+    <Match>
+        <Class name="io.forge.services.actor.infrastructure.persistence.CandidateRepository"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="io.forge.health.infrastructure.CognitoHealthCheck"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="io.forge.health.infrastructure.DynamoDbHealthCheck"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="io.forge.health.infrastructure.S3HealthCheck"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="io.forge.services.auth.infrastructure.cache.TokenStore"/>
+        <Method name="generateToken"/>
+        <Bug pattern="DLS_DEAD_LOCAL_STORE"/>
+    </Match>
+</FindBugsFilter>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes><![CDATA[
+           Suppressing CVE-2025-48734 for commons-beanutils 1.9.4
+        ]]></notes>
+        <!-- Match Maven coordinates - must come before vulnerability identifiers -->
+        <packageUrl regex="true">^pkg:maven/commons-beanutils/commons-beanutils@1\.9\.4$</packageUrl>
+        <!-- Match specific CVE -->
+        <cve>CVE-2025-48734</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+           Suppressing CVE-2023-1932 for quarkus-hibernate-validator-spi 3.30.4
+           This is a false positive - the vulnerability is in Hibernate Validator core, not the SPI.
+        ]]></notes>
+        <!-- Match Maven coordinates - must come before vulnerability identifiers -->
+        <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus-hibernate-validator-spi@3\.30\.4$</packageUrl>
+        <!-- Match specific CVE -->
+        <cve>CVE-2023-1932</cve>
+    </suppress>
+</suppressions>

@@ -1,0 +1,72 @@
+---
+version: '3'
+
+# use mvnd if available, otherwise (in CI) fallback to ./mvnw
+vars:
+  MAVEN_CMD: '$(command -v mvnd >/dev/null 2>&1 && echo mvnd || echo "./mvnw")'
+  ROOT_DIR: "{{.TASKFILE_DIR}}/.."
+
+tasks:
+  clean:
+    desc: Clean all modules
+    aliases: [ cl ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} clean'
+
+  cache:
+    desc: Delete the build cache and stop mvn daemon (if exists)
+    aliases: [ ca ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - 'rm -rf ~/.m2/build-cache'
+      - 'command -v mvnd >/dev/null 2>&1 && mvnd --stop || true'
+
+  compile:
+    desc: Compile all modules
+    aliases: [ co ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} compile'
+
+  package:
+    desc: Package all modules; skips all tests
+    aliases: [ p ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} package -Dmaven.test.skip'
+
+  install:
+    desc: Install all modules; skips all tests
+    aliases: [ i ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} install -Dmaven.test.skip'
+
+  test:
+    desc: Test all modules
+    aliases: [ t ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} verify'
+
+  unit-test:
+    desc: Unit test all modules; skips integration tests
+    aliases: [ ut ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} test'
+
+  integration-test:
+    desc: Integration test modules (skips unit tests)
+    aliases: [ it ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} verify -DskipUnitTests'
+
+  static-analysis:
+    dir: "{{.ROOT_DIR}}"
+    desc: Static analysis profile; skips all tests
+    aliases: [ sa ]
+    cmds:
+      - '{{.MAVEN_CMD}} verify -Pstatic-analysis'

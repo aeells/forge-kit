@@ -1,0 +1,11 @@
+---
+version: '3'
+
+includes:
+  build: ".github/taskfile.build.yml"
+
+tasks:
+  default:
+    desc: Display all tasks
+    cmds:
+      - task --list-all

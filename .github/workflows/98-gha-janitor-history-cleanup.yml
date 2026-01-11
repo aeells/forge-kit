@@ -1,0 +1,22 @@
+---
+name: 98 🚽 GHA Janitor - cleanup history
+# yamllint disable-line rule:truthy
+on:
+  # Run daily, at 08:00
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  delete_history:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: aeells/forge-platform-core
+          retain_days: 0
+          keep_minimum_runs: 0

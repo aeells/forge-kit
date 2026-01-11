@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.forge</groupId>
+    <artifactId>forge-platform</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>contracts</module>
+    </modules>
+
+    <properties>
+        <!--suppress UnresolvedMavenProperty -->
+        <nvd.api.key>${env.NVD_API_KEY}</nvd.api.key>
+        <!--suppress UnresolvedMavenProperty -->
+        <oss.index.user>${env.OSS_INDEX_USER}</oss.index.user>
+        <!--suppress UnresolvedMavenProperty -->
+        <oss.index.key>${env.OSS_INDEX_API_KEY}</oss.index.key>
+
+        <!-- Build & Java setup -->
+        <java.version>25</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Additional Java dependencies -->
+        <commons.lang3.version>3.20.0</commons.lang3.version>
+        <commons.collections4.version>4.5.0</commons.collections4.version>
+
+        <!-- Plugin versions (centralized for clarity) -->
+        <checkstyle.version>3.6.0</checkstyle.version>
+        <lombok.version>1.18.42</lombok.version>
+        <owasp.version>12.1.9</owasp.version>
+        <pmd.version>3.28.0</pmd.version>
+        <spotbugs.version>4.9.8.2</spotbugs.version>
+        <takari.lifecycle.version>2.3.2</takari.lifecycle.version>
+
+        <maven.build.cache.version>1.2.1</maven.build.cache.version>
+        <maven.clover.version>4.5.2</maven.clover.version>
+        <maven.compiler.version>3.14.1</maven.compiler.version>
+        <maven.dependency.version>3.9.0</maven.dependency.version>
+        <maven.enforcer.version>3.6.2</maven.enforcer.version>
+        <maven.failsafe.version>3.5.4</maven.failsafe.version>
+        <maven.min.version>3.9.9</maven.min.version>
+        <maven.spotless.version>3.1.0</maven.spotless.version>
+        <maven.surefire.version>3.5.4</maven.surefire.version>
+        <maven.versions.version>2.20.1</maven.versions.version>
+
+        <!-- Quarkus BOM -->
+        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+        <quarkus.platform.version>3.30.6</quarkus.platform.version>
+
+        <!-- AWS SDK BOM -->
+        <aws.sdk.group-id>software.amazon.awssdk</aws.sdk.group-id>
+        <aws.sdk.artifact-id>bom</aws.sdk.artifact-id>
+        <aws.sdk.version>2.41.4</aws.sdk.version>
+
+        <!-- Test dependencies -->
+        <junit.version>5.11.4</junit.version>
+        <mockito.version>5.14.2</mockito.version>
+
+        <!-- Test execution control properties -->
+        <skipUnitTests>false</skipUnitTests>
+        <skipIntegrationTests>false</skipIntegrationTests>
+        <test.thread.count>4</test.thread.count>
+        <!-- Parallel execution: 'none' when Clover is active (not thread-safe), 'classes' otherwise -->
+        <test.parallel>classes</test.parallel>
+        <!-- JVM args for test execution - use custom property name to avoid Clover interference -->
+        <surefire.jvm.args>-Xshare:off --add-opens java.base/java.lang=ALL-UNNAMED -XX:+EnableDynamicAgentLoading -Djdk.instrument.traceUsage=false</surefire.jvm.args>
+        <!-- Disable parallel execution when Clover is active (not thread-safe) -->
+        <clover.active>false</clover.active>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${quarkus.platform.group-id}</groupId>
+                <artifactId>${quarkus.platform.artifact-id}</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>${aws.sdk.group-id}</groupId>
+                <artifactId>${aws.sdk.artifact-id}</artifactId>
+                <version>${aws.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+            <!-- needed for annotation processing; not needed at runtime -->
+        </dependency>
+
+        <!-- Apache Commons Lang (StringUtils, etc.) -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache Commons Collections (CollectionUtils, etc.) -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons.collections4.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-component</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- 🔧 Compilation -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <release>${maven.compiler.source}</release>
+                        <compilerArgs>
+                            <!-- suppress the message only -->
+                            <arg>-Xlint:-options</arg>
+                        </compilerArgs>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+                <!-- 🧱 Build performance -->
+                <plugin>
+                    <groupId>io.takari.maven.plugins</groupId>
+                    <artifactId>takari-lifecycle-plugin</artifactId>
+                    <version>${takari.lifecycle.version}</version>
+                </plugin>
+
+                <!-- 🧹 Clean plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.5.0</version>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>${project.build.directory}/maven-incremental</directory>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+
+                <!-- 🧩 Dependency management -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven.dependency.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${maven.versions.version}</version>
+                </plugin>
+
+                <!-- 🧪 Testing -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.version}</version>
+                    <configuration>
+                        <argLine>${surefire.jvm.args}</argLine>
+                        <forkCount>1</forkCount>
+                        <reuseForks>true</reuseForks>
+                        <parallel>${test.parallel}</parallel>
+                        <threadCount>${test.thread.count}</threadCount>
+                        <useUnlimitedThreads>false</useUnlimitedThreads>
+                        <skipTests>${skipUnitTests}</skipTests>
+                        <systemPropertyVariables>
+                            <maven.home>${maven.home}</maven.home>
+                            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven.failsafe.version}</version>
+                    <configuration>
+                        <argLine>${surefire.jvm.args}</argLine>
+                        <forkCount>1</forkCount>
+                        <reuseForks>false</reuseForks>
+                        <parallel>${test.parallel}</parallel>
+                        <threadCount>${test.thread.count}</threadCount>
+                        <useUnlimitedThreads>false</useUnlimitedThreads>
+                        <skipTests>${skipIntegrationTests}</skipTests>
+                        <systemPropertyVariables>
+                            <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                            <maven.home>${maven.home}</maven.home>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.openclover</groupId>
+                    <artifactId>clover-maven-plugin</artifactId>
+                    <version>${maven.clover.version}</version>
+                    <configuration>
+                        <cloverDatabase>${maven.multiModuleProjectDirectory}/.clover/clover.db</cloverDatabase>
+                        <snapshot>${maven.multiModuleProjectDirectory}/.clover/atlassian-plugins-clover.snapshot</snapshot>
+                        <singleCloverDatabase>true</singleCloverDatabase>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- 🧩 Dependency management (runs at root level) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Enforcer (runs at root level to validate all modules) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.version}</version>
+                <configuration>
+                    <rules>
+                        <requireMavenVersion>
+                            <version>${maven.min.version}</version>
+                        </requireMavenVersion>
+                        <requireJavaVersion>
+                            <version>${java.version}</version>
+                        </requireJavaVersion>
+                        <bannedRepositories>
+                            <message>Use HTTPS repositories only.</message>
+                            <bannedRepositories>
+                                <bannedRepository>http://*</bannedRepository>
+                            </bannedRepositories>
+                            <bannedPluginRepositories>
+                                <bannedPluginRepository>http://*</bannedPluginRepository>
+                            </bannedPluginRepositories>
+                        </bannedRepositories>
+                    </rules>
+                    <fail>true</fail>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <extensions>
+            <!-- 🧩 Build cache extension -->
+            <extension>
+                <groupId>org.apache.maven.extensions</groupId>
+                <artifactId>maven-build-cache-extension</artifactId>
+                <version>${maven.build.cache.version}</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>spotless</id>
+            <!-- Profile never auto-activates - only used when explicitly invoked -->
+            <!-- Usage: mvn spotless:apply or via git hook .lefthook.yml#pre-commit -->
+            <!-- Another way of doing it but this was being invoked during quarkus:dev
+                <activation>
+                    <property>
+                        &lt;!&ndash; https://docs.github.com/en/actions/reference/workflows-and-actions/variables &ndash;&gt;
+                        <name>!env.CI</name>
+                    </property>
+                </activation>
+            -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <version>${maven.spotless.version}</version>
+                        <configuration>
+                            <ratchetFrom>origin/main</ratchetFrom>
+                            <formats>
+                                <format>
+                                    <includes>
+                                        <include>.gitattributes</include>
+                                        <include>.gitignore</include>
+                                        <include>.yml</include>
+                                        <include>.json</include>
+                                        <include>.md</include>
+                                        <include>Dockerfile</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>**/*.xml</exclude>
+                                    </excludes>
+                                    <trimTrailingWhitespace/>
+                                    <endWithNewline/>
+                                    <indent>
+                                        <spaces>true</spaces>
+                                    </indent>
+                                </format>
+                            </formats>
+                            <pom>
+                                <sortPom>
+                                    <expandEmptyElements>false</expandEmptyElements>
+                                    <nrOfIndentSpace>4</nrOfIndentSpace>
+                                </sortPom>
+                            </pom>
+                            <java>
+                                <!-- Run Cleanthat first for any structural cleanups... -->
+                                <cleanthat/>
+                                <!-- ...then apply Eclipse formatter using the shared project profile
+                                     so IDE and Spotless use the same Java formatting rules -->
+                                <eclipse>
+                                    <version>4.21</version>
+                                    <file>${maven.multiModuleProjectDirectory}/.config/.eclipse-java-format.xml</file>
+                                </eclipse>
+                                <importOrder/>
+                                <removeUnusedImports/>
+                                <trimTrailingWhitespace/>
+                                <endWithNewline/>
+                            </java>
+                            <lintSuppressions>
+                                <suppression name="eclipse jdt formatter"/>
+                            </lintSuppressions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>static-analysis</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipIntegrationTests>true</skipIntegrationTests>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- 🧹 Linting and Static Analysis -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${checkstyle.version}</version>
+                        <configuration>
+                            <configLocation>google_checks.xml</configLocation>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <version>${pmd.version}</version>
+                        <configuration>
+                            <linkXRef>false</linkXRef>
+                            <failOnViolation>true</failOnViolation>
+                            <printFailingErrors>true</printFailingErrors>
+                            <rulesets>
+                                <ruleset>${maven.multiModuleProjectDirectory}/.config/.pmd-rules.xml</ruleset>
+                            </rulesets>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <version>${spotbugs.version}</version>
+                        <configuration>
+                            <excludeFilterFile>${maven.multiModuleProjectDirectory}/.config/.spotbugs-exclude.xml</excludeFilterFile>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>${owasp.version}</version>
+                        <configuration>
+                            <nvdValidForHours>24</nvdValidForHours>
+                            <nvdApiKey>${nvd.api.key}</nvdApiKey>
+                            <failBuildOnCVSS>7</failBuildOnCVSS>
+                            <dataDirectory>.dependency-check-cache</dataDirectory>
+                            <ossIndexUsername>${oss.index.user}</ossIndexUsername>
+                            <ossIndexPassword>${oss.index.key}</ossIndexPassword>
+                            <suppressionFiles>
+                                <suppressionFile>${maven.multiModuleProjectDirectory}/.config/.dependency-check-suppressions.xml</suppressionFile>
+                            </suppressionFiles>
+
+                            <!-- Disable analyzers not needed for Java/Maven project -->
+                            <!-- .NET analyzers -->
+                            <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                            <msbuildAnalyzerEnabled>false</msbuildAnalyzerEnabled>
+                            <nugetconfAnalyzerEnabled>false</nugetconfAnalyzerEnabled>
+                            <nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+                            <libmanAnalyzerEnabled>false</libmanAnalyzerEnabled>
+
+                            <!-- Node.js/JavaScript analyzers -->
+                            <nodeAnalyzerEnabled>false</nodeAnalyzerEnabled>
+                            <nodeAuditAnalyzerEnabled>false</nodeAuditAnalyzerEnabled>
+                            <yarnAuditAnalyzerEnabled>false</yarnAuditAnalyzerEnabled>
+                            <pnpmAuditAnalyzerEnabled>false</pnpmAuditAnalyzerEnabled>
+                            <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
+
+                            <!-- Python analyzers -->
+                            <pyDistributionAnalyzerEnabled>false</pyDistributionAnalyzerEnabled>
+                            <pyPackageAnalyzerEnabled>false</pyPackageAnalyzerEnabled>
+                            <pipAnalyzerEnabled>false</pipAnalyzerEnabled>
+                            <pipfileAnalyzerEnabled>false</pipfileAnalyzerEnabled>
+                            <poetryAnalyzerEnabled>false</poetryAnalyzerEnabled>
+
+                            <!-- Ruby analyzers -->
+                            <rubygemsAnalyzerEnabled>false</rubygemsAnalyzerEnabled>
+                            <bundleAuditAnalyzerEnabled>false</bundleAuditAnalyzerEnabled>
+
+                            <!-- Other language analyzers -->
+                            <composerAnalyzerEnabled>false</composerAnalyzerEnabled>
+                            <cpanfileAnalyzerEnabled>false</cpanfileAnalyzerEnabled>
+                            <dartAnalyzerEnabled>false</dartAnalyzerEnabled>
+                            <cocoapodsAnalyzerEnabled>false</cocoapodsAnalyzerEnabled>
+                            <carthageAnalyzerEnabled>false</carthageAnalyzerEnabled>
+                            <swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
+                            <swiftPackageResolvedAnalyzerEnabled>false</swiftPackageResolvedAnalyzerEnabled>
+                            <mixAuditAnalyzerEnabled>false</mixAuditAnalyzerEnabled>
+
+                            <!-- C/C++ analyzers -->
+                            <autoconfAnalyzerEnabled>false</autoconfAnalyzerEnabled>
+                            <cmakeAnalyzerEnabled>false</cmakeAnalyzerEnabled>
+                            <opensslAnalyzerEnabled>false</opensslAnalyzerEnabled>
+
+                            <!-- Repository analyzers (not using Artifactory or Nexus) -->
+                            <artifactoryAnalyzerEnabled>false</artifactoryAnalyzerEnabled>
+                            <nexusAnalyzerEnabled>false</nexusAnalyzerEnabled>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

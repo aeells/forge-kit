@@ -1,0 +1,94 @@
+---
+name: 00 🧩 Hygiene checks
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, develop, release/* ]
+
+jobs:
+  validate:
+    name: Formatting & PR hygiene checks
+    runs-on: ubuntu-latest
+    if: github.actor != 'renovate[bot]'  # pointless to run hygiene checks on renovate dependency updates
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Needed for commit range checks
+      - uses: ./.github/actions/tools
+        with:
+          install-java: false  # No Java/Maven needed for hygiene checks
+          cache-maven: false
+
+      # ---------------------------
+      # Secrets scanning
+      # ---------------------------
+      - uses: ./.github/actions/secret-scan
+
+      # ---------------------------
+      # Commit message convention
+      # ---------------------------
+      - run: cz check --rev-range HEAD~5..HEAD
+
+      # ---------------------------
+      # Branch naming convention
+      # ---------------------------
+      - name: 🔖 Validate branch naming
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "Branch name: $BRANCH_NAME"
+          if [[ "$BRANCH_NAME" =~ ^(main|develop|release/.+)$ ]]; then
+            echo "✅ Mainline branch detected — skipping branch name validation."
+            exit 0
+          fi
+          if ! [[ "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix|chore|release)/[a-z0-9._-]+$ ]]; then
+            echo "❌ Invalid branch name. Use e.g. feature/my-change or bugfix/fix-typo"
+            exit 1
+          fi
+
+      # ---------------------------
+      # Semantic PR title validation
+      # ---------------------------
+      - name: 🏷️ Validate PR title
+        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+        uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            chore
+            docs
+            style
+            refactor
+            perf
+            test
+            ci
+            build
+          scopes: "*"
+          requireScope: false
+
+      # ---------------------------
+      # YAML linting
+      # ---------------------------
+      - name: 🧾 Lint YAML files
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          config_file: .config/.yamllint.yml  # optional, defaults are fine too
+
+      # ---------------------------
+      # Markdown linting
+      # ---------------------------
+      - name: 📝 Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v22
+        continue-on-error: true
+        with:
+          config: '.config/.markdownlint.jsonc'
+          fix: true
+          globs: |
+            **/*.md
+            !CHANGELOG.md
+            !.grafana/**

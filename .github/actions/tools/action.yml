@@ -1,0 +1,47 @@
+---
+name: 'Base Tools'
+description: 'Install base tools on GHA runners'
+inputs:
+  install-java:
+    description: 'Install GraalVM JDK 25'
+    required: false
+    default: 'true'
+  cache-maven:
+    description: 'Enable Maven dependency caching'
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Set up GraalVM JDK 25
+      if: inputs.install-java == 'true'
+      uses: actions/setup-java@v5
+      with:
+        java-version: '25'
+        distribution: 'graalvm'
+        cache: ${{ inputs.cache-maven == 'true' && 'maven' || '' }}
+
+    - name: Install Taskfile
+      shell: bash
+      run: |
+        curl -sL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Install Gum
+      shell: bash
+      run: |
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://repo.charm.sh/apt/gpg.key \
+          | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" \
+          | sudo tee /etc/apt/sources.list.d/charm.list
+        sudo apt-get update
+        sudo apt-get install -y gum
+
+    - name: Install Commitizen
+      shell: bash
+      run: pip install --quiet commitizen
+
+    - name: Install awslocal
+      shell: bash
+      run: pip install --quiet awscli-local

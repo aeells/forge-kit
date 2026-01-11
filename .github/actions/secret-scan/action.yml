@@ -1,0 +1,16 @@
+---
+name: 00 🔐 Trufflehog secrets scan
+description: Composite action to scan repo for secrets using Trufflehog
+runs:
+    using: 'composite'
+    steps:
+        # Only a single commit is fetched by default, for the ref/SHA that triggered the workflow.
+        # Set fetch-depth: 0 to fetch all history for all branches and tags.
+        - uses: actions/checkout@v6
+          with:
+              fetch-depth: 0
+              ref: ${{ github.head_ref }}
+        - name: trufflehog-actions-scan
+          uses: edplato/trufflehog-actions-scan@master
+          with:
+              scanArguments: '--regex --entropy=False --max_depth=5'

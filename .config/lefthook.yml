@@ -1,0 +1,33 @@
+---
+commit-msg:
+  commands:
+    commit-lint:
+      run: cz check --allow-abort --commit-msg-file {1}
+
+post-commit:
+  parallel: false  # must run sequentially since we modify files
+  commands:
+    spotless-apply:
+      run: |
+        # Skip during rebase operations to avoid running on replayed commits
+        if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ] || [ "${GIT_REFLOG_ACTION:-}" = "rebase" ]; then
+          exit 0
+        fi
+        
+        # run spotless after commitizen commit to format files and amend commit if needed
+        ./mvnw spotless:apply -Pspotless -q
+
+        CHANGED_FILES=$(git diff --name-only)
+        if [ -n "$CHANGED_FILES" ]; then
+          git add $CHANGED_FILES
+          # amend the previous commit instead of creating a new one
+          git commit --amend --no-edit --no-verify
+        fi
+
+pre-push:
+  commands:
+    verify-fast:
+      run: |
+        if git diff --name-only @{push} | grep -qE "^(applications|services|libs)/"; then
+          ./mvnw -q verify -DskipITs -DskipSlowTests=true
+        fi

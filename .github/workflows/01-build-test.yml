@@ -1,0 +1,88 @@
+---
+name: 01 🚧 Build and test
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - .github/**/01-**
+      - contracts/**
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened ]
+    paths:
+      - .github/**/01-**
+      - contracts/**
+
+# need ID token write permission to use OIDC
+# need actions: read to access artifacts from other jobs
+permissions:
+  contents: read
+#  id-token: write
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Needed for commit range checks
+          ref: main  # check out the branch, not detached HEAD
+      - uses: ./.github/actions/tools
+      - run: task build:install
+      - uses: actions/upload-artifact@v6
+        with:
+          name: build-artifacts
+          path: |
+            **/target/*.jar
+            **/target/classes
+          retention-days: 1
+      - uses: actions/upload-artifact@v6
+        with:
+          name: maven-repo
+          path: ~/.m2/repository/io/forge
+          retention-days: 1
+          if-no-files-found: warn
+
+  unit-test:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Needed for commit range checks
+          ref: main  # check out the branch, not detached HEAD
+      - uses: ./.github/actions/tools
+      - uses: actions/download-artifact@v7
+        with:
+          name: build-artifacts
+      - uses: actions/download-artifact@v7
+        with:
+          name: maven-repo
+          path: ~/.m2/repository/io/forge
+      - run: task build:ut -- -Dtest.thread.count=2
+      - if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: unit-test-results
+          path: '**/target/surefire-reports/TEST-*.xml'
+
+  unit-test-reporter:
+    runs-on: ubuntu-latest
+    needs: [ unit-test ]
+    name: 📝 Unit test report
+    if: always()
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v7
+        with:
+          name: unit-test-results
+          path: test-results/unit
+      - uses: dorny/test-reporter@v2
+        with:
+          name: Unit Tests
+          path: test-results/unit/**/*.xml
+          reporter: java-junit
