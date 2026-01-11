@@ -13,7 +13,7 @@ post-commit:
         if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ] || [ "${GIT_REFLOG_ACTION:-}" = "rebase" ]; then
           exit 0
         fi
-        
+
         # run spotless after commitizen commit to format files and amend commit if needed
         ./mvnw spotless:apply -Pspotless -q
 

@@ -1,3 +1,4 @@
+---
 codecov:
   branch: main
 
@@ -23,7 +24,7 @@ coverage:
   precision: 2
   round: down
   range: "70...100"
-  
+
   # Ignore test files and generated code
   ignore:
     - "**/target/**"
@@ -33,7 +34,7 @@ coverage:
     - "**/*IT.java"
     - "**/generated/**"
     - "**/.clover/**"
-  
+
   # Status checks
   status:
     project:
