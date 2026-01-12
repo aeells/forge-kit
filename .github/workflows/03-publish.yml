@@ -31,3 +31,6 @@ jobs:
       - uses: ./.github/actions/tools
       - name: Publish to GitHub Packages
         run: task build:deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
