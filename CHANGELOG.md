@@ -1,3 +1,9 @@
+## v1.2.21 (2026-01-12)
+
+### Fix
+
+- **publish**: trying a skip publish on the parents
+
 ## v1.2.20 (2026-01-12)
 
 ### Fix
