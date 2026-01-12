@@ -27,7 +27,7 @@ jobs:
       - uses: ./.github/actions/tools
         with:
           github-token: ${{ secrets.PAT_FORGE_DEPLOY }}
-          github-actor: ${{ github.actor }}
+          github-actor: aeells
       - name: Test GitHub Packages auth
         run: |
           curl -u "${{ github.actor }}:${{ secrets.PAT_FORGE_DEPLOY }}" \
