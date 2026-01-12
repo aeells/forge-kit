@@ -1,3 +1,9 @@
+## v1.2.22 (2026-01-12)
+
+### Fix
+
+- **publish**: okay child was inheriting parent skip
+
 ## v1.2.21 (2026-01-12)
 
 ### Fix
