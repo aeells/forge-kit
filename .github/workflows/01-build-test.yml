@@ -7,13 +7,13 @@ on:
   push:
     branches: [ main ]
     paths:
-      - .github/**/01-**
+      - .github/**
       - contracts/**
   pull_request:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
     paths:
-      - .github/**/01-**
+      - .github/**
       - contracts/**
 
 # need ID token write permission to use OIDC
