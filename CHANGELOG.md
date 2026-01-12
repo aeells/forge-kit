@@ -1,3 +1,12 @@
+## v1.2.8 (2026-01-12)
+
+### Fix
+
+- **publish**: pom issue
+- **publish**: find replace error
+- **publish**: mvn repo namespace needed to change also
+- **publish**: not a token issue after all - seems to be a requirement that namespace starts com.github
+
 ## v1.2.7 (2026-01-12)
 
 ### Fix
