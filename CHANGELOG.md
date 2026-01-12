@@ -1,3 +1,9 @@
+## v1.2.25 (2026-01-12)
+
+### Fix
+
+- **publish**: seems I need to publish parent poms after all as the usable jar is going to reference
+
 ## v1.2.24 (2026-01-12)
 
 ### Fix
