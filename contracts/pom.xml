@@ -21,7 +21,6 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
-                    <!-- Skip deployment for parent POMs -->
                 </configuration>
             </plugin>
 

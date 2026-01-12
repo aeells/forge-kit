@@ -279,7 +279,6 @@
                 <version>${maven.deploy.version}</version>
                 <configuration>
                     <skip>true</skip>
-                    <!-- Skip deployment for parent POMs -->
                 </configuration>
             </plugin>
 
