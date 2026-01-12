@@ -1,3 +1,9 @@
+## v1.2.11 (2026-01-12)
+
+### Fix
+
+- **publish**: feels like last ditch but username not being sent correctly
+
 ## v1.2.10 (2026-01-12)
 
 ### Fix
