@@ -1,3 +1,9 @@
+## v1.2.4 (2026-01-12)
+
+### Fix
+
+- **publish**: cursor leading me astray again
+
 ## v1.2.3 (2026-01-12)
 
 ### Fix
