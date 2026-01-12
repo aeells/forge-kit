@@ -6,10 +6,11 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: [ '02 👊🏽 Auto version bump' ]
-    tags:
-      - 'v*'
     types:
       - completed
+  push:
+    tags:
+      - 'v*'
 
 permissions:
   contents: read
