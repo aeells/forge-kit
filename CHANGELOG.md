@@ -1,3 +1,9 @@
+## v1.2.23 (2026-01-12)
+
+### Fix
+
+- **publish**: skip configuration is working so no need for the filter
+
 ## v1.2.22 (2026-01-12)
 
 ### Fix
