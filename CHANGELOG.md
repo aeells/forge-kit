@@ -1,3 +1,9 @@
+## v1.2.9 (2026-01-12)
+
+### Fix
+
+- **publish**: using a classic PAT now; also don't think we ever quite got the groupId right
+
 ## v1.2.8 (2026-01-12)
 
 ### Fix
