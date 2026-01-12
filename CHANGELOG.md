@@ -1,3 +1,10 @@
+## v1.2.5 (2026-01-12)
+
+### Fix
+
+- **build**: namespace change for mvn repo artefacts
+- **release**: seems groupId must reflect the namespace to publish to GitHub packages
+
 ## v1.2.4 (2026-01-12)
 
 ### Fix
