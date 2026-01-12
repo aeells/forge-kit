@@ -1,3 +1,9 @@
+## v1.2.19 (2026-01-12)
+
+### Fix
+
+- **publish**: trying to filter on just the health package
+
 ## v1.2.18 (2026-01-12)
 
 ### Fix
