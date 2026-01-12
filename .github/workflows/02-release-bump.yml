@@ -1,5 +1,5 @@
 ---
-name: 02 👊🏽 Auto version bump
+name: '02 👊🏽 Auto version bump'
 
 # yamllint disable-line rule:truthy
 on:
