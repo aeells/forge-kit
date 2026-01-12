@@ -4,7 +4,7 @@
     <parent>
         <groupId>aeells.forgeplatform</groupId>
         <artifactId>contracts</artifactId>
-        <version>1.2.17</version>
+        <version>1.2.18</version>
     </parent>
 
     <artifactId>forge-health</artifactId>
