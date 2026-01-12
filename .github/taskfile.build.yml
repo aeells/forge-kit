@@ -48,7 +48,7 @@ tasks:
     aliases: [ d ]
     dir: "{{.ROOT_DIR}}"
     cmds:
-      - '{{.MAVEN_CMD}} deploy -Dmaven.test.skip'
+      - '{{.MAVEN_CMD}} deploy -X -Dmaven.test.skip'
 
   test:
     desc: Test all modules

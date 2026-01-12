@@ -26,7 +26,11 @@ jobs:
           ref: main  # check out the branch, not detached HEAD
       - uses: ./.github/actions/tools
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_FORGE_DEPLOY }}
           github-actor: ${{ github.actor }}
+      - name: Test GitHub Packages auth
+        run: |
+          curl -u "${{ github.actor }}:${{ secrets.PAT_FORGE_DEPLOY }}" \
+               -I https://maven.pkg.github.com/aeells/forge-platform
       - name: Publish to GitHub Packages
         run: task build:deploy
