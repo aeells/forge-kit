@@ -1,3 +1,9 @@
+## v1.2.13 (2026-01-12)
+
+### Fix
+
+- **publish**: trying to write auth direct to .m2/settings.xml
+
 ## v1.2.12 (2026-01-12)
 
 ### Fix
