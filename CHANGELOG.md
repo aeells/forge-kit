@@ -1,3 +1,9 @@
+## v1.2.20 (2026-01-12)
+
+### Fix
+
+- **publish**: requires MODULE prefix
+
 ## v1.2.19 (2026-01-12)
 
 ### Fix
