@@ -1,3 +1,9 @@
+## v1.2.16 (2026-01-12)
+
+### Fix
+
+- **publish**: ordering issue with the settings.xml
+
 ## v1.2.15 (2026-01-12)
 
 ### Fix
