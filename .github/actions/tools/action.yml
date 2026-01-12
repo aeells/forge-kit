@@ -10,12 +10,6 @@ inputs:
     description: 'Enable Maven dependency caching'
     required: false
     default: 'true'
-  github-token:
-    description: 'GitHub token for Maven deployment'
-    required: false
-  github-actor:
-    description: 'GitHub actor/username for Maven deployment'
-    required: false
 
 runs:
   using: composite
@@ -29,8 +23,8 @@ runs:
         cache: ${{ inputs.cache-maven == 'true' && 'maven' || '' }}
         # ALWAYS define the server
         server-id: github
-        server-username: ${{ inputs.github-actor }}
-        server-password: ${{ inputs.github-token }}
+        server-username: ${{ env.MAVEN_USERNAME }}
+        server-password: ${{ env.MAVEN_PASSWORD }}
 
     - name: Install Taskfile
       shell: bash
