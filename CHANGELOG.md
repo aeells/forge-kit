@@ -1,3 +1,9 @@
+## v1.2.14 (2026-01-12)
+
+### Fix
+
+- **publish**: adding some more debugging
+
 ## v1.2.13 (2026-01-12)
 
 ### Fix
