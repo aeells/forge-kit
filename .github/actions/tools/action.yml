@@ -27,9 +27,6 @@ runs:
         java-version: '25'
         distribution: 'graalvm'
         cache: ${{ inputs.cache-maven == 'true' && 'maven' || '' }}
-        server-id: ${{ inputs.github-token != '' && inputs.github-actor != '' && 'github' || '' }}
-        server-username: ${{ inputs.github-actor }}
-        server-password: ${{ inputs.github-token }}
 
     - name: Install Taskfile
       shell: bash
