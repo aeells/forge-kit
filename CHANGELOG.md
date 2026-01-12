@@ -1,3 +1,9 @@
+## v1.2.12 (2026-01-12)
+
+### Fix
+
+- **publish**: missed the env vars
+
 ## v1.2.11 (2026-01-12)
 
 ### Fix
