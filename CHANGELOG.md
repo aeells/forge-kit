@@ -1,3 +1,10 @@
+## v1.2.6 (2026-01-12)
+
+### Fix
+
+- **publish**: Github actor/token configuration
+- **publish**: github actor/token not being set properly
+
 ## v1.2.5 (2026-01-12)
 
 ### Fix
