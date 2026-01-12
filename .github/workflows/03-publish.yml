@@ -24,13 +24,20 @@ jobs:
         with:
           fetch-depth: 0  # Needed for commit range checks
           ref: main  # check out the branch, not detached HEAD
-      - name: Set environment for Maven deploy
-        run: echo "MAVEN_USERNAME=aeells" >> $GITHUB_ENV
-      - name: Set Maven PAT
-        run: echo "MAVEN_PASSWORD=${{ secrets.PAT_FORGE_DEPLOY }}" >> $GITHUB_ENV
+      - name: Configure Maven settings for GitHub Packages
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>aeells</username>
+                <password>${{ secrets.PAT_FORGE_DEPLOY }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
       - uses: ./.github/actions/tools
       - name: Publish to GitHub Packages
         run: task build:deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}

@@ -21,10 +21,6 @@ runs:
         java-version: '25'
         distribution: 'graalvm'
         cache: ${{ inputs.cache-maven == 'true' && 'maven' || '' }}
-        # ALWAYS define the server
-        server-id: github
-        server-username: ${{ env.MAVEN_USERNAME }}
-        server-password: ${{ env.MAVEN_PASSWORD }}
 
     - name: Install Taskfile
       shell: bash
