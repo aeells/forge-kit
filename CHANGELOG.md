@@ -1,3 +1,9 @@
+## v1.2.7 (2026-01-12)
+
+### Fix
+
+- **publish**: trying a PAT instead
+
 ## v1.2.6 (2026-01-12)
 
 ### Fix
