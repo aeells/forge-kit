@@ -24,9 +24,12 @@ jobs:
         with:
           fetch-depth: 0  # Needed for commit range checks
           ref: main  # check out the branch, not detached HEAD
+      - uses: ./.github/actions/tools
       - name: Configure Maven settings for GitHub Packages
         run: |
           mkdir -p ~/.m2
+          # Create settings.xml AFTER tools action (setup-java may have created one)
+          # We'll overwrite it with our server configuration
           cat > ~/.m2/settings.xml <<EOF
           <settings>
             <servers>
@@ -38,10 +41,8 @@ jobs:
             </servers>
           </settings>
           EOF
-      - name: Create empty Maven security file
-        run: |
-          mkdir -p ~/.m2
-          echo "<settingsSecurity/>" > ~/.m2/settings-security.xml
+          # Remove settings-security.xml if it exists (not needed for plain text passwords)
+          rm -f ~/.m2/settings-security.xml
       - name: Verify Maven settings
         run: |
           if [ -f ~/.m2/settings.xml ]; then
@@ -61,6 +62,5 @@ jobs:
             echo "❌ Repository id 'github' not found in POM!"
             exit 1
           fi
-      - uses: ./.github/actions/tools
       - name: Publish to GitHub Packages
         run: task build:deploy
