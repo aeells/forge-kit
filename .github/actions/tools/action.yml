@@ -10,12 +10,6 @@ inputs:
     description: 'Enable Maven dependency caching'
     required: false
     default: 'true'
-  github-token:
-    description: 'GitHub token for GitHub Packages authentication (optional)'
-    required: false
-  github-actor:
-    description: 'GitHub actor/username for GitHub Packages authentication (optional)'
-    required: false
 
 runs:
   using: composite
@@ -27,6 +21,10 @@ runs:
         java-version: '25'
         distribution: 'graalvm'
         cache: ${{ inputs.cache-maven == 'true' && 'maven' || '' }}
+        # ALWAYS define the server
+        server-id: github
+        server-username: GITHUB_ACTOR
+        server-password: GITHUB_TOKEN
 
     - name: Install Taskfile
       shell: bash
