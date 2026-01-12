@@ -43,7 +43,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: maven-repo
-          path: ~/.m2/repository/com/github/aeells/forge
+          path: ~/.m2/repository/aeells/forgeplatform
           retention-days: 1
           if-no-files-found: warn
 
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: maven-repo
-          path: ~/.m2/repository/com/github/aeells/forge
+          path: ~/.m2/repository/aeells/forgeplatform
       - run: task build:ut -- -Dtest.thread.count=2
       - if: always()
         uses: actions/upload-artifact@v6
