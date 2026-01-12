@@ -47,12 +47,12 @@ tasks:
     desc: Deploy; skips all tests
     aliases: [ d ]
     dir: "{{.ROOT_DIR}}"
-  vars:
-    MODULE: '{{.MODULE | default "health"}}'
-  cmds:
-    - |
-      cd "contracts/{{.MODULE}}"
-      mvn deploy -Dmaven.test.skip
+    vars:
+      MODULE: '{{.MODULE | default "health"}}'
+      # Convert single module or comma-separated list to Maven -pl format
+      MODULE_LIST: '{{if contains .MODULE ","}}{{.MODULE}}{{else}}contracts/{{.MODULE}}{{end}}'
+    cmds:
+      - '{{.MAVEN_CMD}} deploy -pl {{.MODULE_LIST}} -am -DskipTests'
 
   test:
     desc: Test all modules

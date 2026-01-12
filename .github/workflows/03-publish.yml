@@ -38,4 +38,3 @@ jobs:
           </settings>
           EOF
       - run: task build:deploy MODULE=health
-#      - run: task build:deploy MODULE=metrics
