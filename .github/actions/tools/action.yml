@@ -23,8 +23,8 @@ runs:
         cache: ${{ inputs.cache-maven == 'true' && 'maven' || '' }}
         # ALWAYS define the server
         server-id: github
-        server-username: GITHUB_ACTOR
-        server-password: GITHUB_TOKEN
+        server-username: ${{ github.actor }}
+        server-password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Install Taskfile
       shell: bash
