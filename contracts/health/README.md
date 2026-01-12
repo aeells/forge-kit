@@ -80,7 +80,7 @@ This module uses **provided scope** for all dependencies. Your application must 
 
 ```xml
 <dependency>
-    <groupId>com.github.aeells.forgeplatform</groupId>
+    <groupId>com.github.aeells.forge</groupId>
     <artifactId>forge-health</artifactId>
     <version>1.0.0</version>
 </dependency>
