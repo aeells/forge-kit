@@ -26,5 +26,4 @@ jobs:
           ref: main  # check out the branch, not detached HEAD
       - uses: ./.github/actions/tools
       - name: Publish to GitHub Packages
-        run: |
-          mvn clean deploy -DskipTests
+        run: task build:deploy

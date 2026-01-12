@@ -43,6 +43,13 @@ tasks:
     cmds:
       - '{{.MAVEN_CMD}} install -Dmaven.test.skip'
 
+  deploy:
+    desc: Deploy; skips all tests
+    aliases: [ d ]
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - '{{.MAVEN_CMD}} deploy -Dmaven.test.skip'
+
   test:
     desc: Test all modules
     aliases: [ t ]
