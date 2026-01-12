@@ -1,3 +1,9 @@
+## v1.2.17 (2026-01-12)
+
+### Fix
+
+- **publish**: attempting to narrow to just the health module
+
 ## v1.2.16 (2026-01-12)
 
 ### Fix
