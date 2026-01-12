@@ -37,5 +37,5 @@ jobs:
             </servers>
           </settings>
           EOF
-      - run: task build:deploy health
-#      - run: task build:deploy metrics
+      - run: task build:deploy MODULE=health
+#      - run: task build:deploy MODULE=metrics
