@@ -1,3 +1,9 @@
+## v1.2.24 (2026-01-12)
+
+### Fix
+
+- **publish**: reverting to my preferred artifactId after that wild goose chase
+
 ## v1.2.23 (2026-01-12)
 
 ### Fix
