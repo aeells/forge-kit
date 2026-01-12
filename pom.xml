@@ -11,14 +11,6 @@
         <module>contracts</module>
     </modules>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/aeells/forge-platform</url>
-        </repository>
-    </distributionManagement>
-
     <properties>
         <!--suppress UnresolvedMavenProperty -->
         <nvd.api.key>${env.NVD_API_KEY}</nvd.api.key>
