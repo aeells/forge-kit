@@ -1,3 +1,9 @@
+## v1.2.26 (2026-01-12)
+
+### Fix
+
+- **publish**: changing the artifactId names to be consistent and without the forge- prefix
+
 ## v1.2.25 (2026-01-12)
 
 ### Fix
