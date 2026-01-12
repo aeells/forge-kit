@@ -38,6 +38,10 @@ jobs:
             </servers>
           </settings>
           EOF
+      - name: Create empty Maven security file
+        run: |
+          mkdir -p ~/.m2
+          echo "<settingsSecurity/>" > ~/.m2/settings-security.xml
       - name: Verify Maven settings
         run: |
           if [ -f ~/.m2/settings.xml ]; then
