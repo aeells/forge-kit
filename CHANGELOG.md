@@ -1,3 +1,9 @@
+## v1.2.15 (2026-01-12)
+
+### Fix
+
+- **publish**: oi oi oi. might have finally found it; looks like expected .m2/settings-security.xml is required
+
 ## v1.2.14 (2026-01-12)
 
 ### Fix
