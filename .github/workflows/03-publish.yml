@@ -38,6 +38,25 @@ jobs:
             </servers>
           </settings>
           EOF
+      - name: Verify Maven settings
+        run: |
+          if [ -f ~/.m2/settings.xml ]; then
+            echo "✅ Maven settings.xml exists"
+            # Show settings (masking password)
+            sed 's/<password>.*<\/password>/<password>***<\/password>/' ~/.m2/settings.xml
+          else
+            echo "❌ Maven settings.xml NOT found!"
+            exit 1
+          fi
+      - name: Verify distributionManagement in POM
+        run: |
+          if grep -q '<id>github</id>' pom.xml; then
+            echo "✅ Found repository id 'github' in POM"
+            grep -A 3 '<distributionManagement>' pom.xml || echo "⚠️ distributionManagement not found in root POM"
+          else
+            echo "❌ Repository id 'github' not found in POM!"
+            exit 1
+          fi
       - uses: ./.github/actions/tools
       - name: Publish to GitHub Packages
         run: task build:deploy
