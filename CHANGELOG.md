@@ -1,3 +1,10 @@
+## v1.2.1 (2026-01-12)
+
+### Fix
+
+- **deps**: update dependency software.amazon.awssdk:bom to v2.41.5 (#1)
+- **release**: reverting due to lack of clarity on GitHub branch protection rules
+
 ## v1.2.0 (2026-01-12)
 
 ### Feat
