@@ -1,3 +1,9 @@
+## v1.2.18 (2026-01-12)
+
+### Fix
+
+- **publish**: hmmm, i think moving distributionManagement broke it; trying with just the filter
+
 ## v1.2.17 (2026-01-12)
 
 ### Fix
