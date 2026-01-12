@@ -9,7 +9,8 @@ on:
       - completed
 
 permissions:
-  contents: write  # Required to push commits
+  contents: write  # Required to push commits/tags
+  pull-requests: write
 
 jobs:
   # ✅ Commitizen + Maven versioning in sync
@@ -25,9 +26,11 @@ jobs:
           fetch-depth: 0  # Needed for commit range checks
           ref: main  # check out the branch, not detached HEAD
       - uses: ./.github/actions/tools
+
       - name: Check and bump version
         id: version-bump
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -44,7 +47,6 @@ jobs:
 
           # Let commitizen do the work - it will update changelog and .cz.toml
           # If no bump is needed, it will exit with non-zero and we skip
-          BUMPED=false
           if LEFTHOOK=0 cz bump --yes --changelog 2>&1; then
             # Read the new version that commitizen calculated
             NEW_VERSION=$(grep '^version = ' .cz.toml | sed 's/^version = "\(.*\)"/\1/')
@@ -56,18 +58,35 @@ jobs:
 
             # Commit everything (changelog, .cz.toml, pom files)
             git add -A
-            git commit -m "chore(release): bump version to $NEW_VERSION [skip ci]" --signoff --no-verify
-            git tag -f v$NEW_VERSION
-            git push origin main
-            git push origin v$NEW_VERSION
+            if git commit -m "chore(release): bump version to $NEW_VERSION [skip ci]" --signoff --no-verify; then
+              echo "Committed bump changes"
+            else
+              echo "No changes to commit"
+            fi
 
+            # create or update tag locally
+            git tag -f "v$NEW_VERSION"
+
+            # create a bump branch and push branch + tag
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            BRANCH="release/bump-${GITHUB_RUN_ID}"
+            echo "Using branch: $BRANCH"
+            git switch -c "$BRANCH"
+            git push --set-upstream origin "$BRANCH"
+            # push tag (force to update if already exists)
+            git push -f origin "v$NEW_VERSION"
+
+            # expose bump branch for subsequent steps
             echo "bumped=true" >> $GITHUB_OUTPUT
             echo "final_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+            echo "bump_branch=$BRANCH" >> $GITHUB_OUTPUT
           else
             echo "No version bump needed - no eligible commits found."
             echo "bumped=false" >> $GITHUB_OUTPUT
             echo "final_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           fi
+
       - name: Version bump summary
         if: always()
         run: |
@@ -79,9 +98,57 @@ jobs:
               echo ""
               echo "✅ **Version bumped:** \`${{ steps.version-bump.outputs.current_version }}\` → \`${{ steps.version-bump.outputs.final_version }}\`"
               echo ""
-              echo "Tag \`v${{ steps.version-bump.outputs.final_version }}\` has been created and pushed."
+              echo "Tag \`v${{ steps.version-bump.outputs.final_version }}\` has been created and pushed to GitHub."
             else
               echo ""
               echo "ℹ️ **No version bump needed** - no eligible commits found."
             fi
           } >> $GITHUB_STEP_SUMMARY
+
+      - name: Create pull request for bump
+        if: steps.version-bump.outputs.bumped == 'true'
+        id: create_pr
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const branch = '${{ steps.version-bump.outputs.bump_branch }}';
+            const title = `chore(release): bump version to ${{ steps.version-bump.outputs.final_version }}`;
+            const body = `Automated bump from workflow run ${process.env.GITHUB_RUN_ID}`;
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: branch,
+              base: 'main',
+              title,
+              body
+            });
+            core.setOutput('number', String(pr.data.number));
+            core.setOutput('node_id', pr.data.node_id);
+            console.log(`Created PR #${pr.data.number} (${pr.data.html_url})`);
+
+      - name: Enable auto-merge on PR (SQUASH)
+        if: steps.version-bump.outputs.bumped == 'true'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const nodeId = '${{ steps.create_pr.outputs.node_id }}';
+            if (!nodeId) {
+              core.warning('PR node id not found; cannot enable auto-merge');
+              return;
+            }
+            try {
+              await github.graphql(
+                `mutation($input: EnablePullRequestAutoMergeInput!) {
+                   enablePullRequestAutoMerge(input: $input) {
+                     pullRequest { number }
+                   }
+                 }`,
+                { input: { pullRequestId: nodeId, mergeMethod: "SQUASH" } }
+              );
+              console.log('Auto-merge enabled for PR (merge method: SQUASH)');
+            } catch (err) {
+              core.warning('Could not enable auto-merge immediately: ' + err.message);
+              core.info('PR was created and can be merged manually or auto-merge can be retried once repo conditions are satisfied.');
+            }
