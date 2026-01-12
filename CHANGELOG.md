@@ -1,3 +1,9 @@
+## v1.2.2 (2026-01-12)
+
+### Fix
+
+- **publish**: reverting to manual mvn deploy
+
 ## v1.2.1 (2026-01-12)
 
 ### Fix
