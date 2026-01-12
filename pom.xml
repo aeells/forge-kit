@@ -4,7 +4,7 @@
 
     <groupId>com.github.aeells.forge</groupId>
     <artifactId>forge-platform</artifactId>
-    <version>1.2.6</version>
+    <version>1.2.7</version>
     <packaging>pom</packaging>
 
     <modules>
