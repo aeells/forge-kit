@@ -25,7 +25,7 @@
         <!-- AWS SDK BOM -->
         <aws.sdk.group-id>software.amazon.awssdk</aws.sdk.group-id>
         <aws.sdk.artifact-id>bom</aws.sdk.artifact-id>
-        <aws.sdk.version>2.41.5</aws.sdk.version>
+        <aws.sdk.version>2.41.6</aws.sdk.version>
 
         <!-- Additional Java dependencies -->
         <commons.lang3.version>3.20.0</commons.lang3.version>
