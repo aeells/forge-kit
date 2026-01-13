@@ -28,12 +28,9 @@
         <!-- Additional Java dependencies -->
         <commons.lang3.version>3.20.0</commons.lang3.version>
         <commons.collections4.version>4.5.0</commons.collections4.version>
-        <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
-        <microprofile.health.version>4.0.1</microprofile.health.version>
 
         <!-- Test dependencies -->
         <junit.version>5.11.4</junit.version>
-        <junit.platform.suite.version>1.13.4</junit.platform.suite.version>
         <mockito.version>5.14.2</mockito.version>
     </properties>
 
@@ -94,12 +91,6 @@
             </dependency>
             <!-- health module -->
             <dependency>
-                <groupId>org.eclipse.microprofile.health</groupId>
-                <artifactId>microprofile-health-api</artifactId>
-                <version>${microprofile.health.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>dynamodb</artifactId>
                 <version>${aws.sdk.version}</version>
@@ -116,30 +107,6 @@
                 <artifactId>cognitoidentityprovider</artifactId>
                 <version>${aws.sdk.version}</version>
                 <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>jakarta.persistence</groupId>
-                <artifactId>jakarta.persistence-api</artifactId>
-                <version>${jakarta.persistence.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-smallrye-health</artifactId>
-                <version>${quarkus.platform.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-suite-api</artifactId>
-                <version>${junit.platform.suite.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-suite-engine</artifactId>
-                <version>${junit.platform.suite.version}</version>
-                <scope>test</scope>
             </dependency>
             <!-- metrics module -->
         </dependencies>
