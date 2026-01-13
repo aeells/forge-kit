@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>forge-api</module>
         <module>health</module>
         <module>metrics</module>
     </modules>

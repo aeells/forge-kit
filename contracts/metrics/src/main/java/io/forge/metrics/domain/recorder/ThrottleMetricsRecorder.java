@@ -1,7 +1,7 @@
 package io.forge.metrics.domain.recorder;
 
 import io.forge.metrics.domain.MetricsRecorder;
-import io.forge.metrics.domain.dto.MetricsResultIndicator;
+import io.forge.metrics.dto.MetricsResultIndicator;
 import io.forge.metrics.infrastructure.throttle.RateLimitKeyParser;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.DistributionSummary;

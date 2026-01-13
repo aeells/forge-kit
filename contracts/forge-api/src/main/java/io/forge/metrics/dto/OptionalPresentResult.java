@@ -1,4 +1,4 @@
-package io.forge.metrics.domain.dto;
+package io.forge.metrics.dto;
 
 /**
  * Synthetic MetricsResultIndicator for Optional that is present (success case).

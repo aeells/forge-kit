@@ -8,10 +8,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import io.forge.metrics.domain.dto.MetricsResultIndicator;
-import io.forge.metrics.domain.dto.OptionalEmptyResult;
-import io.forge.metrics.domain.dto.OptionalPresentResult;
 import io.forge.metrics.domain.support.MetricsRecorderResolver;
+import io.forge.metrics.dto.MetricsResultIndicator;
+import io.forge.metrics.dto.OptionalEmptyResult;
+import io.forge.metrics.dto.OptionalPresentResult;
 import jakarta.interceptor.InvocationContext;
 import java.lang.reflect.Method;
 import java.util.Optional;

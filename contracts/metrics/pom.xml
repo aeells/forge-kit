@@ -11,6 +11,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.forge</groupId>
+            <artifactId>forge-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
             <scope>provided</scope>

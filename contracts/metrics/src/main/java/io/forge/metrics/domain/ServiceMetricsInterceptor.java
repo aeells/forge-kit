@@ -1,9 +1,9 @@
 package io.forge.metrics.domain;
 
-import io.forge.metrics.domain.dto.MetricsResultIndicator;
-import io.forge.metrics.domain.dto.OptionalEmptyResult;
-import io.forge.metrics.domain.dto.OptionalPresentResult;
 import io.forge.metrics.domain.support.MetricsRecorderResolver;
+import io.forge.metrics.dto.MetricsResultIndicator;
+import io.forge.metrics.dto.OptionalEmptyResult;
+import io.forge.metrics.dto.OptionalPresentResult;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;

@@ -1,6 +1,6 @@
 package io.forge.metrics.domain;
 
-import io.forge.metrics.domain.dto.MetricsResultIndicator;
+import io.forge.metrics.dto.MetricsResultIndicator;
 import jakarta.interceptor.InvocationContext;
 
 /**
