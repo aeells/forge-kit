@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Common utilities for all scripts in the forge-platform project
+# Common utilities for all scripts in the forge-kit project
 #
 # This library provides standardized functions for:
 # - Dependency checking

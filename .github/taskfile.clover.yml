@@ -20,4 +20,4 @@ tasks:
     dir: "{{.ROOT_DIR}}"
     cmds:
       # singleCloverDatabase=true, all coverage is already in one DB, so just generate report on root
-      - '{{.MAVEN_CMD}} clover:clover -pl :platform -Dtest.parallel=none -T 1'
+      - '{{.MAVEN_CMD}} clover:clover -pl :forge-kit -Dtest.parallel=none -T 1'
