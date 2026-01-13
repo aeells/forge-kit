@@ -1,3 +1,9 @@
+## v1.4.3 (2026-01-13)
+
+### Fix
+
+- **rebrand**: missed reference to GitHub package repo for publishing
+
 ## v1.4.2 (2026-01-13)
 
 ### Fix
