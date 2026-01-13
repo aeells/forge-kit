@@ -1,3 +1,13 @@
+## v1.3.0 (2026-01-13)
+
+### Feat
+
+- **dotenv**: envrc required to run static analysis
+
+### Fix
+
+- **rename**: references to -core project remaining
+
 ## v1.2.28 (2026-01-13)
 
 ### Fix
