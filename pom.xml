@@ -34,18 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Additional Java dependencies -->
-        <commons.lang3.version>3.20.0</commons.lang3.version>
-        <commons.collections4.version>4.5.0</commons.collections4.version>
-
-        <!-- Plugin versions (centralized for clarity) -->
-        <checkstyle.version>3.6.0</checkstyle.version>
-        <lombok.version>1.18.42</lombok.version>
-        <owasp.version>12.2.0</owasp.version>
-        <pmd.version>3.28.0</pmd.version>
-        <spotbugs.version>4.9.8.2</spotbugs.version>
-        <takari.lifecycle.version>2.3.2</takari.lifecycle.version>
-
+        <!-- Maven plugin versions -->
         <maven.build.cache.version>1.2.1</maven.build.cache.version>
         <maven.clover.version>4.5.2</maven.clover.version>
         <maven.compiler.version>3.14.1</maven.compiler.version>
@@ -58,19 +47,13 @@
         <maven.surefire.version>3.5.4</maven.surefire.version>
         <maven.versions.version>2.20.1</maven.versions.version>
 
-        <!-- Quarkus BOM -->
-        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.version>3.30.6</quarkus.platform.version>
-
-        <!-- AWS SDK BOM -->
-        <aws.sdk.group-id>software.amazon.awssdk</aws.sdk.group-id>
-        <aws.sdk.artifact-id>bom</aws.sdk.artifact-id>
-        <aws.sdk.version>2.41.5</aws.sdk.version>
-
-        <!-- Test dependencies -->
-        <junit.version>5.11.4</junit.version>
-        <mockito.version>5.14.2</mockito.version>
+        <!-- Profile plugin versions -->
+        <checkstyle.version>3.6.0</checkstyle.version>
+        <lombok.version>1.18.42</lombok.version>
+        <owasp.version>12.2.0</owasp.version>
+        <pmd.version>3.28.0</pmd.version>
+        <spotbugs.version>4.9.8.2</spotbugs.version>
+        <takari.lifecycle.version>2.3.2</takari.lifecycle.version>
 
         <!-- Test execution control properties -->
         <skipUnitTests>false</skipUnitTests>
@@ -83,68 +66,6 @@
         <!-- Disable parallel execution when Clover is active (not thread-safe) -->
         <clover.active>false</clover.active>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>${quarkus.platform.group-id}</groupId>
-                <artifactId>${quarkus.platform.artifact-id}</artifactId>
-                <version>${quarkus.platform.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>${aws.sdk.group-id}</groupId>
-                <artifactId>${aws.sdk.artifact-id}</artifactId>
-                <version>${aws.sdk.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-            <!-- needed for annotation processing; not needed at runtime -->
-        </dependency>
-
-        <!-- Apache Commons Lang (StringUtils, etc.) -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Apache Commons Collections (CollectionUtils, etc.) -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${commons.collections4.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5-component</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5-mockito</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <pluginManagement>
@@ -198,6 +119,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${maven.dependency.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy.version}</version>
                 </plugin>
 
                 <plugin>
@@ -276,7 +203,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven.deploy.version}</version>
             </plugin>
 
             <plugin>
@@ -320,6 +246,7 @@
                 </executions>
             </plugin>
         </plugins>
+
         <extensions>
             <!-- 🧩 Build cache extension -->
             <extension>

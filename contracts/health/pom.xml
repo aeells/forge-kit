@@ -10,54 +10,39 @@
     <artifactId>health</artifactId>
 
     <dependencies>
-        <!-- MicroProfile Health API -->
         <dependency>
             <groupId>org.eclipse.microprofile.health</groupId>
             <artifactId>microprofile-health-api</artifactId>
-            <scope>provided</scope>
         </dependency>
-
-        <!-- AWS SDK for health checks (provided scope - consumers must include) -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>dynamodb</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>s3</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>cognitoidentityprovider</artifactId>
-            <scope>provided</scope>
         </dependency>
-
-        <!-- JPA for database health check (provided scope - consumers must include) -->
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <scope>provided</scope>
         </dependency>
-
         <!-- SmallRye Health implementation for tests (HealthCheckResponse.named() requires implementation) -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-health</artifactId>
-            <scope>test</scope>
         </dependency>
-
         <!-- JUnit Platform Suite API for test suites -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-api</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
