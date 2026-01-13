@@ -1,3 +1,9 @@
+## v1.2.28 (2026-01-13)
+
+### Fix
+
+- **pom**: removing transitive dependency duplication as not best-practive to redeclare
+
 ## v1.2.27 (2026-01-13)
 
 ### Fix
