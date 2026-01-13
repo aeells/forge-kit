@@ -1,0 +1,30 @@
+---
+version: '3'
+
+tasks:
+  default:
+    desc: Display all tasks
+    cmds:
+      - task -t taskfile.init.yml --list-all
+
+  ##################################
+  # Script Management - template
+  ##################################
+
+  script-template:
+    desc: Create a new script from template
+    aliases: [ script, template, new ]
+    cmds:
+      - lib/template-helper.sh {{.CLI_ARGS}}
+
+  ##################################
+  # .envrc
+  ##################################
+
+  dotenvrc:
+    desc: Dev .envrc and shell setup
+    aliases: [ env ]
+    dir: "{{.TASKFILE_DIR}}/.."
+    cmds:
+      - scripts/init/dotenvrc.sh
+      - direnv allow
