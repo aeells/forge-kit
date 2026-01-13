@@ -1,3 +1,13 @@
+## v1.4.1 (2026-01-13)
+
+### Fix
+
+- **pom**: busted version lagging again
+
+### Refactor
+
+- **metrics**: spliting dtos out to forge-api module so that implementations do not need to inherit the entire metrics framework, just the API where necessary
+
 ## v1.4.0 (2026-01-13)
 
 ### Feat
