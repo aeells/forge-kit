@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.forge</groupId>
-        <artifactId>contracts</artifactId>
+        <artifactId>forge-contracts</artifactId>
         <version>1.4.1</version>
     </parent>
 
-    <artifactId>health</artifactId>
+    <artifactId>forge-health</artifactId>
 
     <dependencies>
         <dependency>

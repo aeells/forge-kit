@@ -3,17 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.forge</groupId>
-        <artifactId>platform</artifactId>
+        <artifactId>forge-kit</artifactId>
         <version>1.4.1</version>
     </parent>
 
-    <artifactId>contracts</artifactId>
+    <artifactId>forge-contracts</artifactId>
     <packaging>pom</packaging>
 
     <modules>
         <module>forge-api</module>
-        <module>health</module>
-        <module>metrics</module>
+        <module>forge-health</module>
+        <module>forge-metrics</module>
     </modules>
 
     <properties>
