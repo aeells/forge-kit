@@ -17,6 +17,6 @@ jobs:
         uses: Mattraks/delete-workflow-runs@v2.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: aeells/forge-platform-core
+          repository: aeells/forge-platform
           retain_days: 0
           keep_minimum_runs: 0

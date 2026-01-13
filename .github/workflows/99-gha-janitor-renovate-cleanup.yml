@@ -18,7 +18,7 @@ jobs:
         uses: Mattraks/delete-workflow-runs@v2.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: aeells/forge-platform-core
+          repository: aeells/forge-platform
           delete_workflow_pattern: "00 🧩 Hygiene checks|02 👊🏽 Auto version bump"
           delete_run_by_conclusion_pattern: skipped
           retain_days: 0
