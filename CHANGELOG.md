@@ -1,3 +1,13 @@
+## v1.4.0 (2026-01-13)
+
+### Feat
+
+- **metrics**: migrating metrics out to public repo
+
+### Fix
+
+- **metrics**: pom version lagging
+
 ## v1.3.0 (2026-01-13)
 
 ### Feat
