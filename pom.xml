@@ -15,7 +15,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/aeells/forge-platform</url>
+            <url>https://maven.pkg.github.com/aeells/forge-kit</url>
         </repository>
     </distributionManagement>
 
