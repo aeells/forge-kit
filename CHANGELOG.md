@@ -1,3 +1,9 @@
+## v1.2.27 (2026-01-13)
+
+### Fix
+
+- **pom**: standardising on best-practice pom impl
+
 ## v1.2.26 (2026-01-12)
 
 ### Fix
