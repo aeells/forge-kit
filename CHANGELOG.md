@@ -1,3 +1,10 @@
+## v1.4.2 (2026-01-13)
+
+### Fix
+
+- **rebrand**: rename to forge-kit for lightweight contracts and avoid heavyweight platform connotations
+- **deps**: update aws sdk v2 monorepo to v2.41.6 (#6)
+
 ## v1.4.1 (2026-01-13)
 
 ### Fix
