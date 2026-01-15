@@ -57,18 +57,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Common Quarkus -->
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-arc</artifactId>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-rest</artifactId>
-                <scope>provided</scope>
-            </dependency>
-            <!-- Common Other -->
+            <!-- Common -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -129,6 +118,15 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Quarkus -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest</artifactId>
+        </dependency>
         <!-- Common -->
         <dependency>
             <groupId>org.projectlombok</groupId>
