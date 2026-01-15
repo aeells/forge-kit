@@ -210,6 +210,22 @@
                 <artifactId>versions-maven-plugin</artifactId>
             </plugin>
 
+            <!-- Jandex is required for Quarkus to discover CDI beans in library JARs at build time -->
+            <!-- Without it, Quarkus can't find the implementations in the libs/security etc. modules that are injected into the backend services. -->
+            <plugin>
+                <groupId>io.smallrye</groupId>
+                <artifactId>jandex-maven-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <id>make-index</id>
+                        <goals>
+                            <goal>jandex</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Enforcer (runs at root level to validate all modules) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

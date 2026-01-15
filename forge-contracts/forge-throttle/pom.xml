@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.forge</groupId>
+        <artifactId>forge-contracts</artifactId>
+        <version>1.4.3</version>
+    </parent>
+
+    <artifactId>forge-throttle</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.forge</groupId>
+            <artifactId>forge-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- throttling -->
+        <dependency>
+            <groupId>com.bucket4j</groupId>
+            <artifactId>bucket4j_jdk17-core</artifactId>
+            <version>${bucket4j.version}</version>
+        </dependency>
+        <!-- Redis backend for production (optional - can be enabled via config) -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.bucket4j</groupId>-->
+        <!--            <artifactId>bucket4j-redis</artifactId>-->
+        <!--            <version>${bucket4j.version}</version>-->
+        <!--            <optional>true</optional>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-jackson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -12,8 +12,10 @@
 
     <modules>
         <module>forge-api</module>
+        <module>forge-common</module>
         <module>forge-health</module>
         <module>forge-metrics</module>
+        <module>forge-throttle</module>
     </modules>
 
     <properties>
@@ -28,6 +30,7 @@
         <aws.sdk.version>2.41.6</aws.sdk.version>
 
         <!-- Additional Java dependencies -->
+        <bucket4j.version>8.16.0</bucket4j.version>
         <commons.lang3.version>3.20.0</commons.lang3.version>
         <commons.collections4.version>4.5.0</commons.collections4.version>
 
@@ -54,7 +57,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- Common -->
+            <!-- Common Quarkus -->
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-arc</artifactId>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-rest</artifactId>
+                <scope>provided</scope>
+            </dependency>
+            <!-- Common Other -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

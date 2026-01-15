@@ -15,16 +15,6 @@
             <artifactId>forge-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <!-- metrics endpoint /q/metrics -->
         <dependency>
             <groupId>io.quarkus</groupId>
