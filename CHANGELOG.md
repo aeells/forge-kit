@@ -1,3 +1,14 @@
+## v1.5.0 (2026-01-15)
+
+### Feat
+
+- **throttle**: throttle impl migration
+
+### Fix
+
+- **mvn**: missed dependencies declaration (version inherited from quarkus bom)
+- **pom**: version mismatch on pull rebase again
+
 ## v1.4.4 (2026-01-13)
 
 ### Fix
