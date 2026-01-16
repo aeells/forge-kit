@@ -1,3 +1,9 @@
+## v1.5.1 (2026-01-16)
+
+### Refactor
+
+- **package**: rename to add .kit and avoid clash
+
 ## v1.5.0 (2026-01-15)
 
 ### Feat
