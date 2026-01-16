@@ -1,3 +1,9 @@
+## v1.7.0 (2026-01-16)
+
+### Feat
+
+- **jwt**: final v minor jwt-related util
+
 ## v1.6.0 (2026-01-16)
 
 ### Feat
