@@ -18,9 +18,9 @@ public final class HttpHeaderRateLimitKeyStrategy
 
     /**
      * Resolve a rate-limiting key from the request context. Priority: service token -> user token -> auth:unidentified
-     * (if Authorization header present) -> IP-based.
+     * (if Authorization header is present) -> IP-based.
      * <p>
-     * If an Authorization header is present but we cannot extract a service ID or username, we use "auth:unidentified"
+     * If an Authorization header is present, but we cannot extract a service ID or username, we use "auth:unidentified"
      * to prevent falling back to IP-based rate limiting, which could be exploited by sending malformed tokens.
      */
     public String resolve(final ContainerRequestContext requestContext)
