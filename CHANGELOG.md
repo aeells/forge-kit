@@ -1,3 +1,9 @@
+## v1.6.0 (2026-01-16)
+
+### Feat
+
+- **jwt**: refactoring so as to expose access to specifically service/user jwt token claims
+
 ## v1.5.1 (2026-01-16)
 
 ### Refactor
