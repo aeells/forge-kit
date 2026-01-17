@@ -1,3 +1,10 @@
+## v1.8.6 (2026-01-17)
+
+### Fix
+
+- **publish**: ad-m/github-push-action seems to work with master not version
+- **publish**: using a marketplace action to try and trigger publish on version bump
+
 ## v1.8.5 (2026-01-17)
 
 ### Fix
