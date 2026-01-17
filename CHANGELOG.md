@@ -1,3 +1,9 @@
+## v1.8.4 (2026-01-17)
+
+### Fix
+
+- **publish**: using git credential helper (avoids hygiene check false positives)
+
 ## v1.8.3 (2026-01-17)
 
 ### Fix
