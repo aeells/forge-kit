@@ -1,3 +1,9 @@
+## v1.8.7 (2026-01-17)
+
+### Fix
+
+- **publish**: setting persist-credentials: false — without it, GitHub may still use GITHUB_TOKEN for some operations, which won't trigger downstream workflows
+
 ## v1.8.6 (2026-01-17)
 
 ### Fix
