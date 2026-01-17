@@ -1,3 +1,9 @@
+## v1.8.0 (2026-01-17)
+
+### Feat
+
+- **rename**: migration to metrics-api and package dirs now all include kit prefix
+
 ## v1.7.1 (2026-01-16)
 
 ### Fix
