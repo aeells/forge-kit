@@ -1,3 +1,9 @@
+## v1.8.5 (2026-01-17)
+
+### Fix
+
+- **ci**: minor change to trigger version bump
+
 ## v1.8.4 (2026-01-17)
 
 ### Fix
