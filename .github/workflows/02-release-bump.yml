@@ -24,6 +24,7 @@ jobs:
         with:
           fetch-depth: 0  # Needed for commit range checks
           ref: main  # check out the branch, not detached HEAD
+          token: ${{ secrets.PAT_FORGE_DEPLOY }}  # Use PAT so pushed tags trigger workflows
       - uses: ./.github/actions/tools
       - name: Check and bump version
         id: version-bump

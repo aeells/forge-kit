@@ -4,10 +4,6 @@ name: 03 📦 Publish packages
 # yamllint disable-line rule:truthy
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [ '02 👊🏽 Auto version bump' ]
-    types:
-      - completed
   push:
     tags:
       - 'v*'
