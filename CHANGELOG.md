@@ -1,3 +1,47 @@
+## v1.9.0 (2026-01-17)
+
+### Fix
+
+- **publish**: summary for package publish output
+- **publish**: clean up and optimise now that it's working with the repo event trigger
+
+## v1.8.9 (2026-01-17)
+
+### Fix
+
+- **publish**: switching approach to a repository event trigger via the gh api
+
+## v1.8.8 (2026-01-17)
+
+### Fix
+
+- **publish**: trying anything at this stage tbh
+
+## v1.8.7 (2026-01-17)
+
+### Fix
+
+- **publish**: setting persist-credentials: false — without it, GitHub may still use GITHUB_TOKEN for some operations, which won't trigger downstream workflows
+
+## v1.8.6 (2026-01-17)
+
+### Fix
+
+- **publish**: ad-m/github-push-action seems to work with master not version
+- **publish**: using a marketplace action to try and trigger publish on version bump
+
+## v1.8.5 (2026-01-17)
+
+### Fix
+
+- **ci**: minor change to trigger version bump
+
+## v1.8.2 (2026-01-17)
+
+### Fix
+
+- **ci**: changing so that only tag pushes trigger a package deploy/publish
+
 ## v1.8.10 (2026-01-17)
 
 ### Fix
