@@ -1,3 +1,9 @@
+## v1.8.1 (2026-01-17)
+
+### Refactor
+
+- **spotbugs**: configuration issue after package rename
+
 ## v1.8.0 (2026-01-17)
 
 ### Feat
