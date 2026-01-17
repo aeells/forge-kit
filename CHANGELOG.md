@@ -1,3 +1,9 @@
+## v1.8.10 (2026-01-17)
+
+### Fix
+
+- **publish**: clean up and optimise now that it's working with the repo event trigger
+
 ## v1.8.9 (2026-01-17)
 
 ### Fix
