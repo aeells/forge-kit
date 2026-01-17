@@ -1,3 +1,9 @@
+## v1.8.2 (2026-01-17)
+
+### Fix
+
+- **ci**: changing so that only tag pushes trigger a package deploy/publish
+
 ## v1.8.1 (2026-01-17)
 
 ### Refactor
