@@ -26,12 +26,15 @@ jobs:
           ref: main  # check out the branch, not detached HEAD
           token: ${{ secrets.PAT_FORGE_DEPLOY }}  # Use PAT so pushed tags trigger workflows
       - uses: ./.github/actions/tools
-      - name: Check and bump version
-        id: version-bump
+      - id: version-bump
+        env:
+          PAT_FORGE_DEPLOY: ${{ secrets.PAT_FORGE_DEPLOY }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"         
+          # Configure git to use PAT_FORGE_DEPLOY for pushing (so tags trigger workflows)
+          git remote set-url origin https://aeells:${PAT_FORGE_DEPLOY}@github.com/${GITHUB_REPOSITORY}.git
 
           git fetch --tags
           git checkout main
