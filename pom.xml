@@ -4,7 +4,7 @@
 
     <groupId>io.forge</groupId>
     <artifactId>forge-kit</artifactId>
-    <version>1.8.10</version>
+    <version>1.9.0</version>
     <packaging>pom</packaging>
 
     <modules>
