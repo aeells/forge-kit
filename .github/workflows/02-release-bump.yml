@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0  # Needed for commit range checks
           ref: main  # check out the branch, not detached HEAD
           token: ${{ secrets.PAT_FORGE_DEPLOY }}  # Use PAT so pushed tags trigger workflows
-          persist-credentials: false  # Important: prevents fallback to GITHUB_TOKEN
+          persist-credentials: true  # Keep credentials for git operations
       - uses: ./.github/actions/tools
       - name: Check and bump version
         id: version-bump
@@ -69,14 +69,37 @@ jobs:
             echo "bumped=false" >> $GITHUB_OUTPUT
             echo "final_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           fi
-      - name: Push commits and tags
+      - name: Push commits
         if: steps.version-bump.outputs.bumped == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_FORGE_DEPLOY }}
           branch: main
-          tags: true
+          tags: false
           force: false
+      - name: Push tag explicitly
+        if: steps.version-bump.outputs.bumped == 'true'
+        env:
+          PAT_FORGE_DEPLOY: ${{ secrets.PAT_FORGE_DEPLOY }}
+        run: |
+          # Configure git to use PAT for tag push
+          git config --global credential.helper store
+          {
+            echo "protocol=https"
+            echo "host=github.com"
+            echo "username=aeells"
+            echo "password=${PAT_FORGE_DEPLOY}"
+          } | git credential approve
+          
+          # Push the specific tag - this should trigger the publish workflow
+          echo "Pushing tag v${{ steps.version-bump.outputs.final_version }}"
+          git push origin v${{ steps.version-bump.outputs.final_version }} || {
+            echo "Tag push failed, trying with force..."
+            git push origin v${{ steps.version-bump.outputs.final_version }} --force
+          }
+          
+          # Verify tag was pushed
+          git ls-remote --tags origin | grep "v${{ steps.version-bump.outputs.final_version }}" || echo "WARNING: Tag not found on remote!"
       - name: Version bump summary
         if: always()
         run: |
