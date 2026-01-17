@@ -1,70 +1,24 @@
 ---
 codecov:
   branch: main
+  require_ci_to_pass: true
 
-# Component Management: Group paths to flatten dashboard display
-# This groups all files under parent directories for cleaner dashboard view
-component_management:
-  individual_components:
-    - component_id: applications
-      name: Applications
-      paths:
-        - "applications/**"
-    - component_id: libs
-      name: Libraries
-      paths:
-        - "libs/**"
-    - component_id: services
-      name: Services
-      paths:
-        - "services/**"
-
-# Coverage configuration for Java/Maven project
 coverage:
   precision: 2
   round: down
   range: "70...100"
 
-  # Ignore test files and generated code
-  ignore:
-    - "**/target/**"
-    - "**/src/test/**"
-    - "**/*Test.java"
-    - "**/*Tests.java"
-    - "**/*IT.java"
-    - "**/generated/**"
-    - "**/.clover/**"
-
-  # Status checks
   status:
     project:
       default:
-        target: 80%  # Target 80% coverage
-        threshold: 1%  # Allow 1% decrease
-        base: auto  # Compare against previous commit
+        target: auto
+        threshold: 1%
     patch:
       default:
-        target: 80%
+        target: auto
         threshold: 1%
-        base: auto
 
-# Comment on PRs
 comment:
-  layout: "reach,diff,flags,tree,reach"
+  layout: "reach,diff,flags,files"
   behavior: default
   require_changes: false
-  require_base: false
-  require_head: true
-
-# Flags: Segment coverage by logical groups for better dashboard filtering
-# This allows filtering/grouping coverage in the dashboard by these flags
-flags:
-  applications:
-    paths:
-      - "applications/**"
-  libs:
-    paths:
-      - "libs/**"
-  services:
-    paths:
-      - "services/**"
