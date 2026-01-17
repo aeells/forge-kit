@@ -7,20 +7,15 @@ import static org.mockito.Mockito.*;
 import java.util.List;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import software.amazon.awssdk.awscore.exception.AwsErrorDetails;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.DescribeTableRequest;
 import software.amazon.awssdk.services.dynamodb.model.DescribeTableResponse;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
-@ExtendWith(MockitoExtension.class)
 class DynamoDbHealthCheckTest
 {
-    @Mock
-    private DynamoDbClient dynamoDbClient;
+    private final DynamoDbClient dynamoDbClient = mock(DynamoDbClient.class);
 
     @Test
     void call_WithSuccessfulTableAccess_ReturnsUp()

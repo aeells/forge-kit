@@ -2,20 +2,16 @@ package io.forge.kit.common.auth.jwt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class JwtUserPrincipalAccessorTest
 {
-    @Mock
-    private JwtPrincipalResolver principalResolver;
+    private final JwtPrincipalResolver principalResolver = mock(JwtPrincipalResolver.class);
 
     @Test
     @DisplayName("Extracts username from user principal")

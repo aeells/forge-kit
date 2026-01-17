@@ -42,8 +42,13 @@ public final class DatabaseMetricsInterceptor
 {
     private static final Logger LOGGER = Logger.getLogger(DatabaseMetricsInterceptor.class);
 
+    private final DatabaseMetricsRecorder databaseMetricsRecorder;
+
     @Inject
-    DatabaseMetricsRecorder databaseMetricsRecorder;
+    public DatabaseMetricsInterceptor(DatabaseMetricsRecorder databaseMetricsRecorder)
+    {
+        this.databaseMetricsRecorder = databaseMetricsRecorder;
+    }
 
     @AroundInvoke
     public Object collectDatabaseMetrics(final InvocationContext context) throws Exception

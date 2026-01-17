@@ -50,8 +50,13 @@ import org.apache.commons.lang3.StringUtils;
 @Interceptor
 public final class ServiceMetricsInterceptor
 {
+    private final MetricsRecorderResolver recorderResolver;
+
     @Inject
-    MetricsRecorderResolver recorderResolver;
+    public ServiceMetricsInterceptor(final MetricsRecorderResolver recorderResolver)
+    {
+        this.recorderResolver = recorderResolver;
+    }
 
     @AroundInvoke
     public Object collectMetrics(final InvocationContext context) throws Exception

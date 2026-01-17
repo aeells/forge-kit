@@ -10,18 +10,12 @@ import java.util.List;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class PostgresHealthCheckTest
 {
-    @Mock
-    private EntityManager entityManager;
+    private final EntityManager entityManager = mock(EntityManager.class);
 
-    @Mock
-    private Query query;
+    private final Query query = mock(Query.class);
 
     @BeforeEach
     void setUp()

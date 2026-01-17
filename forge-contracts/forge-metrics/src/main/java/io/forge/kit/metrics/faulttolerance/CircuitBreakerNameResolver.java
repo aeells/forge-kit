@@ -16,7 +16,6 @@ import jakarta.interceptor.InvocationContext;
  */
 public final class CircuitBreakerNameResolver
 {
-
     private CircuitBreakerNameResolver()
     {
         // Utility class

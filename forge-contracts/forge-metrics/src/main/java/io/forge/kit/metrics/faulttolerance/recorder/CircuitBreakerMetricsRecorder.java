@@ -8,8 +8,11 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public final class CircuitBreakerMetricsRecorder
 {
+    private final MeterRegistry meterRegistry;
+
     @Inject
-    MeterRegistry meterRegistry;
+    public CircuitBreakerMetricsRecorder(MeterRegistry meterRegistry)
+    { this.meterRegistry = meterRegistry; }
 
     /**
      * Records a circuit breaker state change.

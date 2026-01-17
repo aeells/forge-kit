@@ -15,8 +15,11 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public final class CircuitBreakerStateFetcher
 {
+    private final CircuitBreakerMaintenance circuitBreakerMaintenance;
+
     @Inject
-    CircuitBreakerMaintenance circuitBreakerMaintenance;
+    public CircuitBreakerStateFetcher(CircuitBreakerMaintenance circuitBreakerMaintenance)
+    { this.circuitBreakerMaintenance = circuitBreakerMaintenance; }
 
     /**
      * Gets the current circuit breaker state using SmallRye Fault Tolerance API.

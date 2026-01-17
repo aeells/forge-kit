@@ -2,6 +2,7 @@ package io.forge.kit.metrics.domain.support;
 
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import io.forge.kit.metrics.domain.MetricsRecorder;
@@ -13,28 +14,19 @@ import java.util.Iterator;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class DefaultMetricsRecorderResolverTest
 {
-    @Mock
-    private Instance<MetricsRecorder> recorders;
-
-    @InjectMocks
-    private DefaultMetricsRecorderResolver resolver;
+    @SuppressWarnings("unchecked")
+    private final Instance<MetricsRecorder> recorders = mock(Instance.class);
 
     @Test
     @DisplayName("resolve returns empty when recorderClass is null")
     void resolve_ReturnsEmpty_WhenRecorderClassIsNull()
     {
-        // When
+        final DefaultMetricsRecorderResolver resolver = new DefaultMetricsRecorderResolver(recorders);
         final Optional<MetricsRecorder> result = resolver.resolve(null);
 
-        // Then
         assertFalse(result.isPresent());
     }
 
@@ -42,16 +34,14 @@ class DefaultMetricsRecorderResolverTest
     @DisplayName("resolve returns CDI-managed recorder when available")
     void resolve_ReturnsCdiManagedRecorder_WhenAvailable()
     {
-        // Given
         final TestMetricsRecorder cdiRecorder = new TestMetricsRecorder();
         @SuppressWarnings("unchecked") final Iterator<MetricsRecorder> iterator = (Iterator<MetricsRecorder>) (Iterator<?>) singletonList(
             cdiRecorder).iterator();
         when(recorders.iterator()).thenReturn(iterator);
 
-        // When
+        final DefaultMetricsRecorderResolver resolver = new DefaultMetricsRecorderResolver(recorders);
         final Optional<MetricsRecorder> result = resolver.resolve(TestMetricsRecorder.class);
 
-        // Then
         assertTrue(result.isPresent());
         assertEquals(cdiRecorder, result.get());
     }
@@ -60,13 +50,11 @@ class DefaultMetricsRecorderResolverTest
     @DisplayName("resolve creates recorder via reflection when CDI not available")
     void resolve_CreatesRecorderViaReflection_WhenCdiNotAvailable()
     {
-        // Given
         when(recorders.iterator()).thenReturn(Collections.emptyIterator());
 
-        // When
+        final DefaultMetricsRecorderResolver resolver = new DefaultMetricsRecorderResolver(recorders);
         final Optional<MetricsRecorder> result = resolver.resolve(TestMetricsRecorder.class);
 
-        // Then
         assertTrue(result.isPresent());
         assertInstanceOf(TestMetricsRecorder.class, result.get());
     }
@@ -75,14 +63,12 @@ class DefaultMetricsRecorderResolverTest
     @DisplayName("resolve caches recorder instances")
     void resolve_CachesRecorderInstances()
     {
-        // Given
         when(recorders.iterator()).thenReturn(Collections.emptyIterator());
 
-        // When
+        final DefaultMetricsRecorderResolver resolver = new DefaultMetricsRecorderResolver(recorders);
         final Optional<MetricsRecorder> result1 = resolver.resolve(TestMetricsRecorder.class);
         final Optional<MetricsRecorder> result2 = resolver.resolve(TestMetricsRecorder.class);
 
-        // Then
         assertTrue(result1.isPresent());
         assertTrue(result2.isPresent());
         // Should be the same instance (cached)
@@ -93,16 +79,14 @@ class DefaultMetricsRecorderResolverTest
     @DisplayName("resolve returns empty when reflection fails")
     void resolve_ReturnsEmpty_WhenReflectionFails()
     {
-        // Given
         // Note: This test intentionally uses a class with a private constructor.
         // The resolver will log a WARNING when it cannot instantiate the recorder,
         // which is expected behavior and documents the failure case.
         when(recorders.iterator()).thenReturn(Collections.emptyIterator());
 
-        // When
+        final DefaultMetricsRecorderResolver resolver = new DefaultMetricsRecorderResolver(recorders);
         final Optional<MetricsRecorder> result = resolver.resolve(PrivateConstructorRecorder.class);
 
-        // Then
         assertFalse(result.isPresent());
     }
 

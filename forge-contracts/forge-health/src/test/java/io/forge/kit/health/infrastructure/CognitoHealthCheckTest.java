@@ -6,20 +6,15 @@ import static org.mockito.Mockito.*;
 
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import software.amazon.awssdk.awscore.exception.AwsErrorDetails;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.CognitoIdentityProviderException;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.DescribeUserPoolRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.DescribeUserPoolResponse;
 
-@ExtendWith(MockitoExtension.class)
 class CognitoHealthCheckTest
 {
-    @Mock
-    private CognitoIdentityProviderClient cognitoClient;
+    private final CognitoIdentityProviderClient cognitoClient = mock(CognitoIdentityProviderClient.class);
 
     @Test
     void call_WithSuccessfulUserPoolAccess_ReturnsUp()

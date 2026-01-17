@@ -14,10 +14,15 @@ public final class DefaultMetricsRecorderResolver implements MetricsRecorderReso
 {
     private static final Logger LOGGER = Logger.getLogger(DefaultMetricsRecorderResolver.class);
 
-    @Inject
-    Instance<MetricsRecorder> recorders;
-
     private final Map<Class<? extends MetricsRecorder>, Optional<MetricsRecorder>> cache = new ConcurrentHashMap<>();
+
+    private final Instance<MetricsRecorder> recorders;
+
+    @Inject
+    public DefaultMetricsRecorderResolver(final Instance<MetricsRecorder> recorders)
+    {
+        this.recorders = recorders;
+    }
 
     @Override
     public Optional<MetricsRecorder> resolve(final Class<? extends MetricsRecorder> recorderClass)

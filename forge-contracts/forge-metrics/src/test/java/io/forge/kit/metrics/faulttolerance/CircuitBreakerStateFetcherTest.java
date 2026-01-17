@@ -1,39 +1,29 @@
 package io.forge.kit.metrics.faulttolerance;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import io.smallrye.faulttolerance.api.CircuitBreakerMaintenance;
 import io.smallrye.faulttolerance.api.CircuitBreakerState;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class CircuitBreakerStateFetcherTest
 {
-    @Mock
-    private CircuitBreakerMaintenance circuitBreakerMaintenance;
-
-    @InjectMocks
-    private CircuitBreakerStateFetcher stateFetcher;
+    private final CircuitBreakerMaintenance circuitBreakerMaintenance = mock(CircuitBreakerMaintenance.class);
 
     @Test
     @DisplayName("getCurrentState returns state when circuit breaker exists")
     void getCurrentState_ReturnsState_WhenCircuitBreakerExists()
     {
-        // Given
         final String circuitName = "test-circuit";
         when(circuitBreakerMaintenance.currentState(circuitName))
             .thenReturn(CircuitBreakerState.OPEN);
 
-        // When
+        final CircuitBreakerStateFetcher stateFetcher = new CircuitBreakerStateFetcher(circuitBreakerMaintenance);
         final CircuitBreakerState result = stateFetcher.getCurrentState(circuitName);
 
-        // Then
         assertEquals(CircuitBreakerState.OPEN, result);
     }
 
@@ -41,15 +31,13 @@ class CircuitBreakerStateFetcherTest
     @DisplayName("getCurrentState returns null when circuit breaker returns null")
     void getCurrentState_ReturnsNull_WhenCircuitBreakerReturnsNull()
     {
-        // Given
         final String circuitName = "test-circuit";
         when(circuitBreakerMaintenance.currentState(circuitName))
             .thenReturn(null);
 
-        // When
+        final CircuitBreakerStateFetcher stateFetcher = new CircuitBreakerStateFetcher(circuitBreakerMaintenance);
         final CircuitBreakerState result = stateFetcher.getCurrentState(circuitName);
 
-        // Then
         assertNull(result);
     }
 
@@ -57,12 +45,11 @@ class CircuitBreakerStateFetcherTest
     @DisplayName("getCurrentState throws IllegalStateException when circuit breaker doesn't exist")
     void getCurrentState_ThrowsIllegalStateException_WhenCircuitBreakerDoesNotExist()
     {
-        // Given
         final String circuitName = "non-existent-circuit";
         when(circuitBreakerMaintenance.currentState(circuitName))
             .thenThrow(new RuntimeException("Circuit breaker 'non-existent-circuit' doesn't exist"));
 
-        // When/Then
+        final CircuitBreakerStateFetcher stateFetcher = new CircuitBreakerStateFetcher(circuitBreakerMaintenance);
         final IllegalStateException exception = assertThrows(IllegalStateException.class,
             () -> stateFetcher.getCurrentState(circuitName));
 
@@ -75,13 +62,12 @@ class CircuitBreakerStateFetcherTest
     @DisplayName("getCurrentState throws IllegalStateException for other exceptions")
     void getCurrentState_ThrowsIllegalStateException_ForOtherExceptions()
     {
-        // Given
         final String circuitName = "test-circuit";
         final String errorMessage = "Unexpected error occurred";
         when(circuitBreakerMaintenance.currentState(circuitName))
             .thenThrow(new RuntimeException(errorMessage));
 
-        // When/Then
+        final CircuitBreakerStateFetcher stateFetcher = new CircuitBreakerStateFetcher(circuitBreakerMaintenance);
         final IllegalStateException exception = assertThrows(IllegalStateException.class,
             () -> stateFetcher.getCurrentState(circuitName));
 
@@ -93,8 +79,9 @@ class CircuitBreakerStateFetcherTest
     @DisplayName("getCurrentState handles all circuit breaker states")
     void getCurrentState_HandlesAllCircuitBreakerStates()
     {
-        // Given
         final String circuitName = "test-circuit";
+
+        final CircuitBreakerStateFetcher stateFetcher = new CircuitBreakerStateFetcher(circuitBreakerMaintenance);
 
         // Test CLOSED
         when(circuitBreakerMaintenance.currentState(circuitName))
@@ -116,13 +103,12 @@ class CircuitBreakerStateFetcherTest
     @DisplayName("getCurrentState preserves exception cause")
     void getCurrentState_PreservesExceptionCause()
     {
-        // Given
         final String circuitName = "test-circuit";
         final RuntimeException originalException = new RuntimeException("Original error");
         when(circuitBreakerMaintenance.currentState(circuitName))
             .thenThrow(originalException);
 
-        // When/Then
+        final CircuitBreakerStateFetcher stateFetcher = new CircuitBreakerStateFetcher(circuitBreakerMaintenance);
         final IllegalStateException exception = assertThrows(IllegalStateException.class,
             () -> stateFetcher.getCurrentState(circuitName));
 

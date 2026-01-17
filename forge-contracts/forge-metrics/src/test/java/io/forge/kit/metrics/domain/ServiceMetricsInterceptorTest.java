@@ -3,10 +3,7 @@ package io.forge.kit.metrics.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import io.forge.kit.metrics.domain.support.MetricsRecorderResolver;
 import io.forge.kit.metrics.dto.MetricsResultIndicator;
@@ -14,46 +11,34 @@ import io.forge.kit.metrics.dto.OptionalEmptyResult;
 import io.forge.kit.metrics.dto.OptionalPresentResult;
 import jakarta.interceptor.InvocationContext;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 class ServiceMetricsInterceptorTest
 {
-    @Mock
-    private MetricsRecorderResolver recorderResolver;
+    private final MetricsRecorderResolver recorderResolver = mock(MetricsRecorderResolver.class);
 
-    @Mock
-    private MetricsRecorder recorder;
+    private final MetricsRecorder recorder = mock(MetricsRecorder.class);
 
-    @Mock
-    private InvocationContext context;
+    private final InvocationContext context = mock(InvocationContext.class);
 
-    @Mock
-    private java.util.Map<String, Object> contextData;
-
-    @InjectMocks
-    private ServiceMetricsInterceptor interceptor;
+    @SuppressWarnings("unchecked")
+    private final Map<String, Object> contextData = mock(Map.class);
 
     @Test
     @DisplayName("collectMetrics proceeds without metrics when no ServiceMetrics annotation")
     void collectMetrics_ProceedsWithoutMetrics_WhenNoServiceMetricsAnnotation() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         when(context.getMethod()).thenReturn(TestTarget.class.getMethod("methodWithoutAnnotation"));
         when(context.getTarget()).thenReturn(target);
         when(context.proceed()).thenReturn("result");
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         final Object result = interceptor.collectMetrics(context);
 
-        // Then
         assertEquals("result", result);
         verify(context).proceed();
         verify(recorderResolver, never()).resolve(any());
@@ -63,7 +48,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics records metrics for MetricsResultIndicator result")
     void collectMetrics_RecordsMetrics_ForMetricsResultIndicatorResult() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         final Method method = TestTarget.class.getMethod("methodWithAnnotation");
         final MetricsResultIndicator result = new TestMetricsResult(true, null);
@@ -74,10 +58,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(result);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         final Object actualResult = interceptor.collectMetrics(context);
 
-        // Then
         assertEquals(result, actualResult);
         verify(recorder).recordMetrics(context, result);
         verify(recorder, never()).recordException(any(), any());
@@ -87,7 +70,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics records exception when method throws")
     void collectMetrics_RecordsException_WhenMethodThrows() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         final Method method = TestTarget.class.getMethod("methodWithAnnotation");
         final RuntimeException exception = new RuntimeException("Test exception");
@@ -97,9 +79,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenThrow(exception);
 
-        // When/Then
         try
         {
+            final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
             interceptor.collectMetrics(context);
         }
         catch (final RuntimeException e)
@@ -115,7 +97,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics converts Optional<MetricsResultIndicator> to indicator")
     void collectMetrics_ConvertsOptional_ToIndicator() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         final Method method = TestTarget.class.getMethod("methodWithAnnotation");
         final MetricsResultIndicator indicator = new TestMetricsResult(true, null);
@@ -126,10 +107,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(optionalResult);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         final Object result = interceptor.collectMetrics(context);
 
-        // Then
         assertEquals(optionalResult, result);
         verify(recorder).recordMetrics(context, indicator);
     }
@@ -138,7 +118,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics converts Optional.empty() to OptionalEmptyResult")
     void collectMetrics_ConvertsOptionalEmpty_ToOptionalEmptyResult() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         final Method method = TestTarget.class.getMethod("methodWithAnnotation");
         final Optional<MetricsResultIndicator> emptyOptional = Optional.empty();
@@ -148,10 +127,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(emptyOptional);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         final Object result = interceptor.collectMetrics(context);
 
-        // Then
         assertEquals(emptyOptional, result);
         verify(recorder).recordMetrics(context, OptionalEmptyResult.INSTANCE);
     }
@@ -160,7 +138,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics converts Optional<NonIndicator> to OptionalPresentResult")
     void collectMetrics_ConvertsOptionalNonIndicator_ToOptionalPresentResult() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         final Method method = TestTarget.class.getMethod("methodWithAnnotation");
         final Optional<String> optionalString = Optional.of("test");
@@ -170,10 +147,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(optionalString);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         final Object result = interceptor.collectMetrics(context);
 
-        // Then
         assertEquals(optionalString, result);
         verify(recorder).recordMetrics(context, OptionalPresentResult.INSTANCE);
     }
@@ -182,7 +158,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics records for void methods")
     void collectMetrics_Records_ForVoidMethods() throws Exception
     {
-        // Given
         final TestTarget target = new TestTarget();
         final Method method = TestTarget.class.getMethod("voidMethodWithAnnotation");
 
@@ -191,10 +166,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(null);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         interceptor.collectMetrics(context);
 
-        // Then
         verify(recorder).recordMetrics(any(), eq(null));
     }
 
@@ -213,10 +187,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(result);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         interceptor.collectMetrics(context);
 
-        // Then
         verify(contextData).put("metrics.type", "user");
         verify(recorder).recordMetrics(context, result);
     }
@@ -225,7 +198,6 @@ class ServiceMetricsInterceptorTest
     @DisplayName("collectMetrics finds class-level annotation when method-level not present")
     void collectMetrics_FindsClassLevelAnnotation_WhenMethodLevelNotPresent() throws Exception
     {
-        // Given
         final TestTargetWithClassAnnotation target = new TestTargetWithClassAnnotation();
         final Method method = TestTargetWithClassAnnotation.class.getMethod("methodWithoutMethodAnnotation");
         final MetricsResultIndicator result = new TestMetricsResult(true, null);
@@ -235,10 +207,9 @@ class ServiceMetricsInterceptorTest
         when(recorderResolver.resolve(any())).thenReturn(Optional.of(recorder));
         when(context.proceed()).thenReturn(result);
 
-        // When
+        final ServiceMetricsInterceptor interceptor = new ServiceMetricsInterceptor(recorderResolver);
         interceptor.collectMetrics(context);
 
-        // Then
         verify(recorder).recordMetrics(context, result);
     }
 

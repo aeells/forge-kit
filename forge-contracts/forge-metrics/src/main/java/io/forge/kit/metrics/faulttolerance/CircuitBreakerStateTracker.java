@@ -18,21 +18,26 @@ import org.jboss.logging.Logger;
 @ApplicationScoped
 public final class CircuitBreakerStateTracker
 {
-
     private static final Logger LOGGER = Logger.getLogger(CircuitBreakerStateTracker.class);
+
     private static final Map<CircuitBreakerState, String> STATE_LABELS = Map.of(
         CircuitBreakerState.CLOSED, "closed",
         CircuitBreakerState.OPEN, "open",
         CircuitBreakerState.HALF_OPEN, "half_open"
     );
 
-    @Inject
-    CircuitBreakerMetricsRecorder recorder;
-
-    @Inject
-    CircuitBreakerStateFetcher stateFetcher;
-
     private final ConcurrentMap<String, CircuitBreakerState> previousStates = new ConcurrentHashMap<>();
+
+    private final CircuitBreakerMetricsRecorder recorder;
+
+    private final CircuitBreakerStateFetcher stateFetcher;
+
+    @Inject
+    public CircuitBreakerStateTracker(final CircuitBreakerMetricsRecorder recorder, final CircuitBreakerStateFetcher stateFetcher)
+    {
+        this.recorder = recorder;
+        this.stateFetcher = stateFetcher;
+    }
 
     /**
      * Records a circuit breaker state transition if the state has changed.

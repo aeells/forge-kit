@@ -8,8 +8,11 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public final class JwtRateLimitPrincipalKeyResolver implements AuthHeaderRateLimitKeyResolver
 {
+    private final JwtPrincipalResolver principalResolver;
+
     @Inject
-    JwtPrincipalResolver principalResolver;
+    public JwtRateLimitPrincipalKeyResolver(JwtPrincipalResolver principalResolver)
+    { this.principalResolver = principalResolver; }
 
     @Override
     public String resolve(final String authorizationHeader)

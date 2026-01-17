@@ -45,8 +45,11 @@ import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 @Interceptor
 public final class CircuitBreakerMetricsInterceptor
 {
+    private final CircuitBreakerStateTracker stateTracker;
+
     @Inject
-    CircuitBreakerStateTracker stateTracker;
+    public CircuitBreakerMetricsInterceptor(CircuitBreakerStateTracker stateTracker)
+    { this.stateTracker = stateTracker; }
 
     @AroundInvoke
     public Object collectCircuitBreakerMetrics(final InvocationContext context) throws Exception

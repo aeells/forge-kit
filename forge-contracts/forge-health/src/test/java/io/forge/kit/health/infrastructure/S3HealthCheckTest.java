@@ -7,9 +7,6 @@ import static org.mockito.Mockito.*;
 import java.util.List;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import software.amazon.awssdk.awscore.exception.AwsErrorDetails;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.HeadBucketRequest;
@@ -17,11 +14,9 @@ import software.amazon.awssdk.services.s3.model.HeadBucketResponse;
 import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
-@ExtendWith(MockitoExtension.class)
 class S3HealthCheckTest
 {
-    @Mock
-    private S3Client s3Client;
+    private final S3Client s3Client = mock(S3Client.class);
 
     @Test
     void call_WithSuccessfulBucketAccess_ReturnsUp()
