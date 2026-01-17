@@ -2,7 +2,6 @@
 name: 99 🧹 GHA Janitor - cleanup renovate
 # yamllint disable-line rule:truthy
 on:
-  workflow_dispatch:
   # Run daily, at 08:00
   schedule:
     - cron: '0 8 * * *'
