@@ -1,3 +1,9 @@
+## v1.8.8 (2026-01-17)
+
+### Fix
+
+- **publish**: trying anything at this stage tbh
+
 ## v1.8.7 (2026-01-17)
 
 ### Fix
