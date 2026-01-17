@@ -69,7 +69,7 @@ jobs:
             echo "final_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           fi
       - if: steps.version-bump.outputs.bumped == 'true'
-        uses: ad-m/github-push-action@1.0.0
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_FORGE_DEPLOY }}
           branch: main
