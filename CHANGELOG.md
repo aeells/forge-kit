@@ -1,3 +1,9 @@
+## v1.8.3 (2026-01-17)
+
+### Fix
+
+- **publish**: tag push did not trigger the publish workflow; trying with the PAT_FORGE_DEPLOY token
+
 ## v1.8.2 (2026-01-17)
 
 ### Fix
