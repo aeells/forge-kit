@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write  # Required to push commits/tags directly to main
+  actions: write  # Required for repository_dispatch
 
 jobs:
   # ✅ Commitizen + Maven versioning in sync
@@ -69,37 +70,21 @@ jobs:
             echo "bumped=false" >> $GITHUB_OUTPUT
             echo "final_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           fi
-      - name: Push commits
+      - name: Push commits and tags
         if: steps.version-bump.outputs.bumped == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_FORGE_DEPLOY }}
           branch: main
-          tags: false
+          tags: true
           force: false
-      - name: Push tag explicitly
+      - name: Trigger publish workflow
         if: steps.version-bump.outputs.bumped == 'true'
-        env:
-          PAT_FORGE_DEPLOY: ${{ secrets.PAT_FORGE_DEPLOY }}
-        run: |
-          # Configure git to use PAT for tag push
-          git config --global credential.helper store
-          {
-            echo "protocol=https"
-            echo "host=github.com"
-            echo "username=aeells"
-            echo "password=${PAT_FORGE_DEPLOY}"
-          } | git credential approve
-          
-          # Push the specific tag - this should trigger the publish workflow
-          echo "Pushing tag v${{ steps.version-bump.outputs.final_version }}"
-          git push origin v${{ steps.version-bump.outputs.final_version }} || {
-            echo "Tag push failed, trying with force..."
-            git push origin v${{ steps.version-bump.outputs.final_version }} --force
-          }
-          
-          # Verify tag was pushed
-          git ls-remote --tags origin | grep "v${{ steps.version-bump.outputs.final_version }}" || echo "WARNING: Tag not found on remote!"
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.PAT_FORGE_DEPLOY }}
+          event-type: publish-packages
+          client-payload: '{"version": "${{ steps.version-bump.outputs.final_version }}", "tag": "v${{ steps.version-bump.outputs.final_version }}"}'
       - name: Version bump summary
         if: always()
         run: |

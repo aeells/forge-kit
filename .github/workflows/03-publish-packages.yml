@@ -3,10 +3,8 @@ name: 03 📦 Publish packages
 
 # yamllint disable-line rule:truthy
 on:
-  workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
+  repository_dispatch:
+    types: [publish-packages]
 
 permissions:
   contents: read
