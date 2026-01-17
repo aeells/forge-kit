@@ -1,4 +1,4 @@
-package io.forge.health.infrastructure;
+package io.forge.kit.health.infrastructure;
 
 import jakarta.persistence.EntityManager;
 import java.util.ArrayList;

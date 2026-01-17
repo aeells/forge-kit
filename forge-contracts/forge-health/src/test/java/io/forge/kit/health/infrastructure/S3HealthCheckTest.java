@@ -1,4 +1,4 @@
-package io.forge.health.infrastructure;
+package io.forge.kit.health.infrastructure;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import io.forge.kit.metrics.domain.MetricsRecorder;
-import io.forge.metrics.dto.MetricsResultIndicator;
+import io.forge.kit.metrics.dto.MetricsResultIndicator;
 import jakarta.enterprise.inject.Instance;
 import jakarta.interceptor.InvocationContext;
 import java.util.Collections;

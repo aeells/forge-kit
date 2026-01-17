@@ -7,6 +7,6 @@
         <version>1.7.1</version>
     </parent>
 
-    <artifactId>forge-api</artifactId>
+    <artifactId>forge-metrics-api</artifactId>
 
 </project>

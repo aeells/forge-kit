@@ -1,4 +1,4 @@
-package io.forge.health.infrastructure;
+package io.forge.kit.health.infrastructure;
 
 import java.util.ArrayList;
 import java.util.List;

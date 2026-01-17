@@ -1,4 +1,4 @@
-package io.forge.metrics.dto;
+package io.forge.kit.metrics.dto;
 
 /**
  * Synthetic MetricsResultIndicator for Optional that is empty (not found case).

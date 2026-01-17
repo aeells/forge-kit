@@ -1,4 +1,4 @@
-package io.forge.metrics.dto;
+package io.forge.kit.metrics.dto;
 
 /**
  * Marker interface for return types that should be automatically instrumented with metrics.

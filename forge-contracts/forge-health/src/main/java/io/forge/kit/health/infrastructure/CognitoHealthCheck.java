@@ -1,4 +1,4 @@
-package io.forge.health.infrastructure;
+package io.forge.kit.health.infrastructure;
 
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;

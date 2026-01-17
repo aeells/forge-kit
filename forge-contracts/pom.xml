@@ -11,10 +11,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>forge-api</module>
         <module>forge-common</module>
         <module>forge-health</module>
         <module>forge-metrics</module>
+        <module>forge-metrics-api</module>
         <module>forge-throttle</module>
     </modules>
 

@@ -9,9 +9,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import io.forge.kit.metrics.domain.support.MetricsRecorderResolver;
-import io.forge.metrics.dto.MetricsResultIndicator;
-import io.forge.metrics.dto.OptionalEmptyResult;
-import io.forge.metrics.dto.OptionalPresentResult;
+import io.forge.kit.metrics.dto.MetricsResultIndicator;
+import io.forge.kit.metrics.dto.OptionalEmptyResult;
+import io.forge.kit.metrics.dto.OptionalPresentResult;
 import jakarta.interceptor.InvocationContext;
 import java.lang.reflect.Method;
 import java.util.Optional;
