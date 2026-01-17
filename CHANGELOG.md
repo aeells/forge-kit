@@ -1,3 +1,9 @@
+## v1.8.9 (2026-01-17)
+
+### Fix
+
+- **publish**: switching approach to a repository event trigger via the gh api
+
 ## v1.8.8 (2026-01-17)
 
 ### Fix
