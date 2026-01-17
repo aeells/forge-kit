@@ -15,9 +15,9 @@ GITHUB_STEP_SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/stdout}"
 # ---- Main --------------------------------------------------------------------
 
 cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-## 📦 Package Publishing
+## 📦 Packages Published
 
 **Version:** \`${VERSION}\` (tag: \`v${VERSION}\`)
 
-Publishing packages to GitHub Package Registry...
+Packages published to GitHub Package Registry.
 EOF

@@ -44,7 +44,7 @@ jobs:
           CURRENT_VERSION: ${{ steps.version-bump.outputs.current_version }}
           NEXT_VERSION: ${{ steps.version-bump.outputs.next_version }}
 
-  push-and-trigger:
+  tag-and-trigger:
     needs: bump-version
     if: needs.bump-version.outputs.bumped == 'true'
     runs-on: ubuntu-latest

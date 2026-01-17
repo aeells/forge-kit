@@ -23,7 +23,7 @@ generate_summary() {
   local next_version="$3"
 
   cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-## 📦 Version Bump Status
+## 📦 Version Bump
 
 **Current Version:** \`${current_version}\`
 EOF
