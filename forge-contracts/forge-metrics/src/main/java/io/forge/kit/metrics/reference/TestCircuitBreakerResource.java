@@ -1,4 +1,4 @@
-package io.forge.kit.metrics.presentation.rest;
+package io.forge.kit.metrics.reference;
 
 import io.forge.kit.metrics.faulttolerance.CircuitBreakerMetrics;
 import io.quarkus.arc.profile.IfBuildProfile;

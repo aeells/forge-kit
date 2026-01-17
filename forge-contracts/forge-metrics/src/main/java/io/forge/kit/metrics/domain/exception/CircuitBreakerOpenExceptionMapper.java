@@ -1,4 +1,4 @@
-package io.forge.kit.metrics.presentation.rest.exception;
+package io.forge.kit.metrics.domain.exception;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
