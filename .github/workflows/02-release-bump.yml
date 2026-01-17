@@ -60,4 +60,4 @@ jobs:
       - uses: peter-evans/repository-dispatch@v4
         with:
           event-type: publish-packages
-          client-payload: '{"version": "${{ needs.bump-version.outputs.next_version }}", "tag": "v${{ needs.bump-version.outputs.next_version }}"}'
+          client-payload: '{"version": "${{ needs.bump-version.outputs.next_version }}"}'

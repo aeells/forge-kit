@@ -32,3 +32,4 @@ jobs:
           </settings>
           EOF
       - run: task build:deploy
+      - run: .github/scripts/publish-summary.sh
