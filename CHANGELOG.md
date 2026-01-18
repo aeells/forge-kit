@@ -1,3 +1,15 @@
+## v1.10.0 (2026-01-18)
+
+### Feat
+
+- **cdi**: cdi bean resolver and unit test
+
+### Fix
+
+- **bump**: reverting; somehow CHANGELOG got out of sync with tags
+- **publish**: summary for package publish output
+- **publish**: clean up and optimise now that it's working with the repo event trigger
+
 ## v1.8.9 (2026-01-17)
 
 ### Fix
