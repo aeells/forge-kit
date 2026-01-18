@@ -181,11 +181,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Add Mockito as Java agent to avoid self-attachment warning in newer JDKs -->
+                    <!-- Append to parent's surefire.jvm.args and add Mockito agent -->
+                    <!-- Note: Using explicit path construction since dependency plugin property may not resolve -->
+                    <argLine>${surefire.jvm.args} -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar</argLine>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <!-- Add Mockito as Java agent to avoid self-attachment warning in newer JDKs -->
+                    <argLine>${surefire.jvm.args} -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar</argLine>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

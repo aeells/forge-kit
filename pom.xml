@@ -62,6 +62,8 @@
         <!-- Parallel execution: 'none' when Clover is active (not thread-safe), 'classes' otherwise -->
         <test.parallel>classes</test.parallel>
         <!-- JVM args for test execution - use custom property name to avoid Clover interference -->
+        <!-- Mockito agent: Using explicit path since dependency plugin property may not be available at root level -->
+        <!-- The path will be resolved per-module where mockito-core is actually a dependency -->
         <surefire.jvm.args>-Xshare:off --add-opens java.base/java.lang=ALL-UNNAMED -XX:+EnableDynamicAgentLoading -Djdk.instrument.traceUsage=false</surefire.jvm.args>
         <!-- Disable parallel execution when Clover is active (not thread-safe) -->
         <clover.active>false</clover.active>
