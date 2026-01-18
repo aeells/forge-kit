@@ -38,20 +38,20 @@ sed -i "s/^version = \".*\"/version = \"$CURRENT_VERSION\"/" .cz.toml
 BUMPED=false
 if LEFTHOOK=0 cz bump --yes --changelog 2>&1; then
   # Read the new version that commitizen calculated
-  NEW_VERSION=$(grep '^version = ' .cz.toml | sed 's/^version = "\(.*\)"/\1/')
-  echo "Version bumped: $CURRENT_VERSION -> $NEW_VERSION"
+  NEXT_VERSION=$(grep '^version = ' .cz.toml | sed 's/^version = "\(.*\)"/\1/')
+  echo "Version bumped: $CURRENT_VERSION -> $NEXT_VERSION"
 
   # Update Maven to match
-  mvn versions:set -DnewVersion=$NEW_VERSION -DgenerateBackupPoms=false
+  mvn versions:set -DnewVersion=$NEXT_VERSION -DgenerateBackupPoms=false
   mvn versions:commit
 
   # Commit everything (changelog, .cz.toml, pom files)
   git add -A
-  git commit -m "chore(release): bump version to $NEW_VERSION [skip ci]" --signoff --no-verify
-  git tag -f v$NEW_VERSION
+  git commit -m "chore(release): bump version to $NEXT_VERSION [skip ci]" --signoff --no-verify
+  git tag -f v$NEXT_VERSION
 
   echo "bumped=true" >> "$GITHUB_OUTPUT"
-  echo "next_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+  echo "next_version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
 else
   echo "No version bump needed - no eligible commits found."
   echo "bumped=false" >> "$GITHUB_OUTPUT"

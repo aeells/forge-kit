@@ -36,7 +36,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           branch: main
-          tags: false
+          tags: true
           force: false
       - run: .github/scripts/version-bump-summary.sh
         env:
@@ -44,19 +44,11 @@ jobs:
           CURRENT_VERSION: ${{ steps.version-bump.outputs.current_version }}
           NEXT_VERSION: ${{ steps.version-bump.outputs.next_version }}
 
-  tag-and-trigger:
+  publish-trigger:
     needs: bump-version
     if: needs.bump-version.outputs.bumped == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-      - uses: ad-m/github-push-action@master
-        with:
-          tags: true
-          force: false
       - uses: peter-evans/repository-dispatch@v4
         with:
           event-type: publish-packages
