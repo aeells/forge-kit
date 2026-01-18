@@ -16,11 +16,5 @@
             <artifactId>quarkus-rest-jackson</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Jakarta Bean Validation API for validation exception mapper -->
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>
