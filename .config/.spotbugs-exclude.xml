@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
     <Match>
-        <Class name="io.forge.kit.health.infrastructure.CognitoHealthCheck"/>
+        <Class name="io.forge.kit.health.impl.infrastructure.CognitoHealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="io.forge.kit.health.infrastructure.DynamoDbHealthCheck"/>
+        <Class name="io.forge.kit.health.impl.infrastructure.DynamoDbHealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="io.forge.kit.health.infrastructure.S3HealthCheck"/>
+        <Class name="io.forge.kit.health.impl.infrastructure.S3HealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="io.forge.kit.metrics.faulttolerance.recorder.CircuitBreakerMetricsRecorder"/>
+        <Class name="io.forge.kit.metrics.impl.faulttolerance.recorder.CircuitBreakerMetricsRecorder"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
 </FindBugsFilter>

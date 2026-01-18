@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.forge</groupId>
+        <artifactId>forge-kit</artifactId>
+        <version>1.13.1</version>
+    </parent>
+
+    <artifactId>forge-api</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>forge-common-api</module>
+        <module>forge-metrics-api</module>
+        <module>forge-security-api</module>
+        <module>forge-throttle-api</module>
+    </modules>
+
+    <properties>
+        <!-- Quarkus BOM -->
+        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+        <quarkus.platform.version>3.30.6</quarkus.platform.version>
+
+        <!-- Additional Java dependencies -->
+        <commons.lang3.version>3.20.0</commons.lang3.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Quarkus bom -->
+            <dependency>
+                <groupId>${quarkus.platform.group-id}</groupId>
+                <artifactId>${quarkus.platform.artifact-id}</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Common -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+                <!-- needed for annotation processing; not needed at runtime -->
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Quarkus -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest</artifactId>
+        </dependency>
+        <!-- Common -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 🔧 Compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- 🧱 Build performance -->
+            <plugin>
+                <groupId>io.takari.maven.plugins</groupId>
+                <artifactId>takari-lifecycle-plugin</artifactId>
+            </plugin>
+
+            <!-- 🧹 Clean plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
