@@ -1,3 +1,9 @@
+## v1.12.0 (2026-01-18)
+
+### Feat
+
+- **migration**: migrating a couple more useful test/jax-rs exception utilities
+
 ## v1.11.0 (2026-01-18)
 
 ### Feat
