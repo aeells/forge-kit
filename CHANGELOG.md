@@ -1,3 +1,9 @@
+## v1.13.0 (2026-01-18)
+
+### Feat
+
+- **migration**: minor utility class for using fixed quarkus port configuration during integration tests
+
 ## v1.12.0 (2026-01-18)
 
 ### Feat
