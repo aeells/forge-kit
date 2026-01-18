@@ -30,20 +30,8 @@ CURRENT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdou
 echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
 echo "Current version: $CURRENT_VERSION"
 
-# Find the latest tag and extract version from it
-# This ensures .cz.toml matches an existing tag, which cz bump requires
-LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-if [ -n "$LATEST_TAG" ]; then
-  # Extract version from tag (remove 'v' prefix if present)
-  TAG_VERSION="${LATEST_TAG#v}"
-  echo "Latest tag: $LATEST_TAG (version: $TAG_VERSION)"
-  # Sync .cz.toml to the tag version so cz bump can find it
-  sed -i "s/^version = \".*\"/version = \"$TAG_VERSION\"/" .cz.toml
-else
-  echo "No tags found, using Maven version"
-  # Sync .cz.toml to current Maven version
-  sed -i "s/^version = \".*\"/version = \"$CURRENT_VERSION\"/" .cz.toml
-fi
+# Sync .cz.toml to current Maven version
+sed -i "s/^version = \".*\"/version = \"$CURRENT_VERSION\"/" .cz.toml
 
 # Let commitizen do the work - it will update changelog and .cz.toml
 # If no bump is needed, it will exit with non-zero and we skip
