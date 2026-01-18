@@ -1,3 +1,9 @@
+## v1.13.2 (2026-01-18)
+
+### Refactor
+
+- **contracts**: splitting out api contracts and implementations
+
 ## v1.13.1 (2026-01-18)
 
 ### Fix
