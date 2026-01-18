@@ -12,5 +12,9 @@
         <Class name="io.forge.kit.health.infrastructure.S3HealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
+    <Match>
+        <Class name="io.forge.kit.metrics.faulttolerance.recorder.CircuitBreakerMetricsRecorder"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
 </FindBugsFilter>
 

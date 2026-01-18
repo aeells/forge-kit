@@ -11,8 +11,10 @@ public final class CircuitBreakerMetricsRecorder
     private final MeterRegistry meterRegistry;
 
     @Inject
-    public CircuitBreakerMetricsRecorder(MeterRegistry meterRegistry)
-    { this.meterRegistry = meterRegistry; }
+    public CircuitBreakerMetricsRecorder(final MeterRegistry meterRegistry)
+    {
+        this.meterRegistry = meterRegistry;
+    }
 
     /**
      * Records a circuit breaker state change.
