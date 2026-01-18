@@ -1,3 +1,9 @@
+## v1.13.1 (2026-01-18)
+
+### Fix
+
+- **revert**: bacaking out changes to migrate QuarkusPortsEnvTestResource; not super valuable and sanitized configuation proved too costly
+
 ## v1.13.0 (2026-01-18)
 
 ### Feat
