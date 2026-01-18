@@ -71,6 +71,29 @@ jobs:
           name: unit-test-results
           path: '**/target/surefire-reports/TEST-*.xml'
 
+  int-test:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Needed for commit range checks
+          ref: main  # check out the branch, not detached HEAD
+      - uses: ./.github/actions/tools
+      - uses: actions/download-artifact@v7
+        with:
+          name: build-artifacts
+      - uses: actions/download-artifact@v7
+        with:
+          name: maven-repo
+          path: ~/.m2/repository/io/forge
+      - run: task build:it -- -Dtest.thread.count=2
+      - if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: int-test-results
+          path: '**/target/failsafe-reports/TEST-*.xml'
+
   unit-test-reporter:
     runs-on: ubuntu-latest
     needs: [ unit-test ]
@@ -86,4 +109,21 @@ jobs:
         with:
           name: Unit Tests
           path: test-results/unit/**/*.xml
+          reporter: java-junit
+
+  int-test-reporter:
+    runs-on: ubuntu-latest
+    needs: [ int-test ]
+    name: 📝 Integration test report
+    if: always()
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v7
+        with:
+          name: int-test-results
+          path: test-results/integration
+      - uses: dorny/test-reporter@v2
+        with:
+          name: Integration Tests
+          path: test-results/integration/**/*.xml
           reporter: java-junit
