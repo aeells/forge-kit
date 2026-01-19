@@ -28,6 +28,6 @@ pre-push:
   commands:
     verify-fast:
       run: |
-        if git diff --name-only @{push} | grep -qE "^(forge-contracts)/"; then
+        if git diff --name-only @{push} | grep -qE "^(forge-api|forge-impl)/"; then
           ./mvnw -q verify -DskipITs -DskipSlowTests=true
         fi

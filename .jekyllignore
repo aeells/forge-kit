@@ -19,7 +19,8 @@ target/
 .prometheus/
 
 # Application code (not needed for docs site)
-forge-contracts/
+forge-api/
+forge-impl/
 perf/
 scripts/
 config/

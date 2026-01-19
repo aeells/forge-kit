@@ -9,13 +9,16 @@ on:
     paths:
       - .config/**
       - .github/**
-      - forge-contracts/**
+      - forge-api/**
+      - forge-impl/**
   pull_request:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
     paths:
+      - .config/**
       - .github/**
-      - contracts/**
+      - forge-api/**
+      - forge-impl/**
 
 # need ID token write permission to use OIDC
 # need actions: read to access artifacts from other jobs
