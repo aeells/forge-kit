@@ -44,11 +44,11 @@
             <artifactId>quarkus-rest-jackson</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Quarkus test API for QuarkusTestResource (used by test classes in services) -->
+        <!-- Quarkus test API for QuarkusTestProfile -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-test-common</artifactId>
-            <scope>provided</scope>
+            <artifactId>quarkus-junit5</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>

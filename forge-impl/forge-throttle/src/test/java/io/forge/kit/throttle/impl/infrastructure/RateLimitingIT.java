@@ -2,7 +2,9 @@ package io.forge.kit.throttle.impl.infrastructure;
 
 import static org.hamcrest.Matchers.equalTo;
 
+import io.forge.kit.throttle.impl.test.ThrottlingEnabledTestProfile;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import io.restassured.RestAssured;
 import jakarta.inject.Inject;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +27,7 @@ import org.junit.jupiter.api.Test;
  * The rate-limiting behavior is tested correctly regardless of the authentication enforcement status.
  */
 @QuarkusTest
+@TestProfile(ThrottlingEnabledTestProfile.class)
 class RateLimitingIT
 {
     @Inject
