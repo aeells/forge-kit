@@ -1,8 +1,8 @@
-package io.forge.kit.security.impl.auth.jwt;
+package io.forge.kit.security.impl.jwt;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.forge.kit.security.api.auth.jwt.JwtPrincipal;
-import io.forge.kit.security.api.auth.jwt.JwtPrincipalExtractor;
+import io.forge.kit.security.api.jwt.JwtPrincipal;
+import io.forge.kit.security.api.jwt.JwtPrincipalExtractor;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.Optional;

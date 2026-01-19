@@ -1,10 +1,10 @@
-package io.forge.kit.security.impl.auth.jwt;
+package io.forge.kit.security.impl.jwt;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.forge.kit.security.api.auth.jwt.JwtPrincipal;
+import io.forge.kit.security.api.jwt.JwtPrincipal;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

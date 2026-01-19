@@ -1,7 +1,7 @@
 package io.forge.kit.throttle.impl.key.resolver.jwt;
 
-import io.forge.kit.security.api.auth.jwt.JwtPrincipal;
-import io.forge.kit.security.impl.auth.jwt.JwtPrincipalResolver;
+import io.forge.kit.security.api.jwt.JwtPrincipal;
+import io.forge.kit.security.impl.jwt.JwtPrincipalResolver;
 import io.forge.kit.throttle.api.key.resolver.jwt.AuthHeaderRateLimitKeyResolver;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

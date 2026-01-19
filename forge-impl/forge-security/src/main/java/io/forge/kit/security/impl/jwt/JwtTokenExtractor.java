@@ -1,4 +1,4 @@
-package io.forge.kit.security.impl.auth.jwt;
+package io.forge.kit.security.impl.jwt;
 
 import jakarta.enterprise.context.ApplicationScoped;
 

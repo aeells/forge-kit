@@ -10,9 +10,21 @@
     <artifactId>forge-security-api</artifactId>
 
     <dependencies>
+        <!-- forge apis -->
+        <dependency>
+            <groupId>io.forge</groupId>
+            <artifactId>forge-metrics-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-jackson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- OpenAPI + Swagger UI endpoints /q/openapi|swagger-ui -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import io.forge.kit.security.api.auth.jwt.JwtPrincipal;
-import io.forge.kit.security.impl.auth.jwt.JwtPrincipalResolver;
+import io.forge.kit.security.api.jwt.JwtPrincipal;
+import io.forge.kit.security.impl.jwt.JwtPrincipalResolver;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package io.forge.kit.security.impl.auth.jwt;
+package io.forge.kit.security.impl.jwt;
 
-import io.forge.kit.security.api.auth.jwt.JwtPrincipal;
+import io.forge.kit.security.api.jwt.JwtPrincipal;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

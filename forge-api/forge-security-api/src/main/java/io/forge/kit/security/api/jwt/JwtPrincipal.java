@@ -1,4 +1,4 @@
-package io.forge.kit.security.api.auth.jwt;
+package io.forge.kit.security.api.jwt;
 
 public sealed interface JwtPrincipal permits JwtPrincipal.Service,JwtPrincipal.User,JwtPrincipal.Anonymous
 {
