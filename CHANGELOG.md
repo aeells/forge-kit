@@ -1,3 +1,13 @@
+## v1.14.0 (2026-01-19)
+
+### Feat
+
+- **security**: migrating some final security contracts from forge-platform core
+
+### Fix
+
+- **deps**: update aws sdk v2 monorepo to v2.41.10 (#8)
+
 ## v1.13.2 (2026-01-18)
 
 ### Refactor
