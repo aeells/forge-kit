@@ -43,14 +43,10 @@ public sealed class ThrottlingEnabledTestProfile implements QuarkusTestProfile p
         }
         else
         {
-            // override any test/application configuration to effectively
-            // disable rate limiting by setting high rate-limit thresholds
+            // override any test/application configuration to
+            // disable rate limiting and the reference filter
             return Map.of(
-                "forge.rate-limit.reference.enabled", "false",
-                "rate-limit.authenticated-capacity-per-minute", "1000",
-                "rate-limit.unauthenticated-capacity-per-minute", "1000",
-                "rate-limit.authenticated-refill-per-second", "100",
-                "rate-limit.unauthenticated-refill-per-second", "100"
+                "forge.rate-limit.reference.enabled", "false"
             );
         }
     }
