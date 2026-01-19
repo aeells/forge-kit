@@ -1,3 +1,9 @@
+## v1.16.0 (2026-01-19)
+
+### Feat
+
+- **security**: some additional lightweight security components
+
 ## v1.15.0 (2026-01-19)
 
 ### Feat
