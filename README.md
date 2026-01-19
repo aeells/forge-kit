@@ -13,13 +13,7 @@
 [![03 📦 Publish packages](https://github.com/aeells/forge-kit/actions/workflows/03-publish-packages.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/03-publish-packages.yml)  
 [![50 🔎 Static analysis](https://github.com/aeells/forge-kit/actions/workflows/50-static-analysis.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/50-static-analysis.yml)  
 [![51 🔎 Code coverage](https://github.com/aeells/forge-kit/actions/workflows/51-code-coverage.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/51-code-coverage.yml)  
-[![98 🚽 GHA Janitor - cleanup history](https://github.com/aeells/forge-kit/actions/workflows/98-gha-janitor-history-cleanup.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/98-gha-janitor-history-cleanup.yml)  
-[![99 🧹 GHA Janitor - cleanup renovate](https://github.com/aeells/forge-kit/actions/workflows/99-gha-janitor-renovate-cleanup.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/99-gha-janitor-renovate-cleanup.yml)  
 [![codecov](https://codecov.io/github/aeells/forge-kit/graph/badge.svg?token=RP8Z2NWG9L)](https://codecov.io/github/aeells/forge-kit)
-
-**Code Coverage**
-
-![Code Coverage Sunburst](https://codecov.io/github/aeells/forge-kit/graphs/sunburst.svg?token=RP8Z2NWG9L)
 
 ---
 
