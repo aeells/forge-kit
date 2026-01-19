@@ -9,15 +9,6 @@ import jakarta.inject.Inject;
  * <p>
  * This class provides convenient methods for extracting username claims from JWT tokens.
  * It uses {@link JwtPrincipalResolver} to resolve principals and filters for user principals.
- * The resolver uses {@link OidcUserPrincipalExtractor} which checks claims in the following priority:
- * <ol>
- * <li>{@code cognito:username} - Cognito-specific</li>
- * <li>{@code email} - Standard OIDC field</li>
- * <li>{@code preferred_username} - Standard OIDC field</li>
- * <li>{@code username} - Common field</li>
- * <li>{@code sub} - Standard OIDC subject</li>
- * </ol>
- * </p>
  */
 @ApplicationScoped
 public final class JwtUserPrincipalAccessor

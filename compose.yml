@@ -1,0 +1,45 @@
+---
+services:
+
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    environment:
+      - SERVICES=dynamodb,ssm,s3
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - PERSISTENCE=1
+      - DEBUG=0
+    ports:
+      - "4566:4566"
+    volumes:
+      - "./.localstack:/var/lib/localstack"  # visible local folder .localstack
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # For OrbStack/standard Docker Compose, resource limits are ignored here.
+      # Options:
+      # 1. Use OrbStack's resource settings in the UI (Settings > Resources)
+      # 2. Apply limits after container starts: docker update --memory=2g --cpus=2 localstack
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.60
+    container_name: jaeger
+    ports:
+      - "16686:16686"  # UI
+      - "4317:4317"    # OTLP gRPC receiver
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./.postgres:/var/lib/postgresql/data"  # visible local folder .postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
