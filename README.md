@@ -2,10 +2,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Quarkus](https://img.shields.io/badge/Quarkus-v3.30.5-blue?logo=quarkus)](https://quarkus.io/)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg+)](https://conventionalcommits.org)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-**CI/CD & Quality**
+**CI/CD Workflows for Forge Kit**
 
 [![00 🧩 Hygiene checks](https://github.com/aeells/forge-kit/actions/workflows/00-hygiene-check.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/00-hygiene-check.yml)  
 [![01 🚧 Build and test](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml)  
@@ -35,7 +35,7 @@ Forge Kit is intentionally opinionated where it matters (security, observability
   - Deterministic rate limiting (Bucket4j-based)
   - Clear separation of authenticated vs unauthenticated capacity
   - Zero-trust–friendly request enforcement patterns
-  - [Documentation →](forge-throttle/README.md)
+  - [Documentation →](forge-impl/forge-throttle/README.md)
 
 ### 📈 Observability
 
@@ -43,19 +43,19 @@ Forge Kit is intentionally opinionated where it matters (security, observability
   - Micrometer integration
   - Prometheus-ready metrics
   - Service, circuit breaker, database recorders
-  - [Documentation →](forge-metrics/README.md)
+  - [Documentation →](forge-impl/forge-metrics/README.md)
 
 - **Health Checks** (`forge-health`)
   - Production-ready health checks 
   - Liveness and readiness probes
-  - [Documentation →](forge-health/README.md)
+  - [Documentation →](forge-impl/forge-health/README.md)
 
 ### 🧱 Platform Utilities
 
 - **Common Utilities** (`forge-common`)
   - Validation and error-handling primitives
   - Method entry logging
-  - [Documentation →](forge-common/README.md)
+  - [Documentation →](forge-impl/forge-common/README.md)
 
 Each module is independently usable and documented.
 
@@ -165,7 +165,7 @@ In short:
 
 Forge Kit is a good fit if you:
 - Are building backend services from scratch
-- Want production-grade infrastructure without vendor lock-in
+- Want production-grade infrastructure without vendor lock-in (excluding the [forge-health-aws](forge-impl/forge-health-aws/README.md) module)
 - Prefer explicit, readable architecture over hidden framework behavior
 - Value testability and operational clarity
 

@@ -12,7 +12,7 @@
 
     <modules>
         <module>forge-common</module>
-        <module>forge-health</module>
+        <module>forge-health-aws</module>
         <module>forge-metrics</module>
         <module>forge-security</module>
         <module>forge-throttle</module>

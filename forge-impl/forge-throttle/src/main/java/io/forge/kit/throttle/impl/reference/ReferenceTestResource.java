@@ -1,5 +1,6 @@
 package io.forge.kit.throttle.impl.reference;
 
+import io.forge.kit.security.api.rest.Secured;
 import io.quarkus.arc.profile.IfBuildProfile;
 import jakarta.annotation.security.PermitAll;
 import jakarta.ws.rs.Consumes;
@@ -24,13 +25,14 @@ public final class ReferenceTestResource
 
     /**
      * <b>Note:</b> The {@code @Secured} annotation and authentication implementation are not implemented in the forge-kit repo.
+     * <p>
      * This means that while the tests call {@code /test/secured} (which is the correct semantic choice), the endpoint does not
      * enforce authentication. However, this does not affect the validity of these rate-limiting tests, as the rate limiting
      * filter extracts user identity from JWT headers independently of whether authentication is enforced by the endpoint.
      * The rate-limiting behavior is tested correctly regardless of the authentication enforcement status.
      */
     @POST
-//    @Secured
+    @Secured
     @Path("/secured")
     public Response testSecured()
     {

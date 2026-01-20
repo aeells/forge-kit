@@ -1,0 +1,23 @@
+# Rate limiting configuration example
+# 
+# This file shows example configuration for forge-throttle.
+# Copy relevant properties to your application.properties file.
+
+# Enable the reference rate limiting filter (optional)
+# If enabled, the ReferenceRateLimitingFilter will be activated automatically
+forge.rate-limit.reference.enabled=false
+
+# Application-level rate limiting defaults (per instance, in-memory)
+# These are the default values - adjust based on your requirements
+
+# Capacity per minute for authenticated requests
+rate-limit.authenticated-capacity-per-minute=100000
+
+# Capacity per minute for unauthenticated requests
+rate-limit.unauthenticated-capacity-per-minute=10000
+
+# Refill rate per second for authenticated requests
+rate-limit.authenticated-refill-per-second=10000
+
+# Refill rate per second for unauthenticated requests
+rate-limit.unauthenticated-refill-per-second=1000
