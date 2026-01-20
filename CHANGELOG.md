@@ -1,3 +1,13 @@
+## v1.17.0 (2026-01-20)
+
+### Feat
+
+- **docs**: First pass at root README; migrated cognito-specific extractors back to forge-platform; docker/bash/taskfile tooling
+
+### Fix
+
+- **oidc**: jwt principal extractor is needed for the RateLimitingIT integration test
+
 ## v1.16.0 (2026-01-19)
 
 ### Feat
