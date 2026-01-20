@@ -4,7 +4,7 @@
 
     <groupId>io.forge</groupId>
     <artifactId>forge-kit</artifactId>
-    <version>1.16.0</version>
+    <version>1.17.0</version>
     <packaging>pom</packaging>
 
     <modules>
