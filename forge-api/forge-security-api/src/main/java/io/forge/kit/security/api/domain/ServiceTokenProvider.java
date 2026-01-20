@@ -16,8 +16,6 @@ import java.util.Optional;
  * - Automatically refresh tokens when they expire
  * - Cache tokens to avoid repeated authentication calls
  *
- * <p>Implementation: {@link io.forge.security.infrastructure.cognito.CachingServiceTokenProvider}
- *
  * <p>For low-level, stateless authentication operations, use {@link ServiceAuthenticationProvider} instead.
  */
 public interface ServiceTokenProvider
