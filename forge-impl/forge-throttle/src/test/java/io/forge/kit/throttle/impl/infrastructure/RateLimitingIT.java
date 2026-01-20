@@ -82,7 +82,7 @@ class RateLimitingIT
     @Test
     void authenticatedRequestsAreRateLimited()
     {
-        final String jwtToken = buildTestJwtToken(Map.of("cognito:username", "test-user@example.com"));
+        final String jwtToken = buildTestJwtToken(Map.of("username", "test-user@example.com"));
 
         // Send requests up to the limit (10 per test config for authenticated)
         // Each request should succeed and consume one token from the user's bucket
@@ -123,7 +123,7 @@ class RateLimitingIT
     @Test
     void authenticatedAndUnauthenticatedRequestsUseSeparateBuckets()
     {
-        final String jwtToken = buildTestJwtToken(Map.of("cognito:username", "user1@example.com"));
+        final String jwtToken = buildTestJwtToken(Map.of("username", "user1@example.com"));
 
         // Consume all unauthenticated tokens (10 requests)
         for (int index = 0; index < 10; index++)
@@ -160,8 +160,8 @@ class RateLimitingIT
     @Test
     void differentUsersHaveSeparateBuckets()
     {
-        final String user1Token = buildTestJwtToken(Map.of("cognito:username", "user1@example.com"));
-        final String user2Token = buildTestJwtToken(Map.of("cognito:username", "user2@example.com"));
+        final String user1Token = buildTestJwtToken(Map.of("username", "user1@example.com"));
+        final String user2Token = buildTestJwtToken(Map.of("username", "user2@example.com"));
 
         // User1 consumes all their tokens (10 requests)
         for (int index = 0; index < 10; index++)
