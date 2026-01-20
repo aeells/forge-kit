@@ -2,7 +2,7 @@
 
 ## Overview
 
-`forge-health-aws` provides **AWS health checks** for use with AWS services such as S3, DynamoDb.
+`forge-health-aws` provides **health checks** for use with AWS services such as S3, DynamoDb.
 
 It distinguishes between **liveness** and **readiness** and supports dependency-aware checks.
 

@@ -48,7 +48,7 @@ Forge Kit is intentionally opinionated where it matters (security, observability
 - **Health Checks** (`forge-health`)
   - Production-ready health checks 
   - Liveness and readiness probes
-  - [Documentation →](forge-impl/forge-health/README.md)
+  - [Documentation →](forge-impl/forge-health-aws/README.md)
 
 ### 🧱 Platform Utilities
 
