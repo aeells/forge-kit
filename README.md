@@ -133,6 +133,21 @@ Each module includes focused documentation and examples.
 
 ---
 
+## Quality Gates
+
+Forge Kit enforces strict quality gates in CI to ensure production readiness:
+
+- Static analysis (PMD, SpotBugs, OWASP Dependency Check)
+- Test coverage via [OpenClover](https://openclover.org/)
+- Deterministic [unit and integration tests](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml)
+- Conventional commits and semantic versioning via [Commitizen](https://commitizen-tools.github.io/commitizen/)
+
+All checks must pass before release artifacts are published.
+
+📄 See [Code Quality & CI Enforcement](docs/CODE_QUALITY.md) for full details.
+
+---
+
 ## Relationship to the Forge Platform
 
 Forge Kit is a foundational **subset** of the Forge Platform.
@@ -158,6 +173,12 @@ In short:
 
 **Forge Kit answers**: *"How should we build this correctly?"*  
 **Forge Platform answers**: *"Do we need to build this at all?"*
+
+---
+
+## Architecture Decision Records (ADRs)
+
+📘 [View Architecture Decision Records](docs/architecture/decisions/index.md)
 
 ---
 
