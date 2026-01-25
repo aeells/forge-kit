@@ -21,7 +21,7 @@
         <!-- Quarkus BOM -->
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.version>3.30.7</quarkus.platform.version>
+        <quarkus.platform.version>3.30.8</quarkus.platform.version>
 
         <!-- Additional Java dependencies -->
         <commons.lang3.version>3.20.0</commons.lang3.version>
