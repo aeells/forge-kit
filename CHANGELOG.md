@@ -1,3 +1,11 @@
+## v1.0.2 (2026-01-26)
+
+### Fix
+
+- **config**: minor config change to suppress default interceptor messages
+- **deps**: update quarkus platform updates (#19)
+- **deps**: update aws sdk v2 monorepo to v2.41.14 (#20)
+
 ## v1.0.1 (2026-01-25)
 
 ### Fix
