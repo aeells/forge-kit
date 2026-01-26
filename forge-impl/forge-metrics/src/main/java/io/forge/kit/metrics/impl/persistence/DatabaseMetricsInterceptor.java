@@ -3,6 +3,7 @@ package io.forge.kit.metrics.impl.persistence;
 import io.forge.kit.metrics.api.persistence.DatabaseMetrics;
 import io.forge.kit.metrics.api.persistence.MetricsRecord;
 import io.forge.kit.metrics.impl.persistence.recorder.DatabaseMetricsRecorder;
+import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -40,6 +41,7 @@ import org.jboss.logging.Logger;
  */
 @DatabaseMetrics(entity = MetricsRecord.class)
 @Interceptor
+@Priority(Interceptor.Priority.LIBRARY_AFTER) // 3000
 public final class DatabaseMetricsInterceptor
 {
     private static final Logger LOGGER = Logger.getLogger(DatabaseMetricsInterceptor.class);

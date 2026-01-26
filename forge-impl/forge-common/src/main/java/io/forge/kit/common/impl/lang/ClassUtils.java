@@ -18,4 +18,17 @@ public final class ClassUtils
             return false;
         }
     }
+
+    public static boolean existsWithClassLoader(final String className, @SuppressWarnings("rawtypes") final Object scope)
+    {
+        try
+        {
+            Class.forName(className, false, scope.getClass().getClassLoader());
+            return true;
+        }
+        catch (final ClassNotFoundException e)
+        {
+            return false;
+        }
+    }
 }

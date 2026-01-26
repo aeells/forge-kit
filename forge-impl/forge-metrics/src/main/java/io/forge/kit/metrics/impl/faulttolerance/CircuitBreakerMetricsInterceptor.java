@@ -2,6 +2,7 @@ package io.forge.kit.metrics.impl.faulttolerance;
 
 import io.forge.kit.metrics.api.faulttolerance.CircuitBreakerMetrics;
 import io.smallrye.faulttolerance.api.CircuitBreakerState;
+import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -44,6 +45,7 @@ import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
  */
 @CircuitBreakerMetrics
 @Interceptor
+@Priority(Interceptor.Priority.LIBRARY_AFTER) // 3000
 public final class CircuitBreakerMetricsInterceptor
 {
     private final CircuitBreakerStateTracker stateTracker;

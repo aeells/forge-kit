@@ -6,6 +6,7 @@ import io.forge.kit.metrics.api.domain.support.MetricsRecorderResolver;
 import io.forge.kit.metrics.api.dto.MetricsResultIndicator;
 import io.forge.kit.metrics.impl.dto.OptionalEmptyResult;
 import io.forge.kit.metrics.impl.dto.OptionalPresentResult;
+import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -50,6 +51,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 @ServiceMetrics(MetricsRecorder.class)
 @Interceptor
+@Priority(Interceptor.Priority.LIBRARY_AFTER) // 3000
 public final class ServiceMetricsInterceptor
 {
     private final MetricsRecorderResolver recorderResolver;

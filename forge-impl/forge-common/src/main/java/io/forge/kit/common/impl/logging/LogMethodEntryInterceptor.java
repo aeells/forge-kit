@@ -1,6 +1,7 @@
 package io.forge.kit.common.impl.logging;
 
 import io.forge.kit.common.api.logging.LogMethodEntry;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -20,6 +21,7 @@ import org.jboss.logging.Logger;
  */
 @LogMethodEntry
 @Interceptor
+@Priority(Interceptor.Priority.LIBRARY_AFTER + 100) // 3100
 public final class LogMethodEntryInterceptor
 {
     @AroundInvoke
