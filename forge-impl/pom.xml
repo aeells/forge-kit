@@ -22,7 +22,7 @@
         <!-- Quarkus BOM -->
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.version>3.30.8</quarkus.platform.version>
+        <quarkus.platform.version>3.31.1</quarkus.platform.version>
 
         <!-- AWS SDK BOM -->
         <aws.sdk.group-id>software.amazon.awssdk</aws.sdk.group-id>
