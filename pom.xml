@@ -36,7 +36,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Maven plugin versions -->
-        <maven.build.cache.version>1.2.1</maven.build.cache.version>
+        <maven.build.cache.version>1.2.2</maven.build.cache.version>
         <maven.clover.version>4.5.2</maven.clover.version>
         <maven.compiler.version>3.14.1</maven.compiler.version>
         <maven.dependency.version>3.9.0</maven.dependency.version>
