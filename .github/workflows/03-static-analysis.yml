@@ -24,7 +24,7 @@ jobs:
     steps:
       # Official action requires github-token + run-id for cross-run download; use community action
       # when artifact may be missing (e.g. 02's bump-version was skipped) so the job does not fail
-      - uses: dawidd6/action-download-artifact@v3
+      - uses: dawidd6/action-download-artifact@v6
         with:
           run_id: ${{ github.event.workflow_run.id }}
           name: version-metadata
