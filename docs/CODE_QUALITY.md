@@ -1,0 +1,18 @@
+# Code Quality
+
+## Code Coverage
+
+[![codecov](https://codecov.io/github/aeells/forge-kit/graph/badge.svg?token=RP8Z2NWG9L)](https://codecov.io/github/aeells/forge-kit)
+
+Forge Kit maintains high test coverage to ensure reliability and maintainability. Coverage metrics are automatically generated and tracked for all modules.
+
+![Code Coverage Sunburst](https://codecov.io/github/aeells/forge-kit/graphs/sunburst.svg?token=RP8Z2NWG9L)
+
+### Coverage Reports
+
+- **Live Dashboard**: View detailed coverage reports, trends, and module breakdowns at [Codecov](https://app.codecov.io/github/aeells/forge-kit)
+- **Automated Generation**: Coverage is calculated weekly via the [code coverage workflow](.github/workflows/51-code-coverage.yml) using Clover instrumentation
+- **Module-Level Tracking**: Coverage is tracked per module, allowing targeted improvements where needed
+
+Coverage reports help maintain code quality standards and identify areas that may need additional test coverage.
+
