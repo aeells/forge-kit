@@ -1,3 +1,9 @@
+## v1.0.4 (2026-02-01)
+
+### Fix
+
+- **deps**: update aws sdk v2 monorepo to v2.41.19 (#28)
+
 ## v1.0.3 (2026-02-01)
 
 ### Fix
