@@ -44,7 +44,7 @@
         <maven.enforcer.version>3.6.2</maven.enforcer.version>
         <maven.failsafe.version>3.5.4</maven.failsafe.version>
         <maven.min.version>3.9.9</maven.min.version>
-        <maven.spotless.version>3.1.0</maven.spotless.version>
+        <maven.spotless.version>3.2.1</maven.spotless.version>
         <maven.surefire.version>3.5.4</maven.surefire.version>
         <maven.versions.version>2.21.0</maven.versions.version>
         <jandex.version>3.5.3</jandex.version>
