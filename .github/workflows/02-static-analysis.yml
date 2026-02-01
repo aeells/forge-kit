@@ -1,0 +1,23 @@
+---
+name: '02 🔎 Static analysis'
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_run:
+    workflows: [ '01 🚧 Build and test' ]
+    types:
+      - completed
+
+env:
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+  OSS_INDEX_USER: ${{ secrets.OSS_INDEX_USER }}
+  OSS_INDEX_API_KEY: ${{ secrets.OSS_INDEX_API_KEY }}
+
+jobs:
+  static-analysis:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'renovate[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/tools
+      - run: task build:sa
