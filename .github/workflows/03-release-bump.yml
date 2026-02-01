@@ -52,7 +52,7 @@ jobs:
             "next": "${{ steps.version-bump.outputs.next_version }}"
           }
           EOF
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: version-metadata
           path: version.json
