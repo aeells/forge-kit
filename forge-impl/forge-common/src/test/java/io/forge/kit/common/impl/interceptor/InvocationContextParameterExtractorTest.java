@@ -1,21 +1,21 @@
-package io.forge.kit.common.impl.logging;
+package io.forge.kit.common.impl.interceptor;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import io.forge.kit.common.api.logging.LogMethodEntry;
+import io.forge.kit.common.impl.reflect.TestReflectionHelper;
+import io.forge.kit.common.impl.reflect.TestRequest;
+import io.forge.kit.common.impl.reflect.TestUser;
 import jakarta.interceptor.InvocationContext;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("LogMethodEntryParameterExtractor Tests")
-class LogMethodEntryParameterExtractorTest
+@DisplayName("InvocationContextParameterExtractor Tests")
+class InvocationContextParameterExtractorTest
 {
     private final InvocationContext context = mock(InvocationContext.class);
-
-    private final LogMethodEntry annotation = mock(LogMethodEntry.class);
 
     @Test
     @DisplayName("extractParameterValues with empty argPaths uses first parameter by default")
@@ -24,10 +24,9 @@ class LogMethodEntryParameterExtractorTest
         final String actorId = "actor-123";
         final Object[] args = {actorId};
 
-        when(annotation.argPaths()).thenReturn(new String[]{});
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -41,10 +40,9 @@ class LogMethodEntryParameterExtractorTest
         final String actorId = "actor-123";
         final Object[] args = {actorId};
 
-        when(annotation.argPaths()).thenReturn(null);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, null);
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -59,11 +57,10 @@ class LogMethodEntryParameterExtractorTest
         final Object[] args = {user};
         final Method method = TestReflectionHelper.createTestMethod("testMethod", TestUser.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"#username"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"#username"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -79,11 +76,10 @@ class LogMethodEntryParameterExtractorTest
         final Object[] args = {actorId, limit};
         final Method method = TestReflectionHelper.createTestMethod("testMethod", String.class, int.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"0", "1"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"0", "1"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(2, result.length, "Should return two values");
@@ -100,11 +96,10 @@ class LogMethodEntryParameterExtractorTest
         final Object[] args = {request};
         final Method method = TestReflectionHelper.createTestMethod("testMethod", TestRequest.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"#user#username"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"#user#username"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -118,11 +113,10 @@ class LogMethodEntryParameterExtractorTest
         final String actorId = "actor-123";
         final Method method = TestReflectionHelper.createTestMethod("testMethod", String.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"5"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(new Object[]{actorId});
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"5"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -137,11 +131,10 @@ class LogMethodEntryParameterExtractorTest
         final Object[] args = {user};
         final Method method = TestReflectionHelper.createTestMethod("testMethod", TestUser.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"#nonexistent"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"#nonexistent"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -155,10 +148,9 @@ class LogMethodEntryParameterExtractorTest
     {
         final Object[] args = {};
 
-        when(annotation.argPaths()).thenReturn(new String[]{});
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");
@@ -174,11 +166,10 @@ class LogMethodEntryParameterExtractorTest
         final Object[] args = {user, limit};
         final Method method = TestReflectionHelper.createTestMethod("testMethod", TestUser.class, int.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"#username", "1"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"#username", "1"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(2, result.length, "Should return two values");
@@ -194,11 +185,10 @@ class LogMethodEntryParameterExtractorTest
         final Object[] args = {request};
         final Method method = TestReflectionHelper.createTestMethod("testMethod", TestRequest.class);
 
-        when(annotation.argPaths()).thenReturn(new String[]{"#user#username"});
         when(context.getMethod()).thenReturn(method);
         when(context.getParameters()).thenReturn(args);
 
-        final Object[] result = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+        final Object[] result = InvocationContextParameterExtractor.extractParameterValues(context, new String[]{"#user#username"});
 
         assertNotNull(result, "Result should not be null");
         assertEquals(1, result.length, "Should return one value");

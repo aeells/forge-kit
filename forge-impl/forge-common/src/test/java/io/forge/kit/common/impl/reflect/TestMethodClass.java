@@ -1,8 +1,12 @@
-package io.forge.kit.common.impl.logging;
+package io.forge.kit.common.impl.reflect;
 
-// Test class for method reflection
+/**
+ * Test class for method reflection. Used by {@link TestReflectionHelper} and annotation-resolution tests.
+ */
+@TestAnnotation("class")
 class TestMethodClass
 {
+    @TestAnnotation("method")
     public void testMethod()
     {
     }

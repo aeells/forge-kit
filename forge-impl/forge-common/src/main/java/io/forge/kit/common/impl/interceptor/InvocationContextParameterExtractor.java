@@ -1,20 +1,18 @@
-package io.forge.kit.common.impl.logging;
+package io.forge.kit.common.impl.interceptor;
 
-import io.forge.kit.common.api.logging.LogMethodEntry;
+import io.forge.kit.common.impl.reflect.ReflectionPathResolver;
 import jakarta.interceptor.InvocationContext;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 
-final class LogMethodEntryParameterExtractor
+public final class InvocationContextParameterExtractor
 {
-    private LogMethodEntryParameterExtractor()
+    private InvocationContextParameterExtractor()
     {}
 
-    static Object[] extractParameterValues(final InvocationContext context, final LogMethodEntry annotation)
+    public static Object[] extractParameterValues(final InvocationContext context, final String[] argPaths)
     {
-        return ArrayUtils.isNotEmpty(annotation.argPaths()) ? extractByPaths(context, annotation.argPaths()) : extractByIndices(context,
+        return ArrayUtils.isNotEmpty(argPaths) ? extractByPaths(context, argPaths) : extractByIndices(context,
             new int[]{0});
     }
 
@@ -28,16 +26,14 @@ final class LogMethodEntryParameterExtractor
 
     private static Object[] extractByPaths(final InvocationContext context, final String[] paths)
     {
-        final Method method = context.getMethod();
         final Object[] args = context.getParameters();
-        final Parameter[] parameters = method.getParameters();
 
         return Arrays.stream(paths)
             .map(path ->
             {
                 try
                 {
-                    return LogMethodEntryReflectionUtils.extractValueByPath(path, args, parameters);
+                    return ReflectionPathResolver.extractValueByPath(path, args);
                 }
                 catch (Exception e)
                 {

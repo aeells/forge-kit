@@ -1,6 +1,8 @@
 package io.forge.kit.common.impl.logging;
 
 import io.forge.kit.common.api.logging.LogMethodEntry;
+import io.forge.kit.common.impl.interceptor.InvocationContextParameterExtractor;
+import io.forge.kit.common.impl.reflect.AnnotationResolver;
 import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -27,7 +29,7 @@ public final class LogMethodEntryInterceptor
     @AroundInvoke
     public Object logMethodEntry(final InvocationContext context) throws Exception
     {
-        final LogMethodEntry annotation = findLogMethodEntryAnnotation(context);
+        final LogMethodEntry annotation = AnnotationResolver.resolve(context, LogMethodEntry.class);
         if (annotation != null)
         {
             final Method method = context.getMethod();
@@ -43,24 +45,11 @@ public final class LogMethodEntryInterceptor
             }
             else
             {
-                final Object[] args = LogMethodEntryParameterExtractor.extractParameterValues(context, annotation);
+                final Object[] args = InvocationContextParameterExtractor.extractParameterValues(context, annotation.argPaths());
                 logger.infof("%s#%s %s", className, methodName, String.format(annotation.message(), args));
             }
         }
 
         return context.proceed();
-    }
-
-    private static LogMethodEntry findLogMethodEntryAnnotation(final InvocationContext context)
-    {
-        final Method method = context.getMethod();
-        final LogMethodEntry annotation = method.getAnnotation(LogMethodEntry.class);
-        if (annotation != null)
-        {
-            return annotation;
-        }
-
-        // fallback to class-level annotation
-        return context.getTarget().getClass().getAnnotation(LogMethodEntry.class);
     }
 }

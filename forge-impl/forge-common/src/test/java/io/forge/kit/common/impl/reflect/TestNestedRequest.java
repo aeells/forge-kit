@@ -1,4 +1,4 @@
-package io.forge.kit.common.impl.logging;
+package io.forge.kit.common.impl.reflect;
 
 record TestNestedRequest(TestRequest request)
 {

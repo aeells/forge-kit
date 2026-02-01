@@ -1,22 +1,20 @@
-package io.forge.kit.common.impl.logging;
+package io.forge.kit.common.impl.reflect;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Parameter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("LogMethodEntryReflectionUtils Tests")
-class LogMethodEntryReflectionUtilsTest
+@DisplayName("ReflectionPathResolver Tests")
+class ReflectionPathResolverTest
 {
     @Test
     @DisplayName("extractValueByPath with numeric index returns parameter value")
     void extractValueByPath_WithNumericIndex_ReturnsParameterValue() throws Exception
     {
         final String actorId = "actor-123";
-        final Parameter[] parameters = TestReflectionHelper.createParameters("actorId");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0", new Object[]{actorId}, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0", new Object[]{actorId});
 
         assertEquals(actorId, result, "Should return the parameter at index 0");
     }
@@ -27,9 +25,8 @@ class LogMethodEntryReflectionUtilsTest
     {
         final TestUser user = new TestUser("john.doe", "john@example.com");
         final Object[] args = {user};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("user");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0#username", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0#username", args);
 
         assertEquals("john.doe", result, "Should return the username property");
     }
@@ -41,9 +38,8 @@ class LogMethodEntryReflectionUtilsTest
         final TestUser user = new TestUser("john.doe", "john@example.com");
         final TestRequest request = new TestRequest(user, true);
         final Object[] args = {request};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("request");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0#user#username", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0#user#username", args);
 
         assertEquals("john.doe", result, "Should return the nested username property");
     }
@@ -56,9 +52,8 @@ class LogMethodEntryReflectionUtilsTest
         final TestRequest request = new TestRequest(user, true);
         final TestNestedRequest nestedRequest = new TestNestedRequest(request);
         final Object[] args = {nestedRequest};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("nestedRequest");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0#registerRequest#user#email", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0#registerRequest#user#email", args);
 
         assertEquals("john@example.com", result, "Should return deeply nested email property");
     }
@@ -69,9 +64,8 @@ class LogMethodEntryReflectionUtilsTest
     {
         final TestRequest request = new TestRequest(null, true);
         final Object[] args = {request};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("request");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0#active", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0#active", args);
 
         assertEquals(true, result, "Should return the boolean property using isActive()");
     }
@@ -82,9 +76,8 @@ class LogMethodEntryReflectionUtilsTest
     {
         final TestRequest request = new TestRequest(null, true);
         final Object[] args = {request};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("request");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0#user#username", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0#user#username", args);
 
         assertNull(result, "Should return null when intermediate value is null");
     }
@@ -94,11 +87,10 @@ class LogMethodEntryReflectionUtilsTest
     void extractValueByPath_WithInvalidIndex_ThrowsIllegalArgumentException()
     {
         final Object[] args = {"value"};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("param");
 
         final IllegalArgumentException exception = assertThrows(
             IllegalArgumentException.class,
-            () -> LogMethodEntryReflectionUtils.extractValueByPath("5", args, parameters),
+            () -> ReflectionPathResolver.extractValueByPath("5", args),
             "Should throw IllegalArgumentException for out of bounds index"
         );
 
@@ -110,11 +102,10 @@ class LogMethodEntryReflectionUtilsTest
     void extractValueByPath_WithNegativeIndex_ThrowsIllegalArgumentException()
     {
         final Object[] args = {"value"};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("param");
 
         final IllegalArgumentException exception = assertThrows(
             IllegalArgumentException.class,
-            () -> LogMethodEntryReflectionUtils.extractValueByPath("-1", args, parameters),
+            () -> ReflectionPathResolver.extractValueByPath("-1", args),
             "Should throw IllegalArgumentException for negative index"
         );
 
@@ -126,11 +117,10 @@ class LogMethodEntryReflectionUtilsTest
     void extractValueByPath_WithNonNumericParameterSpec_ThrowsIllegalArgumentException()
     {
         final Object[] args = {"value"};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("param");
 
         final IllegalArgumentException exception = assertThrows(
             IllegalArgumentException.class,
-            () -> LogMethodEntryReflectionUtils.extractValueByPath("unknownParam", args, parameters),
+            () -> ReflectionPathResolver.extractValueByPath("unknownParam", args),
             "Should throw IllegalArgumentException for non-numeric parameter spec"
         );
 
@@ -144,11 +134,10 @@ class LogMethodEntryReflectionUtilsTest
     {
         final TestUser user = new TestUser("john.doe", "john@example.com");
         final Object[] args = {user};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("user");
 
         final Exception exception = assertThrows(
             Exception.class,
-            () -> LogMethodEntryReflectionUtils.extractValueByPath("0#nonexistent", args, parameters),
+            () -> ReflectionPathResolver.extractValueByPath("0#nonexistent", args),
             "Should throw NoSuchMethodException for missing property"
         );
 
@@ -163,11 +152,10 @@ class LogMethodEntryReflectionUtilsTest
     void extractValueByPath_WithEmptyPath_ThrowsIllegalArgumentException()
     {
         final Object[] args = {"value"};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("param");
 
         final Exception exception = assertThrows(
             Exception.class,
-            () -> LogMethodEntryReflectionUtils.extractValueByPath("", args, parameters),
+            () -> ReflectionPathResolver.extractValueByPath("", args),
             "Should throw exception for empty path"
         );
 
@@ -181,9 +169,8 @@ class LogMethodEntryReflectionUtilsTest
         final String actorId = "actor-123";
         final String limit = "10";
         final Object[] args = {actorId, limit};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("actorId", "limit");
 
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("1", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("1", args);
 
         assertEquals(limit, result, "Should return the second parameter (index 1)");
     }
@@ -194,12 +181,11 @@ class LogMethodEntryReflectionUtilsTest
     {
         final TestUser user = new TestUser("john.doe", "john@example.com");
         final Object[] args = {user};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("user");
 
         // Records use accessor methods like username() instead of getUsername()
-        // LogMethodEntryReflectionUtils tries: getUsername(), isUsername(), then username() (direct)
+        // ReflectionPathResolver tries: getUsername(), isUsername(), then username() (direct)
         // For records, the direct method name (username) should work
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("0#username", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("0#username", args);
 
         assertEquals("john.doe", result, "Should work with record accessor method name");
     }
@@ -210,10 +196,9 @@ class LogMethodEntryReflectionUtilsTest
     {
         final TestUser user = new TestUser("john.doe", "john@example.com");
         final Object[] args = {user};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("user");
 
         // "#username" should default to index 0 (first parameter)
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("#username", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("#username", args);
 
         assertEquals("john.doe", result, "Should default to first parameter when path starts with #");
     }
@@ -225,10 +210,9 @@ class LogMethodEntryReflectionUtilsTest
         final TestUser user = new TestUser("john.doe", "john@example.com");
         final TestRequest request = new TestRequest(user, true);
         final Object[] args = {request};
-        final Parameter[] parameters = TestReflectionHelper.createParameters("request");
 
         // "#user#username" should default to index 0 and navigate nested properties
-        final Object result = LogMethodEntryReflectionUtils.extractValueByPath("#user#username", args, parameters);
+        final Object result = ReflectionPathResolver.extractValueByPath("#user#username", args);
 
         assertEquals("john.doe", result, "Should default to first parameter and navigate nested properties");
     }

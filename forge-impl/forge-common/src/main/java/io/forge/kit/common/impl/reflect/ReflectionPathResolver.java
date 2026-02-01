@@ -1,17 +1,16 @@
-package io.forge.kit.common.impl.logging;
+package io.forge.kit.common.impl.reflect;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
-final class LogMethodEntryReflectionUtils
+public final class ReflectionPathResolver
 {
-    private LogMethodEntryReflectionUtils()
+    private ReflectionPathResolver()
     {}
 
-    public static Object extractValueByPath(final String path, final Object[] methodArgs, final Parameter[] parameters) throws Exception
+    public static Object extractValueByPath(final String path, final Object[] methodArgs) throws Exception
     {
         if (path == null || path.trim().isEmpty())
         {
@@ -30,7 +29,7 @@ final class LogMethodEntryReflectionUtils
         // "1#username" splits to ["1", "username"] - use "1" for the parameter
         // Empty string "" splits to [""] - this is invalid, should be caught above
         final String paramSpec = parts[0].isEmpty() ? "0" : parts[0];
-        Object current = resolveParameter(paramSpec, methodArgs, parameters);
+        Object current = resolveParameter(paramSpec, methodArgs);
 
         // Start property navigation from index 1 (skip the parameter spec)
         for (int i = 1; i < parts.length; i++)
@@ -42,7 +41,7 @@ final class LogMethodEntryReflectionUtils
         return current;
     }
 
-    private static Object resolveParameter(String paramSpec, Object[] args, Parameter[] parameters)
+    private static Object resolveParameter(final String paramSpec, final Object[] args)
     {
         try
         {
