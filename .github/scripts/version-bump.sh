@@ -48,7 +48,7 @@ if LEFTHOOK=0 cz bump --yes --changelog 2>&1; then
   # Commit everything (changelog, .cz.toml, pom files)
   git add -A
   git commit -m "chore(release): bump version to $NEXT_VERSION [skip ci]" --signoff --no-verify
-  git tag -f v$NEXT_VERSION
+  git tag -s -f v$NEXT_VERSION -m "Release v$NEXT_VERSION"
 
   echo "bumped=true" >> "$GITHUB_OUTPUT"
   echo "next_version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
