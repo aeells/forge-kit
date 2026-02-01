@@ -1,3 +1,16 @@
+## v1.0.3 (2026-02-01)
+
+### Fix
+
+- **deps**: update quarkus platform updates to v3.31.1 (#26)
+- **deps**: update aws sdk v2 monorepo to v2.41.17 (#25)
+- **deps**: update aws sdk v2 monorepo to v2.41.16 (#24)
+- **deps**: update aws sdk v2 monorepo to v2.41.15 (#23)
+
+### Refactor
+
+- **reflection**: bunch of refactoring to support duplicate reflection routines in both forge-kit and -platform
+
 ## v1.0.2 (2026-01-26)
 
 ### Fix
