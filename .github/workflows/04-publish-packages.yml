@@ -1,5 +1,5 @@
 ---
-name: 03 📦 Publish packages
+name: 04 📦 Publish packages
 
 # yamllint disable-line rule:truthy
 on:

@@ -3,9 +3,9 @@ name: 51 ☘️ Code coverage
 
 # yamllint disable-line rule:truthy
 on:
+  # Run weekly, Sunday afternoon PST
   schedule:
-    - cron: '0 3 * * *'  # nightly at 03:00 UTC
-  workflow_dispatch:
+    - cron: '0 23 * * 0'
 
 # need ID token write permission to use OIDC
 # need actions: read to access artifacts from other jobs

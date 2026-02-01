@@ -1,10 +1,10 @@
 ---
-name: 98 🚽 GHA Janitor - cleanup history
+name: 99 🚽 GHA janitor cleanup
 # yamllint disable-line rule:truthy
 on:
-  # Run daily, at 08:00
+  # Run weekly, Sunday afternoon PST
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 23 * * 0'
 
 jobs:
   delete_history:
