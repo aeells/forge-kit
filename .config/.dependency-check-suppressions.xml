@@ -19,4 +19,21 @@
         <!-- Match specific CVE -->
         <cve>CVE-2023-1932</cve>
     </suppress>
+    <suppress>
+        <notes><![CDATA[
+           Suppressing CVE-2022-37422, CVE-2022-45129 for microprofile-config-api 3.1.
+           Transitive dependency from Quarkus BOM; CVEs apply to Payara/other runtimes, not the API jar.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.eclipse\.microprofile\.config/microprofile-config-api@3\.1$</packageUrl>
+        <cve>CVE-2022-37422</cve>
+        <cve>CVE-2022-45129</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+           Suppressing CVE-2021-4277 for quarkus-vertx-utils 3.31.1.
+           False positive: CVE-2021-4277 is a bash vulnerability; this is a Java library.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.quarkus\.vertx\.utils/quarkus-vertx-utils@3\.31\.1$</packageUrl>
+        <cve>CVE-2021-4277</cve>
+    </suppress>
 </suppressions>

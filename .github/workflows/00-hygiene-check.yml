@@ -10,7 +10,7 @@ on:
 
 jobs:
   validate:
-    name: Formatting & PR hygiene checks
+    name: Hygiene & secret scan
     runs-on: ubuntu-latest
     if: github.actor != 'renovate[bot]'  # pointless to run hygiene checks on renovate dependency updates
 
