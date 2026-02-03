@@ -19,7 +19,9 @@
 
 ## Overview
 
-**Forge Kit** is a collection of production-grade infrastructure components extracted directly from the **Forge Platform**—battle-tested building blocks for building secure, observable, and resilient backend services.
+**Forge Kit** is a collection of production-grade infrastructure components extracted directly from the
+**Forge Platform**—battle-tested building blocks for building secure, observable, and resilient
+backend services.
 
 Forge Kit focuses on **horizontal concerns**—the infrastructure every serious service needs—without prescribing business logic, workflows, or domain models.
 
@@ -45,8 +47,8 @@ Forge Kit is intentionally opinionated where it matters (security, observability
   - Service, circuit breaker, database recorders
   - [Documentation →](forge-impl/forge-metrics/README.md)
 
-- **Health Checks** (`forge-health`)
-  - Production-ready health checks 
+- **Health Checks** (`forge-health-aws`)
+  - Production-ready AWS service health checks
   - Liveness and readiness probes
   - [Documentation →](forge-impl/forge-health-aws/README.md)
 
@@ -101,7 +103,7 @@ forge-kit/
     ├── forge-throttle-api/ 
 ├── forge-impl/             # Implementations
     ├── forge-common/           # Common utilities and helpers
-    ├── forge-health/           # Health check implementations
+    ├── forge-health-aws/       # AWS health check implementations
     ├── forge-metrics/          # Metrics and observability
     ├── forge-security/         # Metrics and observability
     ├── forge-throttle/         # Rate limiting and throttling

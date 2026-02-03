@@ -41,7 +41,8 @@ It focuses on consistency, correctness, and developer ergonomics rather than fea
 
 ### Validation Exception Mapper
 
-The `ValidationExceptionMapper` automatically converts `ConstraintViolationException` to 400 Bad Request responses. Simply use Jakarta Bean Validation annotations:
+The `ValidationExceptionMapper` automatically converts `ConstraintViolationException` to 400 Bad
+Request responses. Simply use Jakarta Bean Validation annotations:
 
 ```java
 @POST

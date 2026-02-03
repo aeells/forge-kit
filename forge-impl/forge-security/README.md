@@ -2,7 +2,10 @@
 
 ## Overview
 
-`forge-security` provides opinionated, reusable security primitives for Java / Quarkus services operating in a zero-trust environment. It focuses on **request-level authentication and enforcement**, **identity propagation**, and **defensive defaults** for microservices, without coupling to a specific identity provider.
+`forge-security` provides opinionated, reusable security primitives for Java / Quarkus services
+operating in a zero-trust environment. It focuses on **request-level authentication and
+enforcement**, **identity propagation**, and **defensive defaults** for microservices, without
+coupling to a specific identity provider.
 
 ---
 
@@ -38,7 +41,9 @@
 
 ## Usage
 
-`forge-security` provides annotations (`@Secured` and `@AllowedServices`) that act as interceptor bindings for authentication and authorization. **Concrete authentication implementations (filters and interceptors) must be supplied by the consuming application.**
+`forge-security` provides annotations (`@Secured` and `@AllowedServices`) that act as interceptor
+bindings for authentication and authorization. **Concrete authentication implementations (filters
+and interceptors) must be supplied by the consuming application.**
 
 The annotations work as follows:
 - `@Secured` - Marks endpoints that require user authentication
@@ -86,7 +91,10 @@ Code examples demonstrate:
 - Combining both annotations for dual authentication
 - Applying annotations at method and class levels
 
-**Note:** There is also a `ReferenceTestResource` in the throttle module used for integration testing, but it uses `@Secured` as a semantic marker only (the annotation is a no-op in that context). For a complete example of security annotation usage, see `SecuredExample` in the examples directory.
+**Note:** There is also a `ReferenceTestResource` in the throttle module used for integration
+testing, but it uses `@Secured` as a semantic marker only (the annotation is a no-op in that
+context). For a complete example of security annotation usage, see `SecuredExample` in the
+examples directory.
 
 ---
 
@@ -99,4 +107,3 @@ The Forge Platform extends this with:
 - Token exchange and lifecycle management
 - End-to-end service authentication flows
 - Centralized policy and enforcement configuration
-

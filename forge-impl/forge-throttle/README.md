@@ -78,7 +78,8 @@ rate-limit.unauthenticated-refill-per-second=1000
 See: [examples/forge-throttle](../../examples/forge-throttle) for configuration examples.
 
 See the reference implementation:
-- [`ReferenceRateLimitingFilter`](../forge-throttle/src/main/java/io/forge/kit/throttle/impl/reference/ReferenceRateLimitingFilter.java) - A production-ready rate limiting filter implementation
+- [`ReferenceRateLimitingFilter`](../forge-throttle/src/main/java/io/forge/kit/throttle/impl/reference/ReferenceRateLimitingFilter.java) -
+  A production-ready rate limiting filter implementation
 
 This example demonstrates:
 - Implementing a RESTEasy Reactive request filter
@@ -89,6 +90,7 @@ This example demonstrates:
 - Integration with the rate limiting infrastructure
 
 See also:
-- [`RateLimitingIT`](../forge-throttle/src/test/java/io/forge/kit/throttle/impl/infrastructure/RateLimitingIT.java) - Integration tests demonstrating throttling enforcement
+- [`RateLimitingIT`](../forge-throttle/src/test/java/io/forge/kit/throttle/impl/infrastructure/RateLimitingIT.java) -
+  Integration tests demonstrating throttling enforcement
 
 ---

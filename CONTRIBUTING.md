@@ -2,7 +2,9 @@
 
 Thank you for your interest in Forge Kit.
 
-Forge Kit is an open-source project that primarily serves as a reusable foundation for Forge-based platforms. While contributions are welcome, the project is **maintained with a strong emphasis on architectural consistency and long-term stability**.
+Forge Kit is an open-source project that primarily serves as a reusable foundation for Forge-based
+platforms. While contributions are welcome, the project is **maintained with a strong emphasis on
+architectural consistency and long-term stability**.
 
 ---
 

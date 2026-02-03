@@ -105,8 +105,7 @@ See: [examples/forge-metrics](../../examples/forge-metrics) for code examples.
 
 See the reference implementation:
 
-- [
-  `ThrottleMetricsRecorder`](../forge-metrics/src/main/java/io/forge/kit/metrics/impl/domain/recorder/ThrottleMetricsRecorder.java) -
+- [`ThrottleMetricsRecorder`](../forge-metrics/src/main/java/io/forge/kit/metrics/impl/domain/recorder/ThrottleMetricsRecorder.java) -
   A production-ready example of a `MetricsRecorder` implementation that records rate-limiting metrics
 
 This example demonstrates:
