@@ -30,7 +30,9 @@ jobs:
           fetch-depth: 0  # Needed for commit range checks
           ref: main  # check out the branch, not detached HEAD
       # Import GPG key so commits/tags are signed and show as Verified (required for branch protection "Require signed commits")
-      # Add your GPG private key (armored) and passphrase as repo secrets: GPG_PRIVATE_KEY, GPG_PASSPHRASE
+      # Store key as BASE64 to avoid "No key packet found" (GitHub Secrets can strip newlines from pasted armored keys).
+      # Generate: gpg --armor --export-secret-keys YOUR_KEY_ID | base64 -w 0  (Linux) or ... | base64 | tr -d '\n'  (macOS)
+      # Repo secrets: GPG_PRIVATE_KEY (base64-encoded armoured key), GPG_PASSPHRASE
       - uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
