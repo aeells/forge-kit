@@ -1,22 +1,24 @@
 ---
-name: 99 🚽 GHA janitor cleanup
+name: 98 🧹 Janitor renovate cleanup
 # yamllint disable-line rule:truthy
 on:
-  # Run weekly, Sunday afternoon PST
+  # Run daily, at 08:00
   schedule:
-    - cron: '0 23 * * 0'
+    - cron: '0 8 * * *'
 
 jobs:
-  delete_history:
+  delete_skipped:
     runs-on: ubuntu-latest
     permissions:
       actions: write
       contents: read
     steps:
-      - name: Delete workflow runs
+      - name: Delete skipped renovate workflow runs
         uses: Mattraks/delete-workflow-runs@v2.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: aeells/forge-kit
-          retain_days: 7
+          delete_workflow_pattern: "00 🧩 Hygiene checks|03 👊🏽 Auto version bump"
+          delete_run_by_conclusion_pattern: skipped
+          retain_days: 0
           keep_minimum_runs: 0
