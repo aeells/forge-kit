@@ -30,7 +30,7 @@
         <aws.sdk.version>2.41.20</aws.sdk.version>
 
         <!-- Additional Java dependencies -->
-        <bucket4j.version>8.16.0</bucket4j.version>
+        <bucket4j.version>8.16.1</bucket4j.version>
         <commons.lang3.version>3.20.0</commons.lang3.version>
         <commons.collections4.version>4.5.0</commons.collections4.version>
 
