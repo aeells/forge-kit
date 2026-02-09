@@ -39,7 +39,7 @@
         <maven.build.cache.version>1.2.2</maven.build.cache.version>
         <maven.clover.version>4.5.2</maven.clover.version>
         <maven.compiler.version>3.15.0</maven.compiler.version>
-        <maven.dependency.version>3.9.0</maven.dependency.version>
+        <maven.dependency.version>3.10.0</maven.dependency.version>
         <maven.deploy.version>3.1.4</maven.deploy.version>
         <maven.enforcer.version>3.6.2</maven.enforcer.version>
         <maven.failsafe.version>3.5.4</maven.failsafe.version>
