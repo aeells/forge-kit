@@ -27,7 +27,7 @@
         <!-- AWS SDK BOM -->
         <aws.sdk.group-id>software.amazon.awssdk</aws.sdk.group-id>
         <aws.sdk.artifact-id>bom</aws.sdk.artifact-id>
-        <aws.sdk.version>2.41.28</aws.sdk.version>
+        <aws.sdk.version>2.41.29</aws.sdk.version>
 
         <!-- Additional Java dependencies -->
         <bucket4j.version>8.16.1</bucket4j.version>
