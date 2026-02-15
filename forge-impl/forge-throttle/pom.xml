@@ -47,7 +47,7 @@
         <!-- Quarkus test API for QuarkusTestProfile -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5</artifactId>
+            <artifactId>quarkus-junit</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
