@@ -5,3 +5,7 @@ version_files = []
 tag_format = "v$version"
 update_changelog_on_bump = true
 changelog_file = "CHANGELOG.md"
+# When global git config has tag.gpgsign=true (e.g. CI), commitizen must pass -m to git tag
+# or git prompts for a message and fails with "Terminal is dumb, but EDITOR unset".
+gpg_sign = true
+annotated_tag_message = "Release"
