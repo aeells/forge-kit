@@ -1,3 +1,24 @@
+## v1.0.5 (2026-02-16)
+
+### Fix
+
+- **bump**: ditching the overwriting of gpg signature
+- **bump**: commitizen version issue - now it's pinned there's a change and we need to provide git commit message
+- **deploy**: skipping tests during deploy phase
+- **deps**: update aws sdk v2 monorepo to v2.41.29 (#47)
+- **deps**: update aws sdk v2 monorepo to v2.41.28 (#46)
+- **deps**: update dependency io.quarkus.platform:quarkus-bom to v3.31.3 (#45)
+- **deps**: update aws sdk v2 monorepo to v2.41.27 (#44)
+- **deps**: update aws sdk v2 monorepo to v2.41.26 (#43)
+- **deps**: update aws sdk v2 monorepo to v2.41.25 (#42)
+- **deps**: update aws sdk v2 monorepo to v2.41.24 (#40)
+- **deps**: update aws sdk v2 monorepo to v2.41.23 (#39)
+- **deps**: update dependency io.quarkus.platform:quarkus-bom to v3.31.2 (#38)
+- **deps**: update aws sdk v2 monorepo to v2.41.22 (#37)
+- **deps**: update aws sdk v2 monorepo to v2.41.21 (#35)
+- **deps**: update dependency com.bucket4j:bucket4j_jdk17-core to v8.16.1 (#34)
+- **deps**: update aws sdk v2 monorepo to v2.41.20 (#33)
+
 ## v1.0.4 (2026-02-01)
 
 ### Fix
