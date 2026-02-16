@@ -29,4 +29,4 @@ runs:
 
     - name: Install Commitizen
       shell: bash
-      run: pip install --quiet commitizen
+      run: pip install --quiet 'commitizen==4.13.7'
