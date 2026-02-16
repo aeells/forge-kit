@@ -16,10 +16,7 @@ GITHUB_OUTPUT="${GITHUB_OUTPUT:-/dev/stdout}"
 
 # ---- Main --------------------------------------------------------------------
 
-# Configure git user
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
-
+# Committer is set by the GPG action in CI so commits show as Verified.
 # Fetch latest tags and ensure we're on main
 git fetch --tags
 git checkout main
