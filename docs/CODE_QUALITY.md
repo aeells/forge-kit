@@ -1,5 +1,14 @@
 # Code Quality
 
+Forge Kit enforces strict quality gates in CI to ensure production readiness:
+
+- Static analysis (PMD, SpotBugs, OWASP Dependency Check)
+- Test coverage via [OpenClover](https://openclover.org/)
+- Deterministic [unit and integration tests](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml)
+- Conventional commits and semantic versioning via [Commitizen](https://commitizen-tools.github.io/commitizen/)
+
+All checks must pass before release artifacts are published.
+
 ## Code Coverage
 
 [![codecov](https://codecov.io/github/aeells/forge-kit/graph/badge.svg?token=RP8Z2NWG9L)](https://codecov.io/github/aeells/forge-kit)
@@ -15,4 +24,3 @@ Forge Kit maintains high test coverage to ensure reliability and maintainability
 - **Module-Level Tracking**: Coverage is tracked per module, allowing targeted improvements where needed
 
 Coverage reports help maintain code quality standards and identify areas that may need additional test coverage.
-
