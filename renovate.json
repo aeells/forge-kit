@@ -62,7 +62,13 @@
       "groupName": "Quarkus platform updates",
       "matchPackageNames": [
         "/^io\\.quarkus/"
-      ]
+      ],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "description": "Stability: only suggest Maven versions that have been published for a few days (avoids Maven Central vs other repos lag)",
+      "matchManagers": ["maven"],
+      "minimumReleaseAge": "3 days"
     }
   ]
 }
