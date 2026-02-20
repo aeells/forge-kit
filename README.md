@@ -7,12 +7,9 @@
 
 **CI Status**
 
-[![00 🧩 Hygiene checks](https://github.com/aeells/forge-kit/actions/workflows/00-hygiene-check.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/00-hygiene-check.yml)  
-[![01 🚧 Build and test](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml)  
-[![02 🔎 Static analysis](https://github.com/aeells/forge-kit/actions/workflows/02-static-analysis.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/02-static-analysis.yml)  
-[![03 👊🏽 Auto version bump](https://github.com/aeells/forge-kit/actions/workflows/03-release-bump.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/03-release-bump.yml)  
-[![04 📦 Publish packages](https://github.com/aeells/forge-kit/actions/workflows/04-publish-packages.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/04-publish-packages.yml)  
-[![51 🔎 Code coverage](https://github.com/aeells/forge-kit/actions/workflows/51-code-coverage.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/51-code-coverage.yml)  
+[![00 🧩 Hygiene checks](https://github.com/aeells/forge-kit/actions/workflows/00-hygiene-check.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/00-hygiene-check.yml) [![01 🚧 Build and test](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/01-build-test.yml) [![02 🔎 Static analysis](https://github.com/aeells/forge-kit/actions/workflows/02-static-analysis.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/02-static-analysis.yml)  
+[![03 👊🏽 Auto version bump](https://github.com/aeells/forge-kit/actions/workflows/03-release-bump.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/03-release-bump.yml) [![04 📦 Publish packages](https://github.com/aeells/forge-kit/actions/workflows/04-publish-packages.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/04-publish-packages.yml) [![51 🔎 Code coverage](https://github.com/aeells/forge-kit/actions/workflows/51-code-coverage.yml/badge.svg)](https://github.com/aeells/forge-kit/actions/workflows/51-code-coverage.yml)  
+
 [![codecov](https://codecov.io/github/aeells/forge-kit/graph/badge.svg?token=RP8Z2NWG9L)](https://codecov.io/github/aeells/forge-kit)
 
 ---
