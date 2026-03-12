@@ -1,3 +1,20 @@
+## v1.0.7 (2026-03-12)
+
+### Fix
+
+- **deps**: update aws sdk v2 monorepo to v2.42.8 (#76)
+- **deps**: update aws sdk v2 monorepo to v2.42.7 (#75)
+- **deps**: update dependency io.quarkus.platform:quarkus-bom to v3.32.2 (#74)
+- **deps**: update aws sdk v2 monorepo to v2.42.6 (#73)
+- **deps**: update aws sdk v2 monorepo to v2.42.5 (#71)
+- **deps**: update aws sdk v2 monorepo to v2.42.4 (#66)
+- **deps**: update aws sdk v2 monorepo to v2.42.3 (#65)
+- **deps**: update aws sdk v2 monorepo to v2.42.2 (#64)
+- **deps**: update dependency io.quarkus.platform:quarkus-bom to v3.32.1 (#63)
+- **deps**: update aws sdk v2 monorepo to v2.42.1 (#62)
+- **deps**: update aws sdk v2 monorepo to v2.42.0 (#60)
+- **deps**: update aws sdk v2 monorepo to v2.41.34 (#59)
+
 ## v1.0.6 (2026-02-20)
 
 ### Fix
