@@ -1,8 +1,9 @@
 # Forge Kit
 
-[![Lines of Code](https://tokei.kojix2.net/badge/github/aeells/forge-kit/lines)](https://tokei.kojix2.net/github/aeells/forge-kit)
-[![Top Language](https://tokei.kojix2.net/badge/github/aeells/forge-kit/language)](https://tokei.kojix2.net/github/aeells/forge-kit)
-[![Code to Comment](https://tokei.kojix2.net/badge/github/aeells/forge-kit/ratio)](https://tokei.kojix2.net/github/aeells/forge-kit)
+[![Lines of Code](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Faeells%2Fforge-kit%2Flines)](https://tokei.kojix2.net/github/aeells/forge-kit)
+[![Top Language](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Faeells%2Fforge-kit%2Flanguage)](https://tokei.kojix2.net/github/aeells/forge-kit)
+[![Languages](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Faeells%2Fforge-kit%2Flanguages)](https://tokei.kojix2.net/github/aeells/forge-kit)
+[![Code to Comment](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Faeells%2Fforge-kit%2Fratio)](https://tokei.kojix2.net/github/aeells/forge-kit)
 ![License](https://img.shields.io/github/license/aeells/forge-kit)
 ![Last Commit](https://img.shields.io/github/last-commit/aeells/forge-kit)
 
@@ -92,12 +93,6 @@ Forge Kit contains the cross-cutting infrastructure primitives used by the full 
 The Forge Platform extends these foundations with domain services, identity flows, notifications, audit capabilities, and operational tooling.
 
 If your goal is rapid delivery of production-ready microservices, the full platform may be the better starting point.
-
-[![Lines of Code](https://tokei.kojix2.net/badge/github/aeells/forge-core/lines)](https://tokei.kojix2.net/github/aeells/forge-core)
-[![Top Language](https://tokei.kojix2.net/badge/github/aeells/forge-core/language)](https://tokei.kojix2.net/github/aeells/forge-core)
-[![Code to Comment](https://tokei.kojix2.net/badge/github/aeells/forge-core/ratio)](https://tokei.kojix2.net/github/aeells/forge-core)
-![License](https://img.shields.io/github/license/aeells/forge-core)
-![Last Commit](https://img.shields.io/github/last-commit/aeells/forge-core)
 
 ---
 
