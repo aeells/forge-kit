@@ -1,6 +1,11 @@
 # Forge Kit
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Lines of Code](https://tokei.kojix2.net/badge/github/aeells/forge-kit/lines)](https://tokei.kojix2.net/github/aeells/forge-kit)
+[![Top Language](https://tokei.kojix2.net/badge/github/aeells/forge-kit/language)](https://tokei.kojix2.net/github/aeells/forge-kit)
+[![Code to Comment](https://tokei.kojix2.net/badge/github/aeells/forge-kit/ratio)](https://tokei.kojix2.net/github/aeells/forge-kit)
+![License](https://img.shields.io/github/license/aeells/forge-kit)
+![Last Commit](https://img.shields.io/github/last-commit/aeells/forge-kit)
+
 [![Quarkus](https://img.shields.io/badge/Quarkus-v3.31.1-blue?logo=quarkus)](https://quarkus.io/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -18,12 +23,12 @@
 
 **Forge Kit** is a collection of infrastructure components extracted directly from the 👉 **[Forge Platform](https://forgeplatform.software)**.
 
-It provides Quarkus-based components for security, observability and cross-cutting service concerns — without prescribing domain logic.
+It provides Quarkus-based components for security, observability, and cross-cutting service concerns — without prescribing domain logic.
 
 Forge Kit demonstrates the following capabilities that continue with the full Forge Platform: 
 - architectural composure and separation of concerns
 - implementation of microservice cross-cutting concerns
-- disciplined coding standards, documentation and test organisation
+- disciplined coding standards, documentation, and test organisation
 
 ---
 
@@ -87,6 +92,12 @@ Forge Kit contains the cross-cutting infrastructure primitives used by the full 
 The Forge Platform extends these foundations with domain services, identity flows, notifications, audit capabilities, and operational tooling.
 
 If your goal is rapid delivery of production-ready microservices, the full platform may be the better starting point.
+
+[![Lines of Code](https://tokei.kojix2.net/badge/github/aeells/forge-core/lines)](https://tokei.kojix2.net/github/aeells/forge-core)
+[![Top Language](https://tokei.kojix2.net/badge/github/aeells/forge-core/language)](https://tokei.kojix2.net/github/aeells/forge-core)
+[![Code to Comment](https://tokei.kojix2.net/badge/github/aeells/forge-core/ratio)](https://tokei.kojix2.net/github/aeells/forge-core)
+![License](https://img.shields.io/github/license/aeells/forge-core)
+![Last Commit](https://img.shields.io/github/last-commit/aeells/forge-core)
 
 ---
 
