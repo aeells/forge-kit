@@ -108,7 +108,7 @@ jobs:
         with:
           name: unit-test-results
           path: test-results/unit
-      - uses: dorny/test-reporter@v2
+      - uses: dorny/test-reporter@v3
         with:
           name: Unit Tests
           path: test-results/unit/**/*.xml
@@ -125,7 +125,7 @@ jobs:
         with:
           name: int-test-results
           path: test-results/integration
-      - uses: dorny/test-reporter@v2
+      - uses: dorny/test-reporter@v3
         with:
           name: Integration Tests
           path: test-results/integration/**/*.xml
