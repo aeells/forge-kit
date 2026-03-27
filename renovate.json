@@ -2,16 +2,16 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "schedule:nonOfficeHours",
     ":dependencyDashboard",
     ":semanticCommits",
     ":automergeMinor",
     ":automergeBranch",
-    ":prHourlyLimitNone",
-    ":disableRateLimiting"
+    ":prHourlyLimitNone"
+  ],
+  "schedule": [
+    "before 6am on the first day of the month"
   ],
   "enabled": true,
-  "prConcurrentLimit": 5,
   "timezone": "America/Los_Angeles",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",

@@ -2,9 +2,9 @@
 name: 98 🧹 Janitor renovate cleanup
 # yamllint disable-line rule:truthy
 on:
-  # Run daily, at 08:00
+  # Monthly after Renovate (1st) and CI skips settle; 5th UTC morning
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 8 5 * *'
 
 jobs:
   delete_skipped:
