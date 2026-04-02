@@ -1,3 +1,17 @@
+## v1.0.8 (2026-04-02)
+
+### Fix
+
+- **deps**: update aws sdk v2 monorepo to v2.42.15 (#87)
+- **deps**: update aws sdk v2 monorepo to v2.42.14 (#86)
+- **deps**: update aws sdk v2 monorepo to v2.42.13 (#85)
+- **deps**: update aws sdk v2 monorepo to v2.42.12 (#84)
+- **deps**: update dependency org.projectlombok:lombok to v1.18.44 (#82)
+- **deps**: update quarkus platform updates to v3.32.3 (#80)
+- **deps**: update aws sdk v2 monorepo to v2.42.11 (#81)
+- **deps**: update dependency com.bucket4j:bucket4j_jdk17-core to v8.17.0 (#79)
+- **deps**: update aws sdk v2 monorepo to v2.42.9 (#78)
+
 ## v1.0.7 (2026-03-12)
 
 ### Fix
