@@ -37,7 +37,7 @@ jobs:
         id: coverage
         run: .github/scripts/coverage-summary.sh target/site/clover/clover.xml
       - if: always()
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: target/site/clover/clover.xml
