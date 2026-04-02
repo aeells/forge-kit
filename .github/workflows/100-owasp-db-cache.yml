@@ -3,6 +3,7 @@ name: '100 🗄️ OWASP cache'
 
 # yamllint disable-line rule:truthy
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'  # Sunday 00:00 UTC
 

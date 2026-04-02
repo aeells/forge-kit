@@ -20,4 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/tools
+      - uses: actions/cache@v4
+        with:
+          path: .dependency-check-cache
+          key: dependency-check-${{ runner.os }}-v1
+          restore-keys: |
+            dependency-check-${{ runner.os }}-
+
       - run: task build:sa
