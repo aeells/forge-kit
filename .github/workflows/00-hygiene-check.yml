@@ -84,7 +84,7 @@ jobs:
       # Markdown linting
       # ---------------------------
       - name: 📝 Lint Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v22
+        uses: DavidAnson/markdownlint-cli2-action@v23
         continue-on-error: true
         with:
           config: '.config/.markdownlint.jsonc'
