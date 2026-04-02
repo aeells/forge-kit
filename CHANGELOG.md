@@ -1,3 +1,10 @@
+## v1.0.9 (2026-04-02)
+
+### Fix
+
+- **deps**: update aws sdk v2 monorepo to v2.42.27 (#92)
+- **deps**: update quarkus platform updates to v3.34.1 (#90)
+
 ## v1.0.8 (2026-04-02)
 
 ### Fix
