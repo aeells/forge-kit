@@ -427,7 +427,7 @@
                             <nvdValidForHours>24</nvdValidForHours>
                             <nvdApiKey>${nvd.api.key}</nvdApiKey>
                             <failBuildOnCVSS>7</failBuildOnCVSS>
-                            <dataDirectory>.dependency-check-cache</dataDirectory>
+                            <dataDirectory>${maven.multiModuleProjectDirectory}/.dependency-check-cache</dataDirectory>
                             <ossIndexUsername>${oss.index.user}</ossIndexUsername>
                             <ossIndexPassword>${oss.index.key}</ossIndexPassword>
                             <suppressionFiles>

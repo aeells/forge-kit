@@ -13,6 +13,11 @@ env:
   OSS_INDEX_USER: ${{ secrets.OSS_INDEX_USER }}
   OSS_INDEX_API_KEY: ${{ secrets.OSS_INDEX_API_KEY }}
 
+# actions: read — restore actions/cache when org default token is restricted
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   static-analysis:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.actor != 'renovate[bot]' }}
