@@ -13,6 +13,7 @@ import io.quarkus.scheduler.Scheduled;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
@@ -78,7 +79,27 @@ public final class AmpMetricsExporter
             return;
         }
         meterRegistry.counter("forge.observability.amp.push.failure").increment();
-        LOGGER.errorf("AMP remote write failed with status %d", response.statusCode());
+        logRemoteWriteFailure(snapshots.size(), payload.snappyBody().length, response);
+    }
+
+    private static void logRemoteWriteFailure(
+                                              final int snapshotCount, final int snappyBodyBytes, final AwsSignedHttpResponse response)
+    {
+        LOGGER.errorf(
+            "AMP remote write failed with status %d snappyBodyBytes=%d metricSnapshots=%d responseBody=%s",
+            response.statusCode(),
+            snappyBodyBytes,
+            snapshotCount,
+            formatResponseBody(response.body()));
+    }
+
+    private static String formatResponseBody(final byte[] body)
+    {
+        if (body.length == 0)
+        {
+            return "<empty>";
+        }
+        return new String(body, StandardCharsets.UTF_8);
     }
 
     private AwsSignedHttpRequest buildRequest(final RemoteWritePayload payload)
