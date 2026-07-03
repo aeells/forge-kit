@@ -1,3 +1,9 @@
+## v1.3.2 (2026-07-03)
+
+### Fix
+
+- **observability-aws**: log AMP remote-write failure diagnostics
+
 ## v1.3.1 (2026-06-30)
 
 ### Fix
