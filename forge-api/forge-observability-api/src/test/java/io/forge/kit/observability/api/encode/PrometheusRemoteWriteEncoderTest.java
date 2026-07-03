@@ -10,8 +10,10 @@ import io.forge.kit.observability.api.remotewrite.WriteRequest;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.prometheusmetrics.PrometheusConfig;
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
+import io.prometheus.metrics.model.snapshots.GaugeSnapshot;
 import io.prometheus.metrics.model.snapshots.MetricSnapshots;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,6 +85,62 @@ class PrometheusRemoteWriteEncoderTest
         assertEquals(RemoteWritePayload.DEFAULT_REMOTE_WRITE_VERSION, payload.remoteWriteVersion());
         assertFalse(roundTrip.getTimeseriesList().isEmpty());
         assertSeriesPresent(roundTrip, "events_total", 1.0);
+    }
+
+    @Test
+    void encode_usesSinglePushTimestampForAllSamples()
+    {
+        registry.counter("requests_total", "service", "auth").increment();
+        registry.gauge("heap_used_bytes", 42.0);
+        registry.timer("http_latency").record(120, TimeUnit.MILLISECONDS);
+
+        final WriteRequest request = encodeCurrentSnapshots();
+        final long firstTimestamp = request.getTimeseries(0).getSamples(0).getTimestamp();
+
+        assertFalse(request.getTimeseriesList().isEmpty());
+        for (final TimeSeries series : request.getTimeseriesList())
+        {
+            assertEquals(firstTimestamp, series.getSamples(0).getTimestamp());
+        }
+    }
+
+    @Test
+    void encode_ignoresStaleSnapshotScrapeTimestamps()
+    {
+        final long staleTimestampMillis = Instant.parse("2020-01-01T00:00:00Z").toEpochMilli();
+        final GaugeSnapshot gaugeSnapshot = GaugeSnapshot.builder()
+            .name("stale_timestamp_probe")
+            .dataPoint(
+                GaugeSnapshot.GaugeDataPointSnapshot.builder()
+                    .value(3.0)
+                    .scrapeTimestampMillis(staleTimestampMillis)
+                    .build())
+            .build();
+        final long encodeStartMillis = System.currentTimeMillis();
+
+        final WriteRequest request = encoder.encode(MetricSnapshots.of(gaugeSnapshot));
+        final long sampleTimestamp = request.getTimeseries(0).getSamples(0).getTimestamp();
+
+        assertTrue(sampleTimestamp >= encodeStartMillis);
+        assertTrue(sampleTimestamp <= System.currentTimeMillis());
+    }
+
+    @Test
+    void encode_successivePushesUseNonDecreasingTimestamps() throws InterruptedException
+    {
+        registry.gauge("push_clock_probe", 1.0);
+
+        final long firstPushTimestamp = firstSampleTimestamp(encodeCurrentSnapshots());
+        Thread.sleep(2);
+        registry.gauge("push_clock_probe", 2.0);
+        final long secondPushTimestamp = firstSampleTimestamp(encodeCurrentSnapshots());
+
+        assertTrue(secondPushTimestamp >= firstPushTimestamp);
+    }
+
+    private long firstSampleTimestamp(final WriteRequest request)
+    {
+        return request.getTimeseries(0).getSamples(0).getTimestamp();
     }
 
     private WriteRequest encodeCurrentSnapshots()

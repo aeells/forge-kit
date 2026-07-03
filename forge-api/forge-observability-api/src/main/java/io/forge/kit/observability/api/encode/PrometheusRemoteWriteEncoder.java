@@ -29,6 +29,10 @@ import org.xerial.snappy.Snappy;
  * ({@code quarkus-micrometer-registry-prometheus-v1}). Samples are read via
  * {@code PrometheusMeterRegistry.getPrometheusRegistry().scrape()} — not via text scrape parsing.
  *
+ * <p>Remote-write pushes stamp every sample with a single wall-clock time for the batch. Per-datapoint
+ * scrape timestamps from the registry are not forwarded, avoiding AMP {@code new-value-for-timestamp}
+ * discards on periodic push.
+ *
  * <p>PMD class cyclomatic complexity is suppressed: this class dispatches many small type-specific
  * appenders; individual methods remain intentionally small.
  */
@@ -44,10 +48,11 @@ public final class PrometheusRemoteWriteEncoder
      */
     public WriteRequest encode(final MetricSnapshots metricSnapshots)
     {
+        final long pushTimestampMillis = System.currentTimeMillis();
         final WriteRequest.Builder requestBuilder = WriteRequest.newBuilder();
         for (final MetricSnapshot metricSnapshot : metricSnapshots)
         {
-            appendSnapshot(metricSnapshot, requestBuilder);
+            appendSnapshot(metricSnapshot, requestBuilder, pushTimestampMillis);
         }
         return requestBuilder.build();
     }
@@ -72,37 +77,41 @@ public final class PrometheusRemoteWriteEncoder
         }
     }
 
-    private void appendSnapshot(final MetricSnapshot metricSnapshot, final WriteRequest.Builder requestBuilder)
+    private void appendSnapshot(
+                                final MetricSnapshot metricSnapshot, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
         switch (metricSnapshot)
         {
-            case CounterSnapshot counterSnapshot -> appendCounter(counterSnapshot, requestBuilder);
-            case GaugeSnapshot gaugeSnapshot -> appendGauge(gaugeSnapshot, requestBuilder);
-            case HistogramSnapshot histogramSnapshot -> appendHistogram(histogramSnapshot, requestBuilder);
-            case SummarySnapshot summarySnapshot -> appendSummary(summarySnapshot, requestBuilder);
+            case CounterSnapshot counterSnapshot -> appendCounter(counterSnapshot, requestBuilder, pushTimestampMillis);
+            case GaugeSnapshot gaugeSnapshot -> appendGauge(gaugeSnapshot, requestBuilder, pushTimestampMillis);
+            case HistogramSnapshot histogramSnapshot -> appendHistogram(histogramSnapshot, requestBuilder, pushTimestampMillis);
+            case SummarySnapshot summarySnapshot -> appendSummary(summarySnapshot, requestBuilder, pushTimestampMillis);
             default -> { }
         }
     }
 
-    private void appendCounter(final CounterSnapshot counterSnapshot, final WriteRequest.Builder requestBuilder)
+    private void appendCounter(
+                               final CounterSnapshot counterSnapshot, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
         final String metricName = counterSeriesName(counterSnapshot.getMetadata().getPrometheusName());
         for (final CounterSnapshot.CounterDataPointSnapshot dataPoint : counterSnapshot.getDataPoints())
         {
-            requestBuilder.addTimeseries(singleSampleSeries(metricName, dataPoint, dataPoint.getValue()));
+            requestBuilder.addTimeseries(singleSampleSeries(metricName, dataPoint, dataPoint.getValue(), pushTimestampMillis));
         }
     }
 
-    private void appendGauge(final GaugeSnapshot gaugeSnapshot, final WriteRequest.Builder requestBuilder)
+    private void appendGauge(
+                             final GaugeSnapshot gaugeSnapshot, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
         final String metricName = gaugeSnapshot.getMetadata().getPrometheusName();
         for (final GaugeSnapshot.GaugeDataPointSnapshot dataPoint : gaugeSnapshot.getDataPoints())
         {
-            requestBuilder.addTimeseries(singleSampleSeries(metricName, dataPoint, dataPoint.getValue()));
+            requestBuilder.addTimeseries(singleSampleSeries(metricName, dataPoint, dataPoint.getValue(), pushTimestampMillis));
         }
     }
 
-    private void appendHistogram(final HistogramSnapshot histogramSnapshot, final WriteRequest.Builder requestBuilder)
+    private void appendHistogram(
+                                 final HistogramSnapshot histogramSnapshot, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
         final String metricName = histogramSnapshot.getMetadata().getPrometheusName();
         for (final HistogramSnapshot.HistogramDataPointSnapshot dataPoint : histogramSnapshot.getDataPoints())
@@ -111,15 +120,14 @@ public final class PrometheusRemoteWriteEncoder
             {
                 continue;
             }
-            appendClassicHistogram(metricName, dataPoint, requestBuilder);
+            appendClassicHistogram(metricName, dataPoint, requestBuilder, pushTimestampMillis);
         }
     }
 
     private void appendClassicHistogram(
-                                        final String metricName, final HistogramSnapshot.HistogramDataPointSnapshot dataPoint, final WriteRequest.Builder requestBuilder)
+                                        final String metricName, final HistogramSnapshot.HistogramDataPointSnapshot dataPoint, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
         final ClassicHistogramBuckets buckets = dataPoint.getClassicBuckets();
-        final long timestampMillis = scrapeTimestampMillis(dataPoint);
         for (int bucketIndex = 0; bucketIndex < buckets.size(); bucketIndex++)
         {
             final String bucketName = metricName + "_bucket";
@@ -127,7 +135,7 @@ public final class PrometheusRemoteWriteEncoder
             final List<Label> labels = buildBucketLabels(bucketName, dataPoint.getLabels(), upperBound);
             requestBuilder.addTimeseries(TimeSeries.newBuilder()
                 .addAllLabels(labels)
-                .addSamples(sample(buckets.getCount(bucketIndex), timestampMillis))
+                .addSamples(sample(buckets.getCount(bucketIndex), pushTimestampMillis))
                 .build());
         }
         appendSumAndCount(
@@ -136,15 +144,15 @@ public final class PrometheusRemoteWriteEncoder
             buildLabels(metricName, dataPoint.getLabels()),
             dataPoint.getSum(),
             dataPoint.getCount(),
-            timestampMillis);
+            pushTimestampMillis);
     }
 
-    private void appendSummary(final SummarySnapshot summarySnapshot, final WriteRequest.Builder requestBuilder)
+    private void appendSummary(
+                               final SummarySnapshot summarySnapshot, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
         final String metricName = summarySnapshot.getMetadata().getPrometheusName();
         for (final SummarySnapshot.SummaryDataPointSnapshot dataPoint : summarySnapshot.getDataPoints())
         {
-            final long timestampMillis = scrapeTimestampMillis(dataPoint);
             for (int quantileIndex = 0; quantileIndex < dataPoint.getQuantiles().size(); quantileIndex++)
             {
                 final Quantile quantile = dataPoint.getQuantiles().get(quantileIndex);
@@ -152,7 +160,7 @@ public final class PrometheusRemoteWriteEncoder
                     metricName, dataPoint.getLabels(), quantile.getQuantile());
                 requestBuilder.addTimeseries(TimeSeries.newBuilder()
                     .addAllLabels(labels)
-                    .addSamples(sample(quantile.getValue(), timestampMillis))
+                    .addSamples(sample(quantile.getValue(), pushTimestampMillis))
                     .build());
             }
             appendSumAndCount(
@@ -161,7 +169,7 @@ public final class PrometheusRemoteWriteEncoder
                 buildLabels(metricName, dataPoint.getLabels()),
                 dataPoint.getSum(),
                 dataPoint.getCount(),
-                timestampMillis);
+                pushTimestampMillis);
         }
     }
 
@@ -179,11 +187,11 @@ public final class PrometheusRemoteWriteEncoder
     }
 
     private TimeSeries singleSampleSeries(
-                                          final String metricName, final DataPointSnapshot dataPoint, final double value)
+                                          final String metricName, final DataPointSnapshot dataPoint, final double value, final long pushTimestampMillis)
     {
         return TimeSeries.newBuilder()
             .addAllLabels(buildLabels(metricName, dataPoint.getLabels()))
-            .addSamples(sample(value, scrapeTimestampMillis(dataPoint)))
+            .addSamples(sample(value, pushTimestampMillis))
             .build();
     }
 
@@ -195,11 +203,6 @@ public final class PrometheusRemoteWriteEncoder
     private String counterSeriesName(final String prometheusName)
     {
         return prometheusName.endsWith("_total") ? prometheusName : prometheusName + "_total";
-    }
-
-    private long scrapeTimestampMillis(final DataPointSnapshot dataPoint)
-    {
-        return dataPoint.hasScrapeTimestamp() ? dataPoint.getScrapeTimestampMillis() : System.currentTimeMillis();
     }
 
     private String formatUpperBound(final double upperBound)
