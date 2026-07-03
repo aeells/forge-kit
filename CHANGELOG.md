@@ -1,3 +1,10 @@
+## v1.3.3 (2026-07-03)
+
+### Fix
+
+- **prometheus**: fix to avoid prometheus metrics API push collisions across multiple services
+- **observability-api**: stamp remote-write pushes with batch wall-clock time
+
 ## v1.3.2 (2026-07-03)
 
 ### Fix
