@@ -9,6 +9,7 @@ import io.opentelemetry.sdk.common.CompletableResultCode;
 import io.opentelemetry.sdk.trace.data.SpanData;
 import io.opentelemetry.sdk.trace.export.SpanExporter;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
 import org.jboss.logging.Logger;
@@ -47,13 +48,39 @@ public final class XRayTraceExporter implements SpanExporter
         {
             final byte[] body = OtlpTracePayloadEncoder.encode(spans);
             final AwsSignedHttpResponse response = transport.send(buildRequest(body));
-            return response.isSuccessful() ? CompletableResultCode.ofSuccess() : CompletableResultCode.ofFailure();
+            if (response.isSuccessful())
+            {
+                return CompletableResultCode.ofSuccess();
+            }
+
+            logOtlpExportFailure(spans.size(), body.length, response);
+            return CompletableResultCode.ofFailure();
         }
         catch (final RuntimeException exception)
         {
             LOGGER.error("X-Ray OTLP export failed", exception);
             return CompletableResultCode.ofFailure();
         }
+    }
+
+    private static void logOtlpExportFailure(final int spanCount, final int otlpBodyBytes, final AwsSignedHttpResponse response)
+    {
+        LOGGER.errorf(
+            "X-Ray OTLP export failed with status %d otlpBodyBytes=%d spanCount=%d responseBody=%s",
+            response.statusCode(),
+            otlpBodyBytes,
+            spanCount,
+            formatResponseBody(response.body()));
+    }
+
+    private static String formatResponseBody(final byte[] body)
+    {
+        if (body.length == 0)
+        {
+            return "<empty>";
+        }
+
+        return new String(body, StandardCharsets.UTF_8);
     }
 
     @Override

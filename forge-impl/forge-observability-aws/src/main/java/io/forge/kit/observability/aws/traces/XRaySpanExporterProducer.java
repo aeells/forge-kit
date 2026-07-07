@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.Collection;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 
 /**
  * Registers {@link XRayTraceExporter} with Quarkus OpenTelemetry when X-Ray export is enabled.
@@ -17,6 +18,8 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @ApplicationScoped
 public final class XRaySpanExporterProducer
 {
+    private static final Logger LOGGER = Logger.getLogger(XRaySpanExporterProducer.class);
+
     private static final SpanExporter DISABLED = new SpanExporter()
     {
         @Override
@@ -57,11 +60,13 @@ public final class XRaySpanExporterProducer
     @Singleton
     SpanExporter xraySpanExporter()
     {
-        if (!exportEnabled)
+        if (exportEnabled)
         {
-            return DISABLED;
+            LOGGER.infof("X-Ray OTLP span export enabled: endpoint=%s region=%s", otlpEndpoint, awsRegion);
+            return new XRayTraceExporter(transport, otlpEndpoint, awsRegion);
         }
 
-        return new XRayTraceExporter(transport, otlpEndpoint, awsRegion);
+        LOGGER.info("X-Ray OTLP span export is disabled (forge.observability.xray.export.enabled=false); using no-op SpanExporter");
+        return DISABLED;
     }
 }
