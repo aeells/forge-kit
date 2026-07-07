@@ -1,3 +1,9 @@
+## v1.3.4 (2026-07-07)
+
+### Refactor
+
+- **xray**: logging added for tracing purposes
+
 ## v1.3.3 (2026-07-03)
 
 ### Fix

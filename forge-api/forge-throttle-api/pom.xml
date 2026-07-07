@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.forge</groupId>
         <artifactId>forge-api</artifactId>
-        <version>1.3.3</version>
+        <version>1.3.4</version>
     </parent>
 
     <artifactId>forge-throttle-api</artifactId>
