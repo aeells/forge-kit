@@ -79,13 +79,22 @@ public final class PrometheusRemoteWriteEncoder
 
     private void appendSnapshot(final MetricSnapshot metricSnapshot, final WriteRequest.Builder requestBuilder, final long pushTimestampMillis)
     {
-        switch (metricSnapshot)
+        // Use traditional instanceof + cast instead of pattern-matching switch to avoid Clover instrumentation issues.
+        if (metricSnapshot instanceof CounterSnapshot counterSnapshot)
         {
-            case CounterSnapshot counterSnapshot -> appendCounter(counterSnapshot, requestBuilder, pushTimestampMillis);
-            case GaugeSnapshot gaugeSnapshot -> appendGauge(gaugeSnapshot, requestBuilder, pushTimestampMillis);
-            case HistogramSnapshot histogramSnapshot -> appendHistogram(histogramSnapshot, requestBuilder, pushTimestampMillis);
-            case SummarySnapshot summarySnapshot -> appendSummary(summarySnapshot, requestBuilder, pushTimestampMillis);
-            default -> { }
+            appendCounter(counterSnapshot, requestBuilder, pushTimestampMillis);
+        }
+        else if (metricSnapshot instanceof GaugeSnapshot gaugeSnapshot)
+        {
+            appendGauge(gaugeSnapshot, requestBuilder, pushTimestampMillis);
+        }
+        else if (metricSnapshot instanceof HistogramSnapshot histogramSnapshot)
+        {
+            appendHistogram(histogramSnapshot, requestBuilder, pushTimestampMillis);
+        }
+        else if (metricSnapshot instanceof SummarySnapshot summarySnapshot)
+        {
+            appendSummary(summarySnapshot, requestBuilder, pushTimestampMillis);
         }
     }
 

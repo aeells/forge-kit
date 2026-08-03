@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.xerial.snappy.Snappy;
@@ -37,8 +38,11 @@ class PrometheusRemoteWriteEncoderTest
     @Test
     void encode_IncludesCounterGaugeTimerAndSummarySeries()
     {
+        // Micrometer gauges only weakly reference the Number; keep a strong ref so CI GC cannot yield NaN.
+        final AtomicInteger heapUsedBytes = new AtomicInteger(42);
+
         registry.counter("requests_total", "service", "auth").increment(3);
-        registry.gauge("heap_used_bytes", 42.0);
+        registry.gauge("heap_used_bytes", heapUsedBytes);
         registry.timer("http_latency").record(120, TimeUnit.MILLISECONDS);
         registry.summary("payload_size").record(512);
 
@@ -90,8 +94,10 @@ class PrometheusRemoteWriteEncoderTest
     @Test
     void encode_usesSinglePushTimestampForAllSamples()
     {
+        final AtomicInteger heapUsedBytes = new AtomicInteger(42);
+
         registry.counter("requests_total", "service", "auth").increment();
-        registry.gauge("heap_used_bytes", 42.0);
+        registry.gauge("heap_used_bytes", heapUsedBytes);
         registry.timer("http_latency").record(120, TimeUnit.MILLISECONDS);
 
         final WriteRequest request = encodeCurrentSnapshots();
@@ -128,11 +134,12 @@ class PrometheusRemoteWriteEncoderTest
     @Test
     void encode_successivePushesUseNonDecreasingTimestamps() throws InterruptedException
     {
-        registry.gauge("push_clock_probe", 1.0);
+        final AtomicInteger pushClockProbe = new AtomicInteger(1);
+        registry.gauge("push_clock_probe", pushClockProbe);
 
         final long firstPushTimestamp = firstSampleTimestamp(encodeCurrentSnapshots());
         Thread.sleep(2);
-        registry.gauge("push_clock_probe", 2.0);
+        pushClockProbe.set(2);
         final long secondPushTimestamp = firstSampleTimestamp(encodeCurrentSnapshots());
 
         assertTrue(secondPushTimestamp >= firstPushTimestamp);
