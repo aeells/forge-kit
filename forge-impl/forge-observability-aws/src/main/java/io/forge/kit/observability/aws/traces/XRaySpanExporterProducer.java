@@ -66,7 +66,7 @@ public final class XRaySpanExporterProducer
             return new XRayTraceExporter(transport, otlpEndpoint, awsRegion);
         }
 
-        LOGGER.info("X-Ray OTLP span export is disabled (forge.observability.xray.export.enabled=false); using no-op SpanExporter");
+        LOGGER.info("X-Ray OTLP span export is disabled; using no-op SpanExporter");
         return DISABLED;
     }
 }

@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/github/license/get-forge/forge-kit)
 ![Last Commit](https://img.shields.io/github/last-commit/get-forge/forge-kit)
 
-[![Quarkus](https://img.shields.io/badge/Quarkus-v3.36.1-blue?logo=quarkus)](https://quarkus.io/)
+[![Quarkus](https://img.shields.io/badge/Quarkus-v3.38.0-blue?logo=quarkus)](https://quarkus.io/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
