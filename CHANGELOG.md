@@ -1,3 +1,10 @@
+## v1.3.5 (2026-08-03)
+
+### Fix
+
+- **observability-api**: stabilize Prometheus encoder for Clover and gauges
+- **deps**: bump Quarkus platform to 3.38.0
+
 ## v1.3.4 (2026-07-07)
 
 ### Refactor
