@@ -28,9 +28,12 @@ echo "Current version: $CURRENT_VERSION"
 
 sed -i "s/^version = \".*\"/version = \"$CURRENT_VERSION\"/" .cz.toml
 
-# Preview next version (exit 21 = no eligible conventional commits)
+# Preview next version (exit 21 = no eligible conventional commits).
+# --yes is required when no tag exists for the configured version (e.g. fresh
+# 0.0.0 line after a rebrand); otherwise commitizen prompts interactively and
+# fails in CI with a non-TTY error.
 set +e
-NEXT_VERSION=$(LEFTHOOK=0 cz bump --get-next 2>/dev/null)
+NEXT_VERSION=$(LEFTHOOK=0 cz bump --get-next --yes 2>/dev/null)
 GET_NEXT_EXIT=$?
 set -e
 
