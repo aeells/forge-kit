@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.backbone</groupId>
+        <artifactId>backbone-impl</artifactId>
+        <version>0.0.0</version>
+    </parent>
+
+    <artifactId>backbone-throttle</artifactId>
+
+    <dependencies>
+        <!-- backbone apis -->
+        <dependency>
+            <groupId>io.backbone</groupId>
+            <artifactId>backbone-throttle-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- backbone impl -->
+        <dependency>
+            <groupId>io.backbone</groupId>
+            <artifactId>backbone-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.backbone</groupId>
+            <artifactId>backbone-security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- throttling -->
+        <dependency>
+            <groupId>com.bucket4j</groupId>
+            <artifactId>bucket4j_jdk17-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bucket4j</groupId>
+            <artifactId>bucket4j_jdk17-vertx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-redis-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.health</groupId>
+            <artifactId>microprofile-health-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-jackson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Quarkus test API for QuarkusTestProfile -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -9,16 +9,16 @@ on:
     paths:
       - .config/**
       - .github/**
-      - forge-api/**
-      - forge-impl/**
+      - backbone-api/**
+      - backbone-impl/**
   pull_request:
     branches: [ main ]
     types: [ opened, synchronize, reopened ]
     paths:
       - .config/**
       - .github/**
-      - forge-api/**
-      - forge-impl/**
+      - backbone-api/**
+      - backbone-impl/**
 
 # need ID token write permission to use OIDC
 # need actions: read to access artifacts from other jobs
@@ -47,7 +47,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           name: maven-repo
-          path: ~/.m2/repository/io/forge
+          path: ~/.m2/repository/io/backbone
           retention-days: 1
           if-no-files-found: warn
 
@@ -66,7 +66,7 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: maven-repo
-          path: ~/.m2/repository/io/forge
+          path: ~/.m2/repository/io/backbone
       - run: task build:ut -- -Dtest.thread.count=2
       - if: always()
         uses: actions/upload-artifact@v7
@@ -89,7 +89,7 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: maven-repo
-          path: ~/.m2/repository/io/forge
+          path: ~/.m2/repository/io/backbone
       - run: task build:it -- -Dtest.thread.count=2
       - if: always()
         uses: actions/upload-artifact@v7

@@ -1,11 +1,11 @@
-# Forge Kit
+# Backbone Kit
 
-[![Lines of Code](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-forge%2Fforge-kit%2Flines)](https://tokei.kojix2.net/github/get-forgeget-forge/forge-kit)
-[![Top Language](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-forge%2Fforge-kit%2Flanguage)](https://tokei.kojix2.net/github/get-forge/forge-kit)
-[![Languages](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-forge%2Fforge-kit%2Flanguages)](https://tokei.kojix2.net/github/get-forge/forge-kit)
-[![Code to Comment](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-forge%2Fforge-kit%2Fratio)](https://tokei.kojix2.net/github/get-forge/forge-kit)
-![License](https://img.shields.io/github/license/get-forge/forge-kit)
-![Last Commit](https://img.shields.io/github/last-commit/get-forge/forge-kit)
+[![Lines of Code](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-backbone%2Fbackbone-kit%2Flines)](https://tokei.kojix2.net/github/get-backbone/backbone-kit)
+[![Top Language](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-backbone%2Fbackbone-kit%2Flanguage)](https://tokei.kojix2.net/github/get-backbone/backbone-kit)
+[![Languages](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-backbone%2Fbackbone-kit%2Flanguages)](https://tokei.kojix2.net/github/get-backbone/backbone-kit)
+[![Code to Comment](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fget-backbone%2Fbackbone-kit%2Fratio)](https://tokei.kojix2.net/github/get-backbone/backbone-kit)
+![License](https://img.shields.io/github/license/get-backbone/backbone-kit)
+![Last Commit](https://img.shields.io/github/last-commit/get-backbone/backbone-kit)
 
 [![Quarkus](https://img.shields.io/badge/Quarkus-v3.38.0-blue?logo=quarkus)](https://quarkus.io/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
@@ -13,71 +13,71 @@
 
 **CI Status**
 
-[![00 🧩 Hygiene checks](https://github.com/get-forge/forge-kit/actions/workflows/00-hygiene-check.yml/badge.svg)](https://github.com/get-forge/forge-kit/actions/workflows/00-hygiene-check.yml) [![01 🚧 Build and test](https://github.com/get-forge/forge-kit/actions/workflows/01-build-test.yml/badge.svg)](https://github.com/get-forge/forge-kit/actions/workflows/01-build-test.yml) [![02 🔎 Static analysis](https://github.com/get-forge/forge-kit/actions/workflows/02-static-analysis.yml/badge.svg)](https://github.com/get-forge/forge-kit/actions/workflows/02-static-analysis.yml)  
-[![03 👊🏽 Auto version bump](https://github.com/get-forge/forge-kit/actions/workflows/03-release-bump.yml/badge.svg)](https://github.com/get-forge/forge-kit/actions/workflows/03-release-bump.yml) [![04 📦 Publish packages](https://github.com/get-forge/forge-kit/actions/workflows/04-publish-packages.yml/badge.svg)](https://github.com/get-forge/forge-kit/actions/workflows/04-publish-packages.yml) [![51 🔎 Code coverage](https://github.com/get-forge/forge-kit/actions/workflows/51-code-coverage.yml/badge.svg)](https://github.com/get-forge/forge-kit/actions/workflows/51-code-coverage.yml)  
+[![00 🧩 Hygiene checks](https://github.com/get-backbone/backbone-kit/actions/workflows/00-hygiene-check.yml/badge.svg)](https://github.com/get-backbone/backbone-kit/actions/workflows/00-hygiene-check.yml) [![01 🚧 Build and test](https://github.com/get-backbone/backbone-kit/actions/workflows/01-build-test.yml/badge.svg)](https://github.com/get-backbone/backbone-kit/actions/workflows/01-build-test.yml) [![02 🔎 Static analysis](https://github.com/get-backbone/backbone-kit/actions/workflows/02-static-analysis.yml/badge.svg)](https://github.com/get-backbone/backbone-kit/actions/workflows/02-static-analysis.yml)  
+[![03 👊🏽 Auto version bump](https://github.com/get-backbone/backbone-kit/actions/workflows/03-release-bump.yml/badge.svg)](https://github.com/get-backbone/backbone-kit/actions/workflows/03-release-bump.yml) [![04 📦 Publish packages](https://github.com/get-backbone/backbone-kit/actions/workflows/04-publish-packages.yml/badge.svg)](https://github.com/get-backbone/backbone-kit/actions/workflows/04-publish-packages.yml) [![51 🔎 Code coverage](https://github.com/get-backbone/backbone-kit/actions/workflows/51-code-coverage.yml/badge.svg)](https://github.com/get-backbone/backbone-kit/actions/workflows/51-code-coverage.yml)  
 
-[![codecov](https://codecov.io/github/get-forge/forge-kit/graph/badge.svg?token=RP8Z2NWG9L)](https://codecov.io/github/get-forge/forge-kit)
+[![codecov](https://codecov.io/github/get-backbone/backbone-kit/graph/badge.svg?token=RP8Z2NWG9L)](https://codecov.io/github/get-backbone/backbone-kit)
 
 ---
 
 ## Overview
 
-**Forge Kit** is a collection of infrastructure components extracted directly from the 👉 **[Forge Platform](https://forgeplatform.software)**.
+**Backbone Kit** is a collection of infrastructure components extracted directly from the 👉 **[Backbone Platform](https://backbonehq.io)**.
 
 It provides Quarkus-based components for security, observability, and cross-cutting service concerns — without prescribing domain logic.
 
-Forge Kit demonstrates the following capabilities that continue with the full Forge Platform: 
+Backbone Kit demonstrates the following capabilities that continue with the full Backbone Platform: 
 - architectural composure and separation of concerns
 - implementation of microservice cross-cutting concerns
 - disciplined coding standards, documentation, and test organisation
 
 ---
 
-## What Forge Kit Provides
+## What Backbone Kit Provides
 
 ### 🔒 Security & Protection
 
-- **Rate Limiting & Throttling** (`forge-throttle`)
+- **Rate Limiting & Throttling** (`backbone-throttle`)
   - Deterministic rate limiting with clear separation of authenticated vs. unauthenticated capacity.
-  - [Documentation →](forge-impl/forge-throttle/README.md)
+  - [Documentation →](backbone-impl/backbone-throttle/README.md)
 
 ### 📈 Observability
 
-- **Metrics Framework** (`forge-metrics`)
+- **Metrics Framework** (`backbone-metrics`)
   - Micrometer integration with Prometheus-ready metrics.
   - Service, circuit breaker, and database performance recorders
-  - [Documentation →](forge-impl/forge-metrics/README.md)
+  - [Documentation →](backbone-impl/backbone-metrics/README.md)
 
-- **Prometheus Remote Write** (`forge-observability-api`, `forge-observability-aws`)
+- **Prometheus Remote Write** (`backbone-observability-api`, `backbone-observability-aws`)
   - PRW 1.0 encoding from Micrometer `MetricSnapshots` (no text scrape parsing).
   - Scheduled push to Amazon Managed Prometheus with SigV4-signed remote write.
   - Profile-gated via `@LookupIfProperty` — enable only where AMP is configured.
-  - [Documentation →](forge-impl/forge-observability-aws/README.md)
+  - [Documentation →](backbone-impl/backbone-observability-aws/README.md)
 
-- **Distributed Tracing (AWS)** (`forge-observability-aws`)
+- **Distributed Tracing (AWS)** (`backbone-observability-aws`)
   - OTLP protobuf export to AWS X-Ray with SigV4 signing.
   - Works with Quarkus OpenTelemetry; no collector sidecar required.
-  - [Documentation →](forge-impl/forge-observability-aws/README.md)
+  - [Documentation →](backbone-impl/backbone-observability-aws/README.md)
 
-- **AWS Signed HTTP Transport** (`forge-http-aws`)
+- **AWS Signed HTTP Transport** (`backbone-http-aws`)
   - Reusable SigV4 signing for outbound HTTP (AMP, X-Ray OTLP, and other AWS endpoints).
-  - [Documentation →](forge-impl/forge-http-aws/README.md)
+  - [Documentation →](backbone-impl/backbone-http-aws/README.md)
 
-- **Health Checks** (`forge-health-aws`)
+- **Health Checks** (`backbone-health-aws`)
   - Liveness and readiness probe support for AWS environments.
-  - [Documentation →](forge-impl/forge-health-aws/README.md)
+  - [Documentation →](backbone-impl/backbone-health-aws/README.md)
 
-- **Structured Logging** (`forge-logging`)
+- **Structured Logging** (`backbone-logging`)
   - Opt-in method entry logging via `@LogMethodEntry`.
   - HTTP correlation ID propagation (MDC and headers).
   - Sensitive data masking in log output.
-  - [Documentation →](forge-impl/forge-logging/README.md)
+  - [Documentation →](backbone-impl/backbone-logging/README.md)
 
 ### 🧱 Platform Utilities
 
-- **Common Utilities** (`forge-common`)
+- **Common Utilities** (`backbone-common`)
   - Validation, error handling, and shared REST primitives.
-  - [Documentation →](forge-impl/forge-common/README.md)
+  - [Documentation →](backbone-impl/backbone-common/README.md)
 
 Each module is independently usable and documented.
 
@@ -89,8 +89,8 @@ Add the required modules to your project:
 
 ```xml
 <dependency>
-  <groupId>io.forge</groupId>
-  <artifactId>forge-throttle</artifactId>
+  <groupId>io.backbone</groupId>
+  <artifactId>backbone-throttle</artifactId>
   <version>1.0.5</version>
 </dependency>
 ```
@@ -107,11 +107,11 @@ Each module includes focused documentation and examples.
 
 ---
 
-## Relationship to the Forge Platform
+## Relationship to the Backbone Platform
 
-Forge Kit contains the cross-cutting infrastructure primitives used by the full Forge Platform.
+Backbone Kit contains the cross-cutting infrastructure primitives used by the full Backbone Platform.
 
-The Forge Platform extends these foundations with domain services, identity flows, notifications, audit capabilities, and operational tooling.
+The Backbone Platform extends these foundations with domain services, identity flows, notifications, audit capabilities, and operational tooling.
 
 If your goal is rapid delivery of production-ready microservices, the full platform may be the better starting point.
 
@@ -119,13 +119,13 @@ If your goal is rapid delivery of production-ready microservices, the full platf
 
 ## Support
 
-Forge Kit is open-source and community-supported.
+Backbone Kit is open-source and community-supported.
 
 For organisations seeking platform-level support or architectural consulting,
-see 👉 [Forge Platform](https://forgeplatform.software).
+see 👉 [Backbone Platform](https://backbonehq.io).
 
 ---
 
 ## License
 
-Forge Kit is licensed under the [MIT License](LICENSE).
+Backbone Kit is licensed under the [MIT License](LICENSE).

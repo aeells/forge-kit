@@ -2,7 +2,7 @@
 
 ## Our Commitment
 
-We are committed to maintaining a respectful, professional, and inclusive environment for everyone interacting with the Forge Kit project.
+We are committed to maintaining a respectful, professional, and inclusive environment for everyone interacting with the Backbone Kit project.
 
 This Code of Conduct applies to:
 - Issues

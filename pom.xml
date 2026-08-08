@@ -2,21 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.forge</groupId>
-    <artifactId>forge-kit</artifactId>
-    <version>1.3.5</version>
+    <groupId>io.backbone</groupId>
+    <artifactId>backbone-kit</artifactId>
+    <version>0.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>forge-api</module>
-        <module>forge-impl</module>
+        <module>backbone-api</module>
+        <module>backbone-impl</module>
     </modules>
 
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/get-backbone/forge-kit</url>
+            <url>https://maven.pkg.github.com/get-backbone/backbone-kit</url>
         </repository>
     </distributionManagement>
 
@@ -406,7 +406,7 @@
                             <rulesets>
                                 <ruleset>${maven.multiModuleProjectDirectory}/.config/.pmd-rules.xml</ruleset>
                             </rulesets>
-                            <!-- Exclude generated sources (e.g. protobuf in forge-observability-api) from PMD -->
+                            <!-- Exclude generated sources (e.g. protobuf in backbone-observability-api) from PMD -->
                             <excludeRoots>
                                 <excludeRoot>target/generated-sources/protobuf</excludeRoot>
                             </excludeRoots>

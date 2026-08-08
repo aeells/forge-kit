@@ -2,7 +2,7 @@
 
 ## Reporting Security Vulnerabilities
 
-If you discover a security vulnerability in Forge Kit, please report it responsibly.
+If you discover a security vulnerability in Backbone Kit, please report it responsibly.
 
 **Do not** open a public GitHub issue for security-related concerns.
 
@@ -22,7 +22,7 @@ We will acknowledge receipt and investigate promptly.
 
 ## Supported Versions
 
-Forge Kit follows semantic versioning.
+Backbone Kit follows semantic versioning.
 
 Only the **latest released version** is actively maintained for security updates.
 Older versions may not receive fixes.
@@ -32,19 +32,19 @@ Older versions may not receive fixes.
 ## Scope
 
 This policy applies to:
-- Source code within the Forge Kit repository
-- Published Forge Kit artifacts
+- Source code within the Backbone Kit repository
+- Published Backbone Kit artifacts
 
 This policy does **not** apply to:
 - Forks of the repository
-- Downstream applications using Forge Kit
-- The commercial Forge Platform (covered under separate agreements)
+- Downstream applications using Backbone Kit
+- The commercial Backbone Platform (covered under separate agreements)
 
 ---
 
 ## Security Philosophy
 
-Forge Kit is designed with:
+Backbone Kit is designed with:
 - Fail-closed defaults
 - Explicit security boundaries
 - Zero-trust assumptions
@@ -57,4 +57,4 @@ Consumers are responsible for:
 
 ---
 
-Thank you for helping keep Forge Kit secure.
+Thank you for helping keep Backbone Kit secure.

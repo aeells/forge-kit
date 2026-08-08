@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <!--
-      forge-kit: BOM-managed transitives at pinned Quarkus 3.38.0 versions only.
+      backbone-kit: BOM-managed transitives at pinned Quarkus 3.38.0 versions only.
       Revisit when bumping quarkus.platform.version — add rules from the HTML report
       Suppress button if aggregate fails after a bump.
     -->

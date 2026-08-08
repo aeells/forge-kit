@@ -1,8 +1,8 @@
-# Contributing to Forge Kit
+# Contributing to Backbone Kit
 
-Thank you for your interest in Forge Kit.
+Thank you for your interest in Backbone Kit.
 
-Forge Kit is an open-source project that primarily serves as a reusable foundation for Forge-based
+Backbone Kit is an open-source project that primarily serves as a reusable foundation for Backbone-based
 platforms. While contributions are welcome, the project is **maintained with a strong emphasis on
 architectural consistency and long-term stability**.
 
@@ -55,13 +55,13 @@ Pull requests are reviewed selectively and may be declined if they do not align 
 
 ## Commercial Context
 
-Forge Kit is a foundational library extracted from a commercial platform.
+Backbone Kit is a foundational library extracted from a commercial platform.
 
 Acceptance of contributions does not imply:
 - Long-term API stability guarantees
 - Commercial support
-- Inclusion in the Forge Platform
+- Inclusion in the Backbone Platform
 
 ---
 
-Thank you for helping improve Forge Kit.
+Thank you for helping improve Backbone Kit.

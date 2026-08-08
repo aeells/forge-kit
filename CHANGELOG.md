@@ -1,3 +1,15 @@
+## Unreleased
+
+### Refactor
+
+- **BREAKING**: rebrand Forge Kit → Backbone Kit
+  - Maven GAV `io.forge:forge-*` → `io.backbone:backbone-*` (root `io.backbone:backbone-kit`)
+  - Java packages `io.forge.kit.*` → `io.backbone.kit.*`
+  - Config / metric keys `forge.observability.*`, `forge.metrics.*`, `forge.rate-limit.*` → `backbone.*`
+  - GitHub Packages registry `get-backbone/backbone-kit`
+  - Version reset `1.3.5` → `0.0.0` so the next pipeline bump from breaking commits can publish `v1.0.0`
+  - Consumers (e.g. backbone-core) must update dependencies, imports, and config keys
+
 ## v1.3.5 (2026-08-03)
 
 ### Fix

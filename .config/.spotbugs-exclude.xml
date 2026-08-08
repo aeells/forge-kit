@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
-    <!-- Exclude generated protobuf classes (e.g. forge-observability-api target/generated-sources/protobuf) -->
+    <!-- Exclude generated protobuf classes (e.g. backbone-observability-api target/generated-sources/protobuf) -->
     <Match>
-        <Package name="~io\.forge\.kit\.observability\.api\.remotewrite" />
+        <Package name="~io\.backbone\.kit\.observability\.api\.remotewrite" />
     </Match>
     <Match>
-        <Class name="io.forge.kit.health.impl.infrastructure.CognitoHealthCheck"/>
+        <Class name="io.backbone.kit.health.impl.infrastructure.CognitoHealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="io.forge.kit.health.impl.infrastructure.DynamoDbHealthCheck"/>
+        <Class name="io.backbone.kit.health.impl.infrastructure.DynamoDbHealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="io.forge.kit.health.impl.infrastructure.S3HealthCheck"/>
+        <Class name="io.backbone.kit.health.impl.infrastructure.S3HealthCheck"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="io.forge.kit.metrics.impl.faulttolerance.recorder.CircuitBreakerMetricsRecorder"/>
+        <Class name="io.backbone.kit.metrics.impl.faulttolerance.recorder.CircuitBreakerMetricsRecorder"/>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
 </FindBugsFilter>

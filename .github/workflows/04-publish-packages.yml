@@ -25,8 +25,8 @@ jobs:
             <servers>
               <server>
                 <id>github</id>
-                <username>get-forge</username>
-                <password>${{ secrets.PAT_FORGE_DEPLOY }}</password>
+                <username>get-backbone</username>
+                <password>${{ secrets.PAT_BACKBONE_DEPLOY }}</password>
               </server>
             </servers>
           </settings>
