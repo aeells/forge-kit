@@ -4,6 +4,8 @@ version = "0.0.0"
 version_files = []
 version_scheme = "semver2"
 tag_format = "v$version"
+# Ignore rollback tags from the forge→backbone rebrand (not semver release tags).
+ignored_tag_formats = ["pre-*"]
 update_changelog_on_bump = true
 changelog_file = "CHANGELOG.md"
 # When global git config has tag.gpgsign=true (e.g. CI), commitizen must pass -m to git tag
