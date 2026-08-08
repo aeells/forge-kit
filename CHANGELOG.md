@@ -1,14 +1,20 @@
-## Unreleased
+## v1.0.0 (2026-08-08)
+
+### BREAKING CHANGE
+
+- Maven coordinates move to io.backbone:backbone-*, Java
+packages to io.backbone.kit.*, and owned config/metric keys from forge.*
+to backbone.*. Version reset to 0.0.0 for the next pipeline major bump.
+Also stabilize RateLimitingIT by using zero refill in the test profile.
+
+### Fix
+
+- **ci**: align version-bump with backbone-core for first 1.0.0 release
+- **ci**: pass --yes to commitizen --get-next for initial 0.0.0 bump
 
 ### Refactor
 
-- **BREAKING**: rebrand Forge Kit → Backbone Kit
-  - Maven GAV `io.forge:forge-*` → `io.backbone:backbone-*` (root `io.backbone:backbone-kit`)
-  - Java packages `io.forge.kit.*` → `io.backbone.kit.*`
-  - Config / metric keys `forge.observability.*`, `forge.metrics.*`, `forge.rate-limit.*` → `backbone.*`
-  - GitHub Packages registry `get-backbone/backbone-kit`
-  - Version reset `1.3.5` → `0.0.0` so the next pipeline bump from breaking commits can publish `v1.0.0`
-  - Consumers (e.g. backbone-core) must update dependencies, imports, and config keys
+- rename forge-kit to backbone-kit (modules, packages, GAV, config)
 
 ## v1.3.5 (2026-08-03)
 
