@@ -81,8 +81,10 @@ main() {
     mvn versions:set -DnewVersion="${next_version}" -DgenerateBackupPoms=false
     mvn versions:commit
 
-    # Stage only version/changelog artifacts — never git add -A
-    git add -- .cz.toml CHANGELOG.md '**/pom.xml'
+    # Stage only version/changelog artifacts — never git add -A.
+    # Include root pom.xml explicitly: some Git versions' '**/pom.xml' pathspec
+    # matches nested modules only and skips the aggregator POM.
+    git add -- .cz.toml CHANGELOG.md pom.xml '**/pom.xml'
     git commit -m "chore(release): bump version to ${next_version} [skip ci]" --signoff --no-verify
     git tag -s "v${next_version}" -m "Release v${next_version}"
 
