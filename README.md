@@ -22,7 +22,7 @@
 
 ## Overview
 
-**Backbone Kit** is a collection of infrastructure components extracted directly from the 👉 **[Backbone Platform](https://backbonehq.io)**.
+**Backbone Kit** is a collection of infrastructure components that support 👉 **[Backbone](https://backbonehq.io)**.
 
 It provides Quarkus-based components for security, observability, and cross-cutting service concerns — without prescribing domain logic.
 
@@ -91,7 +91,7 @@ Add the required modules to your project:
 <dependency>
   <groupId>io.backbone</groupId>
   <artifactId>backbone-throttle</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -101,28 +101,26 @@ Each module includes focused documentation and examples.
 
 **📚 Documentation**
 - [Examples →](examples/)
-- [Templates →](templates/)
-- [Architecture Decision Records →](docs/architecture/decisions/)
 - [Code Quality & CI Enforcement](CODE_QUALITY.md)
 
 ---
 
-## Relationship to the Backbone Platform
+## Relationship to Backbone
 
-Backbone Kit contains the cross-cutting infrastructure primitives used by the full Backbone Platform.
+Backbone Kit is the cross-cutting foundation — rate limiting, observability, structured logging, and the other plumbing most services need before they ship anything a customer or auditor cares about.
 
-The Backbone Platform extends these foundations with domain services, identity flows, notifications, audit capabilities, and operational tooling.
+Backbone is the same foundation, extended: domain services (auth, users, audit, documents, notifications, BFF), zero-trust security, infrastructure-as-code, and compliance-mapped evidence — licensed and forkable, deployed into your own AWS account.
 
-If your goal is rapid delivery of production-ready microservices, the full platform may be the better starting point.
+Backbone Kit is useful either way. If you're building the rest yourself with Quarkus, it's a head start worth getting right the first time. If you'd rather not spend runway rebuilding identity, observability, security and scaling from scratch, then Backbone is the more complete starting point.
 
 ---
 
 ## Support
 
-Backbone Kit is open-source and community-supported.
+Backbone Kit is open-source and community-supported — issues and PRs welcome.
 
-For organisations seeking platform-level support or architectural consulting,
-see 👉 [Backbone Platform](https://backbonehq.io).
+For teams weighing DIY against a complete, licensed foundation, or wanting architectural input on standing up the full stack,
+see 👉 [Backbone](https://backbonehq.io).
 
 ---
 
