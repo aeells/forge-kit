@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <!--
-      backbone-kit: BOM-managed transitives at pinned Quarkus 3.38.0 versions only.
+      backbone-kit: BOM-managed transitives at pinned Quarkus 3.36.1 versions only.
       Revisit when bumping quarkus.platform.version — add rules from the HTML report
       Suppress button if aggregate fails after a bump.
     -->
     <suppress>
         <notes><![CDATA[
-           Quarkus 3.38.0 (all io.quarkus* modules). Revisit on quarkus.platform.version bump.
+           Quarkus 3.36.1 (all io.quarkus* modules). Revisit on quarkus.platform.version bump.
         ]]></notes>
-        <packageUrl regex="true">^pkg:maven/io\.quarkus(\.[^/]+)?/[^/]+@3\.38\.0$</packageUrl>
+        <packageUrl regex="true">^pkg:maven/io\.quarkus(\.[^/]+)?/[^/]+@3\.36\.1$</packageUrl>
         <vulnerabilityName regex="true">(?s).*</vulnerabilityName>
     </suppress>
     <suppress>
         <notes><![CDATA[
-           Netty 4.1.136.Final (transitive from Quarkus 3.38.0 BOM).
+           Netty 4.1.133.Final (transitive from Quarkus 3.36.1 BOM).
         ]]></notes>
-        <packageUrl regex="true">^pkg:maven/io\.netty/[^/]+@4\.1\.136\.Final$</packageUrl>
+        <packageUrl regex="true">^pkg:maven/io\.netty/[^/]+@4\.1\.133\.Final$</packageUrl>
         <vulnerabilityName regex="true">(?s).*</vulnerabilityName>
     </suppress>
     <suppress>
         <notes><![CDATA[
-           Jackson 2.22.0 (transitive from Quarkus 3.38.0 BOM).
+           Jackson 2.21.4 (transitive from Quarkus 3.36.1 BOM).
         ]]></notes>
-        <packageUrl regex="true">^pkg:maven/com\.fasterxml\.jackson(\.[^/]+)?/[^/]+@2\.22\.0$</packageUrl>
+        <packageUrl regex="true">^pkg:maven/com\.fasterxml\.jackson(\.[^/]+)?/[^/]+@2\.21\.4$</packageUrl>
         <vulnerabilityName regex="true">(?s).*</vulnerabilityName>
     </suppress>
     <suppress>
         <notes><![CDATA[
-           OpenTelemetry 1.62.0 (all modules, Quarkus 3.38.0 BOM).
+           OpenTelemetry 1.60.1 (all modules, Quarkus 3.36.1 BOM).
+           CVE-2026-45292 (unbounded W3C baggage parsing) fixed in OTel 1.62.0; await Quarkus BOM bump.
+           External exposure mitigated by Vert.x/Netty default ~8 KiB header limits on Quarkus HTTP.
         ]]></notes>
-        <packageUrl regex="true">^pkg:maven/io\.opentelemetry/[^/]+@1\.62\.0$</packageUrl>
+        <packageUrl regex="true">^pkg:maven/io\.opentelemetry/[^/]+@1\.60\.1$</packageUrl>
         <vulnerabilityName regex="true">(?s).*</vulnerabilityName>
     </suppress>
     <suppress>
         <notes><![CDATA[
-           Micrometer 1.17.0 (transitive from Quarkus 3.38.0 BOM).
+           Micrometer 1.16.5 (transitive from Quarkus 3.36.1 BOM).
         ]]></notes>
-        <packageUrl regex="true">^pkg:maven/io\.micrometer/[^/]+@1\.17\.0$</packageUrl>
+        <packageUrl regex="true">^pkg:maven/io\.micrometer/[^/]+@1\.16\.5$</packageUrl>
+        <vulnerabilityName regex="true">(?s).*</vulnerabilityName>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+           Vert.x 4.5.27 (transitive from Quarkus 3.36.1 BOM).
+           CVE-2026-15075 / CVE-2026-15076 — await Quarkus BOM bump.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.vertx/[^/]+@4\.5\.27$</packageUrl>
         <vulnerabilityName regex="true">(?s).*</vulnerabilityName>
     </suppress>
 </suppressions>
