@@ -1,3 +1,10 @@
+## v1.0.1 (2026-08-15)
+
+### Fix
+
+- **ci**: restore OWASP suppressions for Quarkus 3.36.1
+- **deps**: downgrade Quarkus platform to 3.36.1
+
 ## v1.0.0 (2026-08-08)
 
 ### BREAKING CHANGE
