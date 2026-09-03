@@ -5,6 +5,7 @@ name: 51 ☘️ Code coverage
 on:
   schedule:
     - cron: '0 0 * * 0'  # weekly Sunday 00:00 UTC
+  workflow_dispatch:
 
 # need ID token write permission to use OIDC
 # need actions: read to access artifacts from other jobs
